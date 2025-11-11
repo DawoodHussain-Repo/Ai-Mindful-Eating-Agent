@@ -1,0 +1,39 @@
+{
+    "default_goals": {
+        "daily_calories": 2000,
+        "daily_protein": 120,
+        "daily_carbs": 250,
+        "daily_fat": 65,
+        "daily_fiber": 30
+    },
+    "goal_presets": {
+        "weight_loss": {
+            "daily_calories": 1500,
+            "daily_protein": 120,
+            "daily_carbs": 150,
+            "daily_fat": 50,
+            "daily_fiber": 30
+        },
+        "muscle_gain": {
+            "daily_calories": 2500,
+            "daily_protein": 180,
+            "daily_carbs": 300,
+            "daily_fat": 70,
+            "daily_fiber": 35
+        },
+        "maintenance": {
+            "daily_calories": 2000,
+            "daily_protein": 120,
+            "daily_carbs": 250,
+            "daily_fat": 65,
+            "daily_fiber": 30
+        },
+        "athletic": {
+            "daily_calories": 3000,
+            "daily_protein": 200,
+            "daily_carbs": 400,
+            "daily_fat": 80,
+            "daily_fiber": 40
+        }
+    }
+}

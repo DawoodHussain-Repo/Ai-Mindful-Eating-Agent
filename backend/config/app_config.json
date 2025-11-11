@@ -1,0 +1,33 @@
+{
+    "app_name": "Mindful Eating Agent",
+    "version": "1.0.0",
+    "debug": true,
+    "host": "0.0.0.0",
+    "port": 5000,
+    "secret_key": "dev-secret-key-change-in-production",
+    "session_lifetime_days": 7,
+    "portion_patterns": {
+        "oz": "(\\d+\\.?\\d*)\\s*(?:oz|ounce|ounces)",
+        "cup": "(\\d+\\.?\\d*|1/2|half|quarter|1/4)\\s*(?:cup|cups)",
+        "gram": "(\\d+\\.?\\d*)\\s*(?:g|gram|grams)",
+        "piece": "(\\d+\\.?\\d*)\\s*(?:piece|pieces|slice|slices)",
+        "tbsp": "(\\d+\\.?\\d*)\\s*(?:tbsp|tablespoon|tablespoons)",
+        "tsp": "(\\d+\\.?\\d*)\\s*(?:tsp|teaspoon|teaspoons)"
+    },
+    "portion_sizes": {
+        "small": 0.75,
+        "medium": 1.0,
+        "large": 1.5,
+        "huge": 2.0,
+        "tiny": 0.5
+    },
+    "recommendation_thresholds": {
+        "low_protein": 60,
+        "good_protein": 80,
+        "target_protein": 120,
+        "high_calories": 2200,
+        "low_calories": 1200,
+        "target_calories": 2000,
+        "food_frequency_alert": 4
+    }
+}

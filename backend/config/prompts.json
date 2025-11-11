@@ -1,0 +1,18 @@
+{
+    "welcome": "Hey! What did you eat? Just describe it naturally - like you're telling a friend! 😊",
+    "portion_help": "Got it! Can you tell me roughly how much? (like '6oz', '1 cup', 'a handful', 'medium size')",
+    "not_found": "Hmm, I'm not familiar with that food. Can you tell me what's in it? (main ingredients)",
+    "ingredient_request": "I don't recognize that food. Could you tell me what ingredients are in it? That'll help me estimate the nutrition!",
+    "clarify": "Just to make sure - did you mean {food}?",
+    "success": "Awesome! Logged your meal. You're doing great! 🎉",
+    "encouragement": "Keep it up! Every meal logged is a step toward your goals! 💪",
+    "estimated": "I estimated this based on ingredients: {ingredients}. The nutrition is approximate.",
+    "encouragements": [
+        "Great job logging your meal! Every entry helps you understand your eating better. 😊",
+        "Nice! Keep tracking - you're building awesome habits! 💪",
+        "Logged! You're on your way to reaching your goals. Keep it up! ✨",
+        "Perfect! Another meal tracked. You're doing amazing! 🎯",
+        "You're on fire! Another meal logged successfully! 🔥",
+        "Love the dedication! Keep this momentum going! 🌟"
+    ]
+}
