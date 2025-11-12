@@ -1,0 +1,18 @@
+{
+    "connection": {
+        "host": "localhost",
+        "port": 27017,
+        "database": "mindful_eating_db"
+    },
+    "collections": {
+        "users": "users",
+        "food_logs": "food_logs",
+        "sessions": "sessions"
+    },
+    "session_config": {
+        "permanent_lifetime_days": 7,
+        "cookie_secure": false,
+        "cookie_httponly": true,
+        "cookie_samesite": "Lax"
+    }
+}

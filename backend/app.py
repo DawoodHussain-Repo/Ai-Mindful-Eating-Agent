@@ -4,6 +4,8 @@ Text-based food logging with AI-powered nutrition analysis using LangGraph
 """
 
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from flask_session import Session
+from flask_cors import CORS
 from datetime import datetime, timedelta
 import json
 import os
@@ -11,17 +13,51 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from collections import defaultdict
 import re
 
-# Import LangGraph Agent
+# Import LangGraph Agents
 from agent import process_food_log, mindful_eating_agent
+from agent_chat import process_conversational_message
+
+# Import MongoDB utilities
+from utils.mongodb_client import (
+    MongoDBClient, 
+    UserOperations, 
+    FoodLogOperations,
+    SessionOperations
+)
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 
-# In-memory storage (replace with database in production)
-users_db = {}
-food_logs_db = {}
-user_patterns_db = {}
+# Enable CORS for Next.js frontend
+CORS(app, supports_credentials=True, origins=['http://localhost:3000'])
+
+# MongoDB Session Configuration
+app.config['SESSION_TYPE'] = 'mongodb'
+app.config['SESSION_PERMANENT'] = True
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
+app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_KEY_PREFIX'] = 'mindful_eating:'
+
+# Initialize MongoDB
+try:
+    mongo_client = MongoDBClient('config/mongodb_config.json')
+    app.config['SESSION_MONGODB'] = mongo_client.client
+    app.config['SESSION_MONGODB_DB'] = mongo_client.db.name
+    app.config['SESSION_MONGODB_COLLECT'] = 'sessions'
+    
+    # Initialize database operations
+    user_ops = UserOperations(mongo_client)
+    food_log_ops = FoodLogOperations(mongo_client)
+    session_ops = SessionOperations(mongo_client)
+    
+    print("✅ MongoDB initialized successfully")
+except Exception as e:
+    print(f"❌ Failed to initialize MongoDB: {e}")
+    print("Please ensure MongoDB is running on localhost:27017")
+    exit(1)
+
+# Initialize Flask-Session
+Session(app)
 
 # Comprehensive nutritional database
 FOOD_DATABASE = {
@@ -154,11 +190,12 @@ def parse_food_text(text):
 
 def analyze_eating_patterns(user_id):
     """Analyze user's eating patterns for recommendations"""
-    if user_id not in food_logs_db or not food_logs_db[user_id]:
+    logs = food_log_ops.get_recent_logs(user_id, days=14)
+    
+    if not logs:
         return None
     
-    logs = food_logs_db[user_id]
-    recent_logs = logs[-14:]  # Last 2 weeks
+    recent_logs = logs  # Already filtered to last 2 weeks
     
     patterns = {
         'total_meals': len(recent_logs),
@@ -173,7 +210,12 @@ def analyze_eating_patterns(user_id):
     daily_totals = defaultdict(lambda: {'calories': 0, 'protein': 0})
     
     for log in recent_logs:
-        date = log['timestamp'].split('T')[0]
+        # Handle both string and datetime timestamps
+        if isinstance(log['timestamp'], str):
+            date = log['timestamp'].split('T')[0]
+        else:
+            date = log['timestamp'].date().isoformat()
+        
         daily_totals[date]['calories'] += log['total_nutrition']['calories']
         daily_totals[date]['protein'] += log['total_nutrition']['protein']
         
@@ -212,9 +254,7 @@ def generate_recommendations(user_id):
         return recommendations
     
     # Get today's logs
-    today = datetime.now().date().isoformat()
-    today_logs = [log for log in food_logs_db.get(user_id, []) 
-                  if log['timestamp'].startswith(today)]
+    today_logs = food_log_ops.get_today_logs(user_id)
     
     today_protein = sum(log['total_nutrition']['protein'] for log in today_logs)
     today_calories = sum(log['total_nutrition']['calories'] for log in today_logs)
@@ -274,7 +314,13 @@ def generate_recommendations(user_id):
 def index():
     if 'user_id' not in session:
         return redirect(url_for('login'))
-    return render_template('index.html', user_name=users_db[session['user_id']]['name'])
+    
+    user = user_ops.get_user_by_email(session['user_id'])
+    if not user:
+        session.clear()
+        return redirect(url_for('login'))
+    
+    return render_template('index.html', user_name=user['name'])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -282,10 +328,14 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         
-        if email in users_db and check_password_hash(users_db[email]['password'], password):
+        user = user_ops.get_user_by_email(email)
+        
+        if user and check_password_hash(user['password'], password):
+            session.clear()
             session['user_id'] = email
             session.permanent = True
             return redirect(url_for('index'))
+        
         return render_template('login.html', error='Invalid email or password')
     
     return render_template('login.html')
@@ -296,33 +346,43 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
         name = request.form.get('name')
+        goals_json = request.form.get('goals')
         
-        if email in users_db:
-            return render_template('register.html', error='Email already registered')
+        if user_ops.user_exists(email):
+            if request.content_type == 'application/x-www-form-urlencoded':
+                return render_template('register.html', error='Email already registered')
+            return jsonify({'error': 'Email already registered'}), 400
         
-        users_db[email] = {
-            'name': name,
-            'password': generate_password_hash(password),
-            'created_at': datetime.now().isoformat(),
-            'goals': {
-                'daily_calories': 2000,
-                'daily_protein': 120,
-                'daily_carbs': 250,
-                'daily_fat': 65
-            }
-        }
-        food_logs_db[email] = []
-        user_patterns_db[email] = {}
+        password_hash = generate_password_hash(password)
         
+        # Parse custom goals if provided
+        custom_goals = None
+        if goals_json:
+            try:
+                custom_goals = json.loads(goals_json)
+            except:
+                pass
+        
+        result = user_ops.create_user(email, name, password_hash, custom_goals)
+        
+        if not result['success']:
+            if request.content_type == 'application/x-www-form-urlencoded':
+                return render_template('register.html', error='Registration failed. Please try again.')
+            return jsonify({'error': 'Registration failed'}), 400
+        
+        session.clear()
         session['user_id'] = email
         session.permanent = True
-        return redirect(url_for('index'))
+        
+        if request.content_type == 'application/x-www-form-urlencoded':
+            return redirect(url_for('index'))
+        return jsonify({'success': True}), 200
     
     return render_template('register.html')
 
 @app.route('/logout')
 def logout():
-    session.pop('user_id', None)
+    session.clear()
     return redirect(url_for('login'))
 
 @app.route('/api/log-food', methods=['POST'])
@@ -340,7 +400,7 @@ def log_food():
     user_id = session['user_id']
     
     # Get user history for the agent
-    user_history = food_logs_db.get(user_id, [])
+    user_history = food_log_ops.get_recent_logs(user_id, days=30)
     
     # Process food log using LangGraph Agent
     result = process_food_log(
@@ -355,19 +415,14 @@ def log_food():
             'error': result.get('error', 'No food items recognized. Try being more specific.')
         }), 400
     
-    # Create log entry
-    log_entry = {
-        'id': len(food_logs_db.get(user_id, [])) + 1,
-        'timestamp': datetime.now().isoformat(),
-        'meal_type': meal_type,
-        'foods': result['foods'],
-        'total_nutrition': result['total_nutrition'],
-        'original_text': food_text
-    }
-    
-    if user_id not in food_logs_db:
-        food_logs_db[user_id] = []
-    food_logs_db[user_id].append(log_entry)
+    # Create log entry in MongoDB
+    log_entry = food_log_ops.create_log(
+        user_id=user_id,
+        meal_type=meal_type,
+        foods=result['foods'],
+        total_nutrition=result['total_nutrition'],
+        original_text=food_text
+    )
     
     return jsonify({
         'success': True,
@@ -383,11 +438,9 @@ def get_logs():
         return jsonify({'error': 'Not authenticated'}), 401
     
     user_id = session['user_id']
-    logs = food_logs_db.get(user_id, [])
     
-    # Get today's logs
-    today = datetime.now().date().isoformat()
-    today_logs = [log for log in logs if log['timestamp'].startswith(today)]
+    # Get today's logs from MongoDB
+    today_logs = food_log_ops.get_today_logs(user_id)
     
     # Calculate daily totals
     daily_total = {
@@ -399,7 +452,8 @@ def get_logs():
     }
     
     # Get user goals
-    goals = users_db[user_id].get('goals', {
+    user = user_ops.get_user_by_email(user_id)
+    goals = user.get('goals', {
         'daily_calories': 2000,
         'daily_protein': 120,
         'daily_carbs': 250,
@@ -445,6 +499,112 @@ def get_stats():
     }
     
     return jsonify({'stats': stats})
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    """Conversational food logging endpoint"""
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not authenticated'}), 401
+    
+    data = request.json
+    message = data.get('message', '')
+    conversation_history = data.get('conversation_history', [])
+    
+    if not message.strip():
+        return jsonify({'error': 'Please enter a message'}), 400
+    
+    user_id = session['user_id']
+    
+    # Get user history for context
+    user_history = food_log_ops.get_recent_logs(user_id, days=30)
+    
+    # Process message with conversational agent
+    result = process_conversational_message(
+        user_id=user_id,
+        message=message,
+        conversation_history=conversation_history,
+        user_history=user_history
+    )
+    
+    # If food was successfully logged, save to database
+    if result['success'] and result['foods']:
+        # Determine meal type based on time
+        hour = datetime.now().hour
+        if hour < 11:
+            meal_type = 'breakfast'
+        elif hour < 15:
+            meal_type = 'lunch'
+        elif hour < 20:
+            meal_type = 'dinner'
+        else:
+            meal_type = 'snack'
+        
+        # Create log entry
+        log_entry = food_log_ops.create_log(
+            user_id=user_id,
+            meal_type=meal_type,
+            foods=result['foods'],
+            total_nutrition=result['total_nutrition'],
+            original_text=message
+        )
+    
+    return jsonify(result)
+
+@app.route('/api/calendar-logs')
+def calendar_logs():
+    """Get logs organized by date for calendar view"""
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not authenticated'}), 401
+    
+    user_id = session['user_id']
+    days = request.args.get('days', 30, type=int)
+    
+    # Get logs for the specified period
+    logs = food_log_ops.get_recent_logs(user_id, days=days)
+    
+    # Organize by date
+    logs_by_date = defaultdict(lambda: {
+        'meals': [],
+        'total_calories': 0,
+        'total_protein': 0,
+        'total_carbs': 0,
+        'total_fat': 0,
+        'meal_count': 0
+    })
+    
+    for log in logs:
+        # Handle both string and datetime timestamps
+        if isinstance(log['timestamp'], str):
+            date = log['timestamp'].split('T')[0]
+        else:
+            date = log['timestamp'].date().isoformat()
+        
+        logs_by_date[date]['meals'].append(log)
+        logs_by_date[date]['total_calories'] += log['total_nutrition']['calories']
+        logs_by_date[date]['total_protein'] += log['total_nutrition']['protein']
+        logs_by_date[date]['total_carbs'] += log['total_nutrition']['carbs']
+        logs_by_date[date]['total_fat'] += log['total_nutrition']['fat']
+        logs_by_date[date]['meal_count'] += 1
+    
+    # Convert to list and sort by date
+    calendar_data = [
+        {
+            'date': date,
+            'meals': data['meals'],
+            'summary': {
+                'total_calories': round(data['total_calories']),
+                'total_protein': round(data['total_protein']),
+                'total_carbs': round(data['total_carbs']),
+                'total_fat': round(data['total_fat']),
+                'meal_count': data['meal_count']
+            }
+        }
+        for date, data in logs_by_date.items()
+    ]
+    
+    calendar_data.sort(key=lambda x: x['date'], reverse=True)
+    
+    return jsonify({'calendar_data': calendar_data})
 
 if __name__ == '__main__':
     print("=" * 60)

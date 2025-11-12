@@ -414,5 +414,717 @@
     "fat": 0.4,
     "fiber": 3.8,
     "category": "carbs"
+  },
+  "pizza": {
+    "calories": 285,
+    "protein": 12,
+    "carbs": 36,
+    "fat": 10,
+    "fiber": 2.5,
+    "category": "fast_food"
+  },
+  "burger": {
+    "calories": 354,
+    "protein": 20,
+    "carbs": 30,
+    "fat": 17,
+    "fiber": 1.5,
+    "category": "fast_food"
+  },
+  "cheeseburger": {
+    "calories": 400,
+    "protein": 22,
+    "carbs": 32,
+    "fat": 20,
+    "fiber": 1.5,
+    "category": "fast_food"
+  },
+  "fries": {
+    "calories": 312,
+    "protein": 3.4,
+    "carbs": 41,
+    "fat": 15,
+    "fiber": 3.8,
+    "category": "fast_food"
+  },
+  "french fries": {
+    "calories": 312,
+    "protein": 3.4,
+    "carbs": 41,
+    "fat": 15,
+    "fiber": 3.8,
+    "category": "fast_food"
+  },
+  "hot dog": {
+    "calories": 290,
+    "protein": 10,
+    "carbs": 24,
+    "fat": 17,
+    "fiber": 1,
+    "category": "fast_food"
+  },
+  "sandwich": {
+    "calories": 250,
+    "protein": 15,
+    "carbs": 30,
+    "fat": 8,
+    "fiber": 2,
+    "category": "fast_food"
+  },
+  "taco": {
+    "calories": 226,
+    "protein": 9,
+    "carbs": 21,
+    "fat": 12,
+    "fiber": 3,
+    "category": "fast_food"
+  },
+  "burrito": {
+    "calories": 450,
+    "protein": 18,
+    "carbs": 55,
+    "fat": 17,
+    "fiber": 8,
+    "category": "fast_food"
+  },
+  "pasta": {
+    "calories": 221,
+    "protein": 8,
+    "carbs": 43,
+    "fat": 1.3,
+    "fiber": 2.5,
+    "category": "carbs"
+  },
+  "spaghetti": {
+    "calories": 221,
+    "protein": 8,
+    "carbs": 43,
+    "fat": 1.3,
+    "fiber": 2.5,
+    "category": "carbs"
+  },
+  "noodles": {
+    "calories": 138,
+    "protein": 4.5,
+    "carbs": 25,
+    "fat": 2,
+    "fiber": 1.2,
+    "category": "carbs"
+  },
+  "bread": {
+    "calories": 265,
+    "protein": 9,
+    "carbs": 49,
+    "fat": 3.2,
+    "fiber": 2.7,
+    "category": "carbs"
+  },
+  "toast": {
+    "calories": 79,
+    "protein": 2.6,
+    "carbs": 15,
+    "fat": 1,
+    "fiber": 0.8,
+    "category": "carbs"
+  },
+  "bagel": {
+    "calories": 289,
+    "protein": 11,
+    "carbs": 56,
+    "fat": 2,
+    "fiber": 2.3,
+    "category": "carbs"
+  },
+  "croissant": {
+    "calories": 406,
+    "protein": 8,
+    "carbs": 46,
+    "fat": 21,
+    "fiber": 2.6,
+    "category": "carbs"
+  },
+  "muffin": {
+    "calories": 377,
+    "protein": 6,
+    "carbs": 55,
+    "fat": 15,
+    "fiber": 1.5,
+    "category": "treats"
+  },
+  "donut": {
+    "calories": 269,
+    "protein": 3,
+    "carbs": 31,
+    "fat": 15,
+    "fiber": 0.9,
+    "category": "treats"
+  },
+  "cookie": {
+    "calories": 142,
+    "protein": 2,
+    "carbs": 20,
+    "fat": 6.5,
+    "fiber": 0.7,
+    "category": "treats"
+  },
+  "cake": {
+    "calories": 257,
+    "protein": 3,
+    "carbs": 42,
+    "fat": 9,
+    "fiber": 0.6,
+    "category": "treats"
+  },
+  "ice cream": {
+    "calories": 207,
+    "protein": 3.5,
+    "carbs": 24,
+    "fat": 11,
+    "fiber": 0.7,
+    "category": "treats"
+  },
+  "chocolate": {
+    "calories": 546,
+    "protein": 5,
+    "carbs": 61,
+    "fat": 31,
+    "fiber": 7,
+    "category": "treats"
+  },
+  "candy": {
+    "calories": 394,
+    "protein": 0,
+    "carbs": 100,
+    "fat": 0,
+    "fiber": 0,
+    "category": "treats"
+  },
+  "chips": {
+    "calories": 536,
+    "protein": 7,
+    "carbs": 53,
+    "fat": 34,
+    "fiber": 4.5,
+    "category": "snacks"
+  },
+  "popcorn": {
+    "calories": 387,
+    "protein": 13,
+    "carbs": 78,
+    "fat": 4.5,
+    "fiber": 15,
+    "category": "snacks"
+  },
+  "pretzels": {
+    "calories": 380,
+    "protein": 10,
+    "carbs": 80,
+    "fat": 3,
+    "fiber": 3,
+    "category": "snacks"
+  },
+  "crackers": {
+    "calories": 502,
+    "protein": 8,
+    "carbs": 62,
+    "fat": 24,
+    "fiber": 2,
+    "category": "snacks"
+  },
+  "nuts": {
+    "calories": 607,
+    "protein": 20,
+    "carbs": 21,
+    "fat": 54,
+    "fiber": 8,
+    "category": "snacks"
+  },
+  "almonds": {
+    "calories": 579,
+    "protein": 21,
+    "carbs": 22,
+    "fat": 50,
+    "fiber": 12,
+    "category": "snacks"
+  },
+  "peanuts": {
+    "calories": 567,
+    "protein": 26,
+    "carbs": 16,
+    "fat": 49,
+    "fiber": 9,
+    "category": "snacks"
+  },
+  "cashews": {
+    "calories": 553,
+    "protein": 18,
+    "carbs": 30,
+    "fat": 44,
+    "fiber": 3.3,
+    "category": "snacks"
+  },
+  "walnuts": {
+    "calories": 654,
+    "protein": 15,
+    "carbs": 14,
+    "fat": 65,
+    "fiber": 7,
+    "category": "snacks"
+  },
+  "peanut butter": {
+    "calories": 588,
+    "protein": 25,
+    "carbs": 20,
+    "fat": 50,
+    "fiber": 6,
+    "category": "snacks"
+  },
+  "cheese": {
+    "calories": 402,
+    "protein": 25,
+    "carbs": 1.3,
+    "fat": 33,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "cheddar cheese": {
+    "calories": 403,
+    "protein": 25,
+    "carbs": 1.3,
+    "fat": 33,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "mozzarella": {
+    "calories": 280,
+    "protein": 28,
+    "carbs": 3.1,
+    "fat": 17,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "parmesan": {
+    "calories": 431,
+    "protein": 38,
+    "carbs": 4.1,
+    "fat": 29,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "milk": {
+    "calories": 149,
+    "protein": 8,
+    "carbs": 12,
+    "fat": 8,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "yogurt": {
+    "calories": 59,
+    "protein": 10,
+    "carbs": 3.6,
+    "fat": 0.4,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "greek yogurt": {
+    "calories": 100,
+    "protein": 17,
+    "carbs": 6,
+    "fat": 0.7,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "butter": {
+    "calories": 717,
+    "protein": 0.9,
+    "carbs": 0.1,
+    "fat": 81,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "cream": {
+    "calories": 340,
+    "protein": 2.1,
+    "carbs": 2.8,
+    "fat": 36,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "sour cream": {
+    "calories": 193,
+    "protein": 2.4,
+    "carbs": 4.6,
+    "fat": 19,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "cream cheese": {
+    "calories": 342,
+    "protein": 6,
+    "carbs": 5.5,
+    "fat": 34,
+    "fiber": 0,
+    "category": "dairy"
+  },
+  "broccoli": {
+    "calories": 55,
+    "protein": 3.7,
+    "carbs": 11,
+    "fat": 0.6,
+    "fiber": 2.4,
+    "category": "vegetables"
+  },
+  "spinach": {
+    "calories": 23,
+    "protein": 2.9,
+    "carbs": 3.6,
+    "fat": 0.4,
+    "fiber": 2.2,
+    "category": "vegetables"
+  },
+  "carrots": {
+    "calories": 41,
+    "protein": 0.9,
+    "carbs": 10,
+    "fat": 0.2,
+    "fiber": 2.8,
+    "category": "vegetables"
+  },
+  "tomato": {
+    "calories": 18,
+    "protein": 0.9,
+    "carbs": 3.9,
+    "fat": 0.2,
+    "fiber": 1.2,
+    "category": "vegetables"
+  },
+  "lettuce": {
+    "calories": 15,
+    "protein": 1.4,
+    "carbs": 2.9,
+    "fat": 0.2,
+    "fiber": 1.3,
+    "category": "vegetables"
+  },
+  "cucumber": {
+    "calories": 16,
+    "protein": 0.7,
+    "carbs": 3.6,
+    "fat": 0.1,
+    "fiber": 0.5,
+    "category": "vegetables"
+  },
+  "bell pepper": {
+    "calories": 31,
+    "protein": 1,
+    "carbs": 6,
+    "fat": 0.3,
+    "fiber": 2.1,
+    "category": "vegetables"
+  },
+  "onion": {
+    "calories": 40,
+    "protein": 1.1,
+    "carbs": 9.3,
+    "fat": 0.1,
+    "fiber": 1.7,
+    "category": "vegetables"
+  },
+  "garlic": {
+    "calories": 149,
+    "protein": 6.4,
+    "carbs": 33,
+    "fat": 0.5,
+    "fiber": 2.1,
+    "category": "vegetables"
+  },
+  "mushroom": {
+    "calories": 22,
+    "protein": 3.1,
+    "carbs": 3.3,
+    "fat": 0.3,
+    "fiber": 1,
+    "category": "vegetables"
+  },
+  "potato": {
+    "calories": 163,
+    "protein": 4.3,
+    "carbs": 37,
+    "fat": 0.2,
+    "fiber": 2.5,
+    "category": "vegetables"
+  },
+  "sweet potato": {
+    "calories": 180,
+    "protein": 4,
+    "carbs": 41,
+    "fat": 0.3,
+    "fiber": 6.6,
+    "category": "vegetables"
+  },
+  "corn": {
+    "calories": 86,
+    "protein": 3.3,
+    "carbs": 19,
+    "fat": 1.4,
+    "fiber": 2,
+    "category": "vegetables"
+  },
+  "peas": {
+    "calories": 81,
+    "protein": 5,
+    "carbs": 14,
+    "fat": 0.4,
+    "fiber": 5.7,
+    "category": "vegetables"
+  },
+  "green beans": {
+    "calories": 31,
+    "protein": 1.8,
+    "carbs": 7,
+    "fat": 0.2,
+    "fiber": 2.7,
+    "category": "vegetables"
+  },
+  "cauliflower": {
+    "calories": 25,
+    "protein": 1.9,
+    "carbs": 5,
+    "fat": 0.3,
+    "fiber": 2,
+    "category": "vegetables"
+  },
+  "zucchini": {
+    "calories": 17,
+    "protein": 1.2,
+    "carbs": 3.1,
+    "fat": 0.3,
+    "fiber": 1,
+    "category": "vegetables"
+  },
+  "eggplant": {
+    "calories": 25,
+    "protein": 1,
+    "carbs": 6,
+    "fat": 0.2,
+    "fiber": 3,
+    "category": "vegetables"
+  },
+  "asparagus": {
+    "calories": 20,
+    "protein": 2.2,
+    "carbs": 3.9,
+    "fat": 0.1,
+    "fiber": 2.1,
+    "category": "vegetables"
+  },
+  "cabbage": {
+    "calories": 25,
+    "protein": 1.3,
+    "carbs": 5.8,
+    "fat": 0.1,
+    "fiber": 2.5,
+    "category": "vegetables"
+  },
+  "kale": {
+    "calories": 49,
+    "protein": 4.3,
+    "carbs": 9,
+    "fat": 0.9,
+    "fiber": 2,
+    "category": "vegetables"
+  },
+  "apple": {
+    "calories": 95,
+    "protein": 0.5,
+    "carbs": 25,
+    "fat": 0.3,
+    "fiber": 4.4,
+    "category": "fruits"
+  },
+  "banana": {
+    "calories": 105,
+    "protein": 1.3,
+    "carbs": 27,
+    "fat": 0.4,
+    "fiber": 3.1,
+    "category": "fruits"
+  },
+  "orange": {
+    "calories": 62,
+    "protein": 1.2,
+    "carbs": 15,
+    "fat": 0.2,
+    "fiber": 3.1,
+    "category": "fruits"
+  },
+  "berries": {
+    "calories": 57,
+    "protein": 1.1,
+    "carbs": 14,
+    "fat": 0.5,
+    "fiber": 2.4,
+    "category": "fruits"
+  },
+  "strawberry": {
+    "calories": 32,
+    "protein": 0.7,
+    "carbs": 7.7,
+    "fat": 0.3,
+    "fiber": 2,
+    "category": "fruits"
+  },
+  "blueberry": {
+    "calories": 57,
+    "protein": 0.7,
+    "carbs": 14,
+    "fat": 0.3,
+    "fiber": 2.4,
+    "category": "fruits"
+  },
+  "raspberry": {
+    "calories": 52,
+    "protein": 1.2,
+    "carbs": 12,
+    "fat": 0.7,
+    "fiber": 6.5,
+    "category": "fruits"
+  },
+  "blackberry": {
+    "calories": 43,
+    "protein": 1.4,
+    "carbs": 10,
+    "fat": 0.5,
+    "fiber": 5.3,
+    "category": "fruits"
+  },
+  "grapes": {
+    "calories": 69,
+    "protein": 0.7,
+    "carbs": 18,
+    "fat": 0.2,
+    "fiber": 0.9,
+    "category": "fruits"
+  },
+  "watermelon": {
+    "calories": 30,
+    "protein": 0.6,
+    "carbs": 8,
+    "fat": 0.2,
+    "fiber": 0.4,
+    "category": "fruits"
+  },
+  "mango": {
+    "calories": 60,
+    "protein": 0.8,
+    "carbs": 15,
+    "fat": 0.4,
+    "fiber": 1.6,
+    "category": "fruits"
+  },
+  "pineapple": {
+    "calories": 50,
+    "protein": 0.5,
+    "carbs": 13,
+    "fat": 0.1,
+    "fiber": 1.4,
+    "category": "fruits"
+  },
+  "peach": {
+    "calories": 39,
+    "protein": 0.9,
+    "carbs": 10,
+    "fat": 0.3,
+    "fiber": 1.5,
+    "category": "fruits"
+  },
+  "pear": {
+    "calories": 57,
+    "protein": 0.4,
+    "carbs": 15,
+    "fat": 0.1,
+    "fiber": 3.1,
+    "category": "fruits"
+  },
+  "plum": {
+    "calories": 46,
+    "protein": 0.7,
+    "carbs": 11,
+    "fat": 0.3,
+    "fiber": 1.4,
+    "category": "fruits"
+  },
+  "cherry": {
+    "calories": 63,
+    "protein": 1.1,
+    "carbs": 16,
+    "fat": 0.2,
+    "fiber": 2.1,
+    "category": "fruits"
+  },
+  "kiwi": {
+    "calories": 61,
+    "protein": 1.1,
+    "carbs": 15,
+    "fat": 0.5,
+    "fiber": 3,
+    "category": "fruits"
+  },
+  "avocado": {
+    "calories": 160,
+    "protein": 2,
+    "carbs": 9,
+    "fat": 15,
+    "fiber": 7,
+    "category": "fruits"
+  },
+  "oatmeal": {
+    "calories": 158,
+    "protein": 6,
+    "carbs": 27,
+    "fat": 3.2,
+    "fiber": 4,
+    "category": "carbs"
+  },
+  "cereal": {
+    "calories": 379,
+    "protein": 8,
+    "carbs": 84,
+    "fat": 2,
+    "fiber": 7,
+    "category": "carbs"
+  },
+  "granola": {
+    "calories": 471,
+    "protein": 13,
+    "carbs": 64,
+    "fat": 20,
+    "fiber": 8,
+    "category": "carbs"
+  },
+  "pancakes": {
+    "calories": 227,
+    "protein": 6,
+    "carbs": 28,
+    "fat": 10,
+    "fiber": 1,
+    "category": "carbs"
+  },
+  "waffles": {
+    "calories": 291,
+    "protein": 7,
+    "carbs": 33,
+    "fat": 15,
+    "fiber": 1.7,
+    "category": "carbs"
+  },
+  "meat": {
+    "calories": 250,
+    "protein": 26,
+    "carbs": 0,
+    "fat": 15,
+    "fiber": 0,
+    "category": "protein"
   }
 }

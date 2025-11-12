@@ -50,6 +50,27 @@ if errorlevel 1 (
 
 echo.
 echo ============================================================
+echo   Checking MongoDB...
+echo ============================================================
+echo.
+
+mongosh --eval "db.version()" --quiet >nul 2>&1
+
+if errorlevel 1 (
+    echo [WARNING] MongoDB is not running!
+    echo.
+    echo Please ensure MongoDB is installed and running.
+    echo After starting MongoDB, run: setup_mongodb.cmd
+    echo.
+) else (
+    echo [OK] MongoDB is running!
+    echo.
+    echo Setting up MongoDB database...
+    call setup_mongodb.cmd
+)
+
+echo.
+echo ============================================================
 echo   Setup Complete!
 echo ============================================================
 echo.
