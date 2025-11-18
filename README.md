@@ -1,22 +1,25 @@
 # Mindful Eating Agent
 
-AI-powered nutrition tracking with conversational interface, smart food recognition, and personalized recommendations.
+AI-powered nutrition tracking with conversational interface, smart food recognition, and personalized recommendations using Flask and LangGraph.
 
 ## Features
 
-### 💬 Conversational AI Chat
+### 💬 ChatGPT-Style AI Chat Interface
 - Natural language food logging
 - Handles misspellings and typos
 - Fuzzy matching for unknown foods
 - Context-aware responses
 - Real-time nutrition feedback
+- Inline AI insights and recommendations
+- Scrollable chat history
+- Modern, clean UI design
 
-### 📅 Calendar View
-- Historical meal tracking
-- Daily nutrition summaries
-- Expandable meal details
-- 30-day history view
-- Pattern visualization
+### 📊 Smart Dashboard
+- Real-time progress tracking
+- Daily nutrition totals
+- Macro breakdown visualization
+- Goal alignment indicators
+- Today's meal history
 
 ### 🎯 Personalized Onboarding
 - Custom calorie goals
@@ -24,68 +27,87 @@ AI-powered nutrition tracking with conversational interface, smart food recognit
 - Macro tracking (carbs, fat)
 - Flexible goal setting
 
-### 📊 Smart Tracking
-- Real-time progress bars
-- Daily nutrition totals
-- Macro breakdown
-- Goal alignment
-
-### 🤖 AI Recommendations
+### 🤖 AI Recommendations (LangGraph)
 - Pattern-based insights
 - Contextual suggestions
 - Positive reinforcement
 - Behavioral nudges
+- Real-time analysis
 
 ## Tech Stack
 
-**Frontend**: Next.js 15, TypeScript, Tailwind CSS, shadcn/ui  
-**Backend**: Flask 3.0, Python 3.10, LangGraph, LangChain  
-**Database**: MongoDB 6.0  
-**AI/ML**: Custom NLP, Fuzzy matching, Pattern recognition
+**Frontend**: HTML5, CSS3, JavaScript (Vanilla)  
+**Backend**: Flask 3.0, Python 3.10+  
+**AI/ML**: LangGraph, LangChain, Custom NLP  
+**Database**: MongoDB 6.0+  
+**Features**: Fuzzy matching, Pattern recognition, Conversational AI
 
 ## Quick Start
 
 ### Prerequisites
 - Python 3.10+
-- Node.js 18+
 - MongoDB 6.0+
 
 ### Installation
 
 ```bash
-# 1. Setup Backend
-cd backend
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-setup_mongodb.cmd
+# 1. Clone the repository
+git clone <repository-url>
+cd mindful-eating-agent
 
-# 2. Setup Frontend
-cd frontend
-npm install
-
-# 3. Start Full Stack
+# 2. Run the startup script (Windows)
 start-fullstack.cmd
 ```
 
-Access at: **http://localhost:3000**
+The script will:
+- Check Python and MongoDB
+- Create virtual environment
+- Install dependencies
+- Start Flask server
+- Open browser automatically
+
+Access at: **http://localhost:5000**
+
+### Manual Setup
+
+```bash
+# 1. Setup Backend
+cd backend
+python -m venv venv
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Linux/Mac
+pip install -r requirements.txt
+
+# 2. Setup MongoDB
+setup_mongodb.cmd  # Windows
+# ./setup_mongodb.sh  # Linux/Mac
+
+# 3. Start Flask
+python app.py
+```
 
 ## Project Structure
 
 ```
-├── backend/              # Flask API
-│   ├── app.py           # Main application
+├── backend/              # Flask Application
+│   ├── app.py           # Main Flask app
 │   ├── agent.py         # Original LangGraph agent
 │   ├── agent_chat.py    # Conversational AI agent
+│   ├── templates/       # HTML templates
+│   │   ├── base.html
+│   │   ├── index.html   # Dashboard
+│   │   ├── chat.html    # Chat interface
+│   │   ├── login.html
+│   │   └── register.html
+│   ├── static/          # Static assets
+│   │   ├── css/
+│   │   │   └── style.css
+│   │   └── js/
+│   │       ├── app.js   # Dashboard JS
+│   │       └── chat.js  # Chat interface JS
 │   ├── config/          # Configuration files
 │   ├── data/            # Food database
 │   └── utils/           # Utilities
-├── frontend/            # Next.js app
-│   ├── app/            # Pages & routes
-│   ├── components/     # UI components
-│   │   ├── chat-interface.tsx
-│   │   └── calendar-view.tsx
-│   └── lib/            # API client
 ├── docs/               # Documentation
 │   ├── SETUP.md       # Setup guide
 │   ├── ARCHITECTURE.md # System design
@@ -94,25 +116,28 @@ Access at: **http://localhost:3000**
 └── Workflow.md        # System workflow
 ```
 
-## Key Improvements
+## Key Features
 
-### Conversational AI
+### Conversational AI (LangGraph)
 - **Fuzzy Matching**: Handles misspellings (e.g., "chiken" → "chicken")
 - **Intent Detection**: Understands greetings, questions, and food logging
 - **Context Awareness**: Remembers conversation history
 - **Natural Responses**: Friendly, encouraging feedback
+- **Ingredient Estimation**: Calculates nutrition from ingredients when food is unknown
 
-### Calendar View
-- **Daily Summaries**: Total calories, protein, carbs, fat per day
-- **Expandable Details**: Click to see individual meals
-- **Visual Timeline**: Easy-to-scan history
-- **Quick Stats**: Meal count and nutrition at a glance
+### ChatGPT-Style Interface
+- **Scrollable Chat**: Smooth scrolling message history
+- **Message Types**: User messages, AI responses, and AI insights
+- **Inline Nutrition**: Food details shown directly in chat
+- **Real-time Updates**: Instant feedback and recommendations
+- **Modern Design**: Clean, professional UI with gradients and animations
 
 ### Enhanced UX
-- **3 Modes**: Chat, Manual logging, History
-- **Tab Navigation**: Easy switching between modes
+- **2 Modes**: AI Chat and Manual Dashboard
+- **Easy Navigation**: Simple header navigation
 - **Real-time Updates**: Instant feedback on logging
 - **Mobile Responsive**: Works on all devices
+- **Progress Sidebar**: Quick stats while chatting
 
 ## API Endpoints
 
@@ -144,27 +169,33 @@ Access at: **http://localhost:3000**
 User: "had a burger and fries"
 AI: "Got it! Logged: Burger (1 serving), Fries (1 serving) 📝
 
-📊 Nutrition:
+📊 Nutrition Summary:
 • 666 calories
 • 23g protein
 • 71g carbs
 • 25g fat
 
 🔥 That's a solid meal!"
+
+[AI Insights appear below]
+✨ AI Insights
+💪 You're at 85g protein today (goal: 120g). Try adding some chicken or Greek yogurt!
 ```
 
 ### Misspelling Handling
 ```
 User: "ate chiken and ryce"
-AI: "Did you mean 'Chicken', 'Rice'? (Reply 'yes' to confirm)"
+AI: "Did you mean 'Chicken', 'Rice'? 🤔
+(Reply 'yes' to confirm or tell me what you actually meant)"
 User: "yes"
 AI: "Perfect! Logged: Chicken (1 serving), Rice (1 serving) ✅"
 ```
 
-### Calendar View
-- Click any day to expand meal details
-- See nutrition breakdown per meal
-- Track patterns over time
+### Dashboard
+- Manual food logging with meal type selection
+- Real-time progress bars for calories and protein
+- Today's meal history with nutrition breakdown
+- AI recommendations based on patterns
 
 ## Documentation
 
@@ -176,20 +207,24 @@ AI: "Perfect! Logged: Chicken (1 serving), Rice (1 serving) ✅"
 
 ## Development
 
-### Backend
+### Running the Application
 ```bash
 cd backend
-venv\Scripts\activate
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Linux/Mac
 python app.py
 ```
 Runs on: http://localhost:5000
 
-### Frontend
-```bash
-cd frontend
-npm run dev
-```
-Runs on: http://localhost:3000
+### Available Routes
+- `/` - Dashboard (manual logging)
+- `/chat` - AI Chat interface
+- `/login` - User login
+- `/register` - User registration
+- `/logout` - Logout
+
+### API Endpoints
+All API endpoints are documented in [docs/API.md](docs/API.md)
 
 ## Team
 

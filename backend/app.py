@@ -322,6 +322,18 @@ def index():
     
     return render_template('index.html', user_name=user['name'])
 
+@app.route('/chat')
+def chat():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = user_ops.get_user_by_email(session['user_id'])
+    if not user:
+        session.clear()
+        return redirect(url_for('login'))
+    
+    return render_template('chat.html', user_name=user['name'])
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -501,7 +513,7 @@ def get_stats():
     return jsonify({'stats': stats})
 
 @app.route('/api/chat', methods=['POST'])
-def chat():
+def api_chat():
     """Conversational food logging endpoint"""
     if 'user_id' not in session:
         return jsonify({'error': 'Not authenticated'}), 401

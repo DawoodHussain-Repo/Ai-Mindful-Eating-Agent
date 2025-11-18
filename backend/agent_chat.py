@@ -18,9 +18,36 @@ from utils.recommendation_engine import RecommendationEngine
 FOOD_DATABASE = load_food_database()
 USER_PROMPTS = load_user_prompts()
 
+# Define portion patterns and sizes
+PORTION_PATTERNS = {
+    'oz': r'(\d+\.?\d*)\s*(?:oz|ounce|ounces)',
+    'cup': r'(\d+\.?\d*|1/2|1/4|half|quarter)\s*(?:cup|cups)',
+    'gram': r'(\d+\.?\d*)\s*(?:g|gram|grams)',
+    'piece': r'(\d+\.?\d*)\s*(?:piece|pieces|slice|slices)',
+    'serving': r'(\d+\.?\d*)\s*(?:serving|servings)',
+}
+
+PORTION_SIZES = {
+    'small': 0.75,
+    'medium': 1.0,
+    'large': 1.5,
+    'huge': 2.0,
+}
+
+# Define nutrition thresholds
+NUTRITION_THRESHOLDS = {
+    'low_protein': 60,
+    'good_protein': 80,
+    'target_protein': 120,
+    'low_calories': 1200,
+    'target_calories': 2000,
+    'high_calories': 2200,
+    'food_frequency_alert': 3,
+}
+
 # Initialize utilities
-food_parser = FoodParser(FOOD_DATABASE, {}, {})
-recommendation_engine = RecommendationEngine({}, USER_PROMPTS)
+food_parser = FoodParser(FOOD_DATABASE, PORTION_PATTERNS, PORTION_SIZES)
+recommendation_engine = RecommendationEngine(NUTRITION_THRESHOLDS, USER_PROMPTS)
 
 # Define the Conversational Agent State
 class ConversationalAgentState(TypedDict):
@@ -311,10 +338,10 @@ def generate_conversational_response_node(state: ConversationalAgentState) -> Co
     # If this was calculated from ingredients, mention it
     if foods and 'ingredients' in foods[0]:
         ingredients_list = ', '.join(foods[0]['ingredients'])
-        response += f"\n\n🧩 **Ingredients detected:** {ingredients_list}"
+        response += f"\n\n🧩 Ingredients detected: {ingredients_list}"
     
     # Add nutrition summary
-    response += f"\n\n📊 **Nutrition:**\n"
+    response += f"\n\n📊 Nutrition Summary:\n"
     response += f"• {round(nutrition['calories'])} calories\n"
     response += f"• {round(nutrition['protein'])}g protein\n"
     response += f"• {round(nutrition['carbs'])}g carbs\n"
@@ -329,26 +356,37 @@ def generate_conversational_response_node(state: ConversationalAgentState) -> Co
         response += "\n\n🥗 Nice fiber content!"
     
     state['agent_response'] = response
-    state['step'] = 'complete'
+    state['step'] = 'nutrition_calculated'
     
     return state
 
 def generate_recommendations_node(state: ConversationalAgentState) -> ConversationalAgentState:
     """Node 5: Generate recommendations based on history"""
-    if state['intent'] != 'log_food':
+    if state['intent'] != 'log_food' or state['needs_clarification']:
         return state
     
     user_history = state.get('user_history', [])
     nutrition_data = state.get('nutrition_data', {})
     
+    # Analyze patterns from history
+    patterns = {}
+    if user_history:
+        recent_logs = user_history[-14:]  # Last 2 weeks
+        food_frequency = {}
+        for log in recent_logs:
+            for food in log.get('foods', []):
+                food_name = food.get('name', '')
+                food_frequency[food_name] = food_frequency.get(food_name, 0) + 1
+        patterns['food_frequency'] = food_frequency
+    
     recommendations = recommendation_engine.generate_recommendations(
         nutrition_data,
         user_history,
-        {}
+        patterns
     )
     
     state['recommendations'] = recommendations
-    state['step'] = 'recommendations_generated'
+    state['step'] = 'complete'
     
     return state
 
@@ -365,7 +403,7 @@ def should_continue(state: ConversationalAgentState) -> str:
     elif step == 'parsed':
         return 'calculate_nutrition'
     elif step == 'nutrition_calculated':
-        return 'generate_response'
+        return 'generate_recommendations'
     elif step == 'recommendations_generated':
         return END
     
@@ -406,15 +444,7 @@ def create_conversational_agent():
         }
     )
     
-    workflow.add_conditional_edges(
-        "calculate_nutrition",
-        should_continue,
-        {
-            "generate_response": "generate_response",
-            END: END
-        }
-    )
-    
+    workflow.add_edge("calculate_nutrition", "generate_response")
     workflow.add_edge("generate_response", "generate_recommendations")
     workflow.add_edge("generate_recommendations", END)
     

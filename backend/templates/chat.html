@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}AI Chat - Mindful Eating Agent{% endblock %}
+
+{% block content %}
+<header>
+    <div class="header-content">
+        <div class="logo">🍽️ Mindful Eating Agent</div>
+        <nav>
+            <span class="user-greeting">Welcome, {{ user_name }}!</span>
+            <a href="{{ url_for('index') }}">Dashboard</a>
+            <a href="{{ url_for('chat') }}" class="active">Chat</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <div class="chat-layout">
+        <!-- Main Chat Area -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <span class="chat-icon">💬</span>
+                    <div>
+                        <h2>AI Nutrition Assistant</h2>
+                        <p class="chat-subtitle">Just tell me what you ate naturally - I understand everything!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chatMessages">
+                <div class="message agent-message">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Hey! 👋 What did you eat? Just tell me naturally - like 'had a burger and fries' or 'ate
+                                chicken with rice'</p>
+                        </div>
+                        <div class="message-time" data-time="now"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <textarea id="chatInput" placeholder="Message AI... (e.g., 'I had pizza' or 'ate chicken and rice')"
+                        rows="1"></textarea>
+                    <button id="sendButton" class="send-button" onclick="sendMessage()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                        </svg>
+                    </button>
+                </div>
+                <p class="chat-hint">💡 Just type naturally! I understand misspellings and can estimate nutrition from
+                    ingredients.</p>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="chat-sidebar">
+            <div class="sidebar-card">
+                <h3>📊 Today's Progress</h3>
+                <div class="progress-compact" id="sidebarProgress">
+                    <div class="loading pulse">Loading...</div>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>🍴 Recent Meals</h3>
+                <div id="sidebarMeals">
+                    <div class="loading pulse">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}

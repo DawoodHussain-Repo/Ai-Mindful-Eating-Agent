@@ -81,9 +81,19 @@ class MongoDBClient:
         self.collections['food_logs'].create_index('timestamp')
         self.collections['food_logs'].create_index([('user_id', 1), ('timestamp', -1)])
         
-        # Session index
-        self.collections['sessions'].create_index('session_id', unique=True)
-        self.collections['sessions'].create_index('expiry')
+        # Session indexes (Flask-Session uses `id` and `expiration` fields)
+        sessions_collection = self.collections['sessions']
+
+        # Drop legacy session_id index causing duplicate key errors (field not used by Flask-Session)
+        try:
+            index_info = sessions_collection.index_information()
+            if 'session_id_1' in index_info:
+                sessions_collection.drop_index('session_id_1')
+        except Exception as e:
+            print(f"⚠️ Could not drop legacy session_id index: {e}")
+
+        sessions_collection.create_index('id', unique=True)
+        sessions_collection.create_index('expiration')
     
     def get_collection(self, collection_name):
         """Get a collection by name"""

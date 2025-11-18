@@ -3,7 +3,6 @@
 ## Prerequisites
 
 - Python 3.10+
-- Node.js 18+
 - MongoDB 6.0+
 
 ## Quick Start
@@ -22,57 +21,63 @@ Start MongoDB:
 net start MongoDB
 ```
 
+**Linux/Mac:**
+```bash
+# Ubuntu/Debian
+sudo apt-get install mongodb
+
+# Mac (Homebrew)
+brew install mongodb-community
+
+# Start MongoDB
+sudo systemctl start mongod  # Linux
+brew services start mongodb-community  # Mac
+```
+
 ### 2. Setup Backend
 
 ```cmd
 cd backend
 python -m venv venv
-venv\Scripts\activate
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Linux/Mac
 pip install -r requirements.txt
-setup_mongodb.cmd
+setup_mongodb.cmd  # Windows
+# ./setup_mongodb.sh  # Linux/Mac
 ```
 
-### 3. Setup Frontend
+### 3. Start Application
 
-```cmd
-cd frontend
-npm install
-```
-
-### 4. Start Application
-
-**Option A: Full Stack (Recommended)**
+**Option A: Automated (Recommended - Windows)**
 ```cmd
 start-fullstack.cmd
 ```
 
 **Option B: Manual**
 ```cmd
-# Terminal 1 - Backend
 cd backend
-venv\Scripts\activate
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Linux/Mac
 python app.py
-
-# Terminal 2 - Frontend
-cd frontend
-npm run dev
 ```
 
-### 5. Access Application
+### 4. Access Application
 
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:5000
+- Application: http://localhost:5000
+- Dashboard: http://localhost:5000/
+- AI Chat: http://localhost:5000/chat
+- Login: http://localhost:5000/login
 
 ## Configuration
 
-### Backend (.env)
+### Flask Secret Key (backend/app.py)
+The application uses a default secret key for development. For production, set an environment variable:
 ```bash
-SECRET_KEY=your-secret-key-here
-```
+# Windows
+set SECRET_KEY=your-secret-key-here
 
-### Frontend (.env.local)
-```bash
-NEXT_PUBLIC_API_URL=http://localhost:5000
+# Linux/Mac
+export SECRET_KEY=your-secret-key-here
 ```
 
 ### MongoDB (backend/config/mongodb_config.json)
@@ -121,33 +126,59 @@ cd backend
 pip install -r requirements.txt
 ```
 
-### Frontend Build Errors
+### Port Already in Use
 ```cmd
-cd frontend
-rm -rf .next node_modules
-npm install
+# Windows - Find and kill process on port 5000
+netstat -ano | findstr :5000
+taskkill /PID <PID> /F
+
+# Linux/Mac
+lsof -ti:5000 | xargs kill -9
 ```
 
 ## Production Deployment
 
-### Backend
+### Flask Application
 ```cmd
 cd backend
-pip install gunicorn
+pip install gunicorn  # Linux/Mac
+# pip install waitress  # Windows
+
+# Linux/Mac
 gunicorn -w 4 -b 0.0.0.0:5000 app:app
+
+# Windows
+waitress-serve --port=5000 app:app
 ```
 
-### Frontend
-```cmd
-cd frontend
-npm run build
-npm start
+### Environment Variables
+```bash
+# Set production secret key
+export SECRET_KEY=your-production-secret-key
+
+# Set Flask environment
+export FLASK_ENV=production
 ```
+
+## Application Structure
+
+### Pages
+- **Dashboard** (`/`) - Manual food logging with progress tracking
+- **AI Chat** (`/chat`) - ChatGPT-style conversational interface
+- **Login** (`/login`) - User authentication
+- **Register** (`/register`) - New user registration
+
+### Features
+- Real-time nutrition tracking
+- AI-powered food recognition
+- Fuzzy matching for misspellings
+- Pattern-based recommendations
+- Progress visualization
 
 ## Support
 
 - Check MongoDB is running on port 27017
 - Verify Python virtual environment is activated
-- Ensure Node.js dependencies are installed
-- Review browser console for frontend errors
-- Check Flask logs for backend errors
+- Review browser console for JavaScript errors
+- Check Flask terminal for backend errors
+- Ensure all dependencies are installed

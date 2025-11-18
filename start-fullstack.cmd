@@ -1,6 +1,6 @@
 @echo off
 echo ============================================================
-echo   Mindful Eating Agent - Full Stack Startup
+echo   Mindful Eating Agent - Flask Application Startup
 echo ============================================================
 echo.
 
@@ -12,18 +12,11 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
-
-REM Check Node.js
-node --version >nul 2>&1
-if errorlevel 1 (
-    echo [ERROR] Node.js is not installed or not in PATH
-    echo Please install Node.js 18 or higher from https://nodejs.org/
-    pause
-    exit /b 1
-)
+echo [OK] Python is installed
 
 REM Check MongoDB
-echo [1/6] Checking MongoDB...
+echo.
+echo [1/4] Checking MongoDB...
 mongosh --eval "db.version()" --quiet >nul 2>&1
 if errorlevel 1 (
     echo [ERROR] MongoDB is not running!
@@ -35,7 +28,7 @@ echo [OK] MongoDB is running
 
 REM Setup Backend if needed
 echo.
-echo [2/6] Setting up Backend...
+echo [2/4] Setting up Backend...
 if not exist "backend\venv" (
     echo Creating virtual environment...
     cd backend
@@ -54,61 +47,44 @@ echo Installing/Updating backend dependencies...
 cd backend
 call venv\Scripts\activate.bat
 python -m pip install --upgrade pip >nul 2>&1
-pip install -r requirements.txt >nul 2>&1
+pip install -r requirements.txt
 if errorlevel 1 (
     echo [WARNING] Some dependencies may have failed to install
+    echo Please check the error messages above
 )
 cd ..
 echo [OK] Backend setup complete
 
-REM Setup Frontend if needed
+REM Start Flask Application
 echo.
-echo [3/6] Setting up Frontend...
-if not exist "frontend\node_modules" (
-    echo Installing frontend dependencies...
-    cd frontend
-    call npm install
-    if errorlevel 1 (
-        echo [ERROR] Failed to install frontend dependencies
-        cd ..
-        pause
-        exit /b 1
-    )
-    cd ..
-)
-echo [OK] Frontend setup complete
+echo [3/4] Starting Flask Application...
+start "Mindful Eating Agent - Flask Server" cmd /k "cd backend && call venv\Scripts\activate.bat && python app.py"
 
-REM Start Backend
+REM Wait for Flask to start
+echo Waiting for Flask server to initialize...
+timeout /t 5 /nobreak >nul
+
+REM Open browser
 echo.
-echo [4/6] Starting Flask Backend...
-start "Mindful Eating - Backend" cmd /k "cd backend && call venv\Scripts\activate.bat && python app.py"
-
-REM Wait for backend to start
-echo Waiting for backend to initialize...
-timeout /t 8 /nobreak >nul
-
-REM Start Frontend
-echo.
-echo [5/6] Starting Next.js Frontend...
-start "Mindful Eating - Frontend" cmd /k "cd frontend && npm run dev"
-
-REM Wait and open browser
-echo.
-echo [6/6] Opening browser...
-timeout /t 10 /nobreak >nul
-start http://localhost:3000
+echo [4/4] Opening browser...
+timeout /t 3 /nobreak >nul
+start http://localhost:5000
 
 echo.
 echo ============================================================
-echo   Full Stack Running Successfully!
+echo   Flask Application Running Successfully!
 echo ============================================================
 echo.
-echo Backend API:  http://localhost:5000
-echo Frontend App: http://localhost:3000
-echo MongoDB:      localhost:27017
+echo Application URL: http://localhost:5000
+echo MongoDB:         localhost:27017
 echo.
-echo Both servers are running in separate windows.
-echo Close those windows to stop the servers.
+echo The Flask server is running in a separate window.
+echo Close that window to stop the server.
+echo.
+echo Features:
+echo   - Dashboard: http://localhost:5000/
+echo   - AI Chat:   http://localhost:5000/chat
+echo   - Login:     http://localhost:5000/login
 echo.
 echo Press any key to exit this window...
 pause >nul
