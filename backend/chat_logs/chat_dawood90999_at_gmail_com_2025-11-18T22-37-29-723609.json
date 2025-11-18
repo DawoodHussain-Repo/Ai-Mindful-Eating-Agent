@@ -1,0 +1,12 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-18T22:37:29.723609",
+  "status": "clarification",
+  "message": "suggestions",
+  "agent_response": "I don't recognize 'suggestions' 🤔\n\nCan you tell me what ingredients are in it? (e.g., 'bread, cheese, meat, tomato')\n\nOr try describing it differently!",
+  "foods": [],
+  "total_nutrition": {},
+  "recommendations": [],
+  "intent": "log_food",
+  "needs_clarification": true
+}

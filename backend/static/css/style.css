@@ -7,21 +7,22 @@
 }
 
 :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --primary-color: #667eea;
-    --secondary-color: #764ba2;
-    --success-color: #48bb78;
-    --warning-color: #ed8936;
-    --danger-color: #f56565;
-    --text-dark: #2d3748;
-    --text-light: #718096;
-    --bg-light: #f7fafc;
-    --border-color: #e2e8f0;
+    /* Uber Eats–inspired palette */
+    --primary-gradient: linear-gradient(135deg, #06c167 0%, #05944f 100%);
+    --primary-color: #06c167;
+    --secondary-color: #111827;
+    --success-color: #06c167;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --text-dark: #111827;
+    --text-light: #6b7280;
+    --bg-light: #f3f4f6;
+    --border-color: #e5e7eb;
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: var(--primary-gradient);
+    background: #050816;
     min-height: 100vh;
     color: var(--text-dark);
     line-height: 1.6;
@@ -35,11 +36,11 @@ body {
 
 /* Header */
 header {
-    background: rgba(255, 255, 255, 0.98);
-    padding: 20px 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    background: rgba(17, 24, 39, 0.96);
+    padding: 18px 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
     margin-bottom: 30px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(18px);
 }
 
 .header-content {
@@ -53,11 +54,8 @@ header {
 
 .logo {
     font-size: 24px;
-    font-weight: 700;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-weight: 800;
+    color: #f9fafb;
 }
 
 nav {
@@ -68,20 +66,21 @@ nav {
 
 nav a {
     text-decoration: none;
-    color: var(--text-dark);
+    color: #e5e7eb;
     font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 8px 16px;
-    border-radius: 8px;
+    transition: all 0.25s ease;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: transparent;
 }
 
 nav a:hover {
-    background: var(--bg-light);
-    color: var(--primary-color);
+    background: rgba(31, 41, 55, 0.9);
+    color: #f9fafb;
 }
 
 .user-greeting {
-    color: var(--text-light);
+    color: #9ca3af;
     font-size: 14px;
 }
 
@@ -1080,5 +1079,119 @@ nav a.active {
     
     .chat-input-container {
         padding: 15px;
+    }
+}
+
+/* Calendar layout */
+.calendar-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.calendar-main {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+}
+
+.calendar-days {
+    margin-top: 16px;
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+}
+
+.calendar-day-card {
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: var(--bg-light);
+    margin-bottom: 10px;
+}
+
+.calendar-day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.calendar-day-date {
+    color: var(--text-dark);
+}
+
+.calendar-day-calories {
+    color: var(--primary-color);
+}
+
+.calendar-day-macros {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.calendar-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.calendar-summary-card,
+.calendar-insight-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.calendar-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.calendar-summary-item {
+    background: var(--bg-light);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+}
+
+.calendar-summary-label {
+    color: var(--text-light);
+    margin-bottom: 4px;
+}
+
+.calendar-summary-value {
+    font-weight: 600;
+}
+
+.calendar-insight-text {
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.calendar-insight-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.calendar-insight-list li {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+}
+
+@media (max-width: 968px) {
+    .calendar-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .calendar-days {
+        max-height: none;
     }
 }

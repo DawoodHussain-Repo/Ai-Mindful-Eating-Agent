@@ -1,0 +1,49 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-18T22:37:38.223770",
+  "status": "success",
+  "message": "I ate 2 ice creams",
+  "agent_response": "Nice! I tracked: Ice Cream (2 servings) ✅\n\n📊 Nutrition Summary:\n• 414 calories\n• 7g protein\n• 48g carbs\n• 22g fat",
+  "foods": [
+    {
+      "name": "Ice Cream",
+      "portion": 2.0,
+      "portion_text": "2 servings",
+      "nutrition": {
+        "calories": 414.0,
+        "protein": 7.0,
+        "carbs": 48.0,
+        "fat": 22.0,
+        "fiber": 1.4
+      },
+      "category": "treats",
+      "confidence": 1.0
+    }
+  ],
+  "total_nutrition": {
+    "calories": 414.0,
+    "protein": 7.0,
+    "carbs": 48.0,
+    "fat": 22.0,
+    "fiber": 1.4
+  },
+  "recommendations": [
+    {
+      "type": "calories",
+      "message": "You're at 2914 calories today. Maybe go for something lighter next time? You've got this! 😊",
+      "icon": "⚠️"
+    },
+    {
+      "type": "variety",
+      "message": "I noticed you've had Burger 5 times recently. Nothing wrong with that, but variety is the spice of life! Try something new? 🔄",
+      "icon": "🔄"
+    },
+    {
+      "type": "positive",
+      "message": "Love the consistency! You've logged 3+ meals today. That's how you build lasting habits! 🌟",
+      "icon": "🌟"
+    }
+  ],
+  "intent": "log_food",
+  "needs_clarification": false
+}

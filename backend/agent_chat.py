@@ -34,6 +34,39 @@ PORTION_SIZES = {
     'huge': 2.0,
 }
 
+NUMBER_WORDS = {
+    'one': 1,
+    'two': 2,
+    'three': 3,
+    'four': 4,
+    'five': 5,
+    'six': 6,
+    'seven': 7,
+    'eight': 8,
+    'nine': 9,
+    'ten': 10,
+}
+
+def _extract_count_multiplier(text: str, food_name: str) -> float:
+    text = text.lower()
+    food_name = food_name.lower()
+    index = text.find(food_name)
+    if index == -1:
+        return 1.0
+    pre_text = text[:index]
+    tokens = re.findall(r'\b[\w\.]+\b', pre_text)
+    for token in reversed(tokens):
+        if token.isdigit():
+            try:
+                value = float(token)
+                if value > 0:
+                    return value
+            except ValueError:
+                continue
+        if token in NUMBER_WORDS:
+            return float(NUMBER_WORDS[token])
+    return 1.0
+
 # Define nutrition thresholds
 NUTRITION_THRESHOLDS = {
     'low_protein': 60,
@@ -201,28 +234,20 @@ def parse_conversational_food_node(state: ConversationalAgentState) -> Conversat
         matched = False
         for food_name in all_food_names:
             if food_name in food_text:
-                # Extract portion if present
-                portion_match = re.search(r'(\d+\.?\d*)\s*(oz|ounce|ounces|cup|cups|g|gram|grams|serving|servings)?', food_text)
-                portion = 1.0
-                portion_text = "1 serving"
-                
-                if portion_match:
-                    amount = float(portion_match.group(1))
-                    unit = portion_match.group(2) or 'serving'
-                    
-                    if 'oz' in unit or 'ounce' in unit:
-                        portion = amount / 4
-                        portion_text = f"{amount} oz"
-                    elif 'cup' in unit:
-                        portion = amount
-                        portion_text = f"{amount} cup"
-                    elif 'g' in unit or 'gram' in unit:
-                        portion = amount / 100
-                        portion_text = f"{amount}g"
+                # Use shared FoodParser logic for base portion (oz, cups, grams, etc.)
+                portion, portion_text = food_parser.parse_portion(food_text)
+
+                # Detect count multiplier like "3 burger" or "two pizza" and apply it
+                count_multiplier = _extract_count_multiplier(food_text, food_name)
+                if count_multiplier != 1.0:
+                    portion *= count_multiplier
+                    if portion_text and portion_text != "1 serving":
+                        count_str = str(int(count_multiplier)) if count_multiplier.is_integer() else str(count_multiplier)
+                        portion_text = f"{count_str} x {portion_text}"
                     else:
-                        portion = amount
-                        portion_text = f"{amount} serving"
-                
+                        count_str = str(int(count_multiplier)) if count_multiplier.is_integer() else str(count_multiplier)
+                        portion_text = f"{count_str} serving{'s' if count_multiplier != 1 else ''}"
+
                 nutrition = FOOD_DATABASE[food_name]
                 portioned_nutrition = {
                     k: round(v * portion, 1) 
@@ -496,13 +521,20 @@ def process_conversational_message(
     # Run the agent
     result = conversational_agent.invoke(initial_state)
     
+    needs_clarification = result.get('needs_clarification', False)
+    agent_response = (result.get('agent_response') or '').strip()
+    clarification_question = (result.get('clarification_question') or '').strip()
+    
+    if needs_clarification and not agent_response and clarification_question:
+        agent_response = clarification_question
+    
     return {
-        'success': result['intent'] == 'log_food' and not result['needs_clarification'],
-        'agent_response': result.get('agent_response', ''),
+        'success': result.get('intent') == 'log_food' and not needs_clarification,
+        'agent_response': agent_response,
         'foods': result.get('parsed_foods', []),
         'total_nutrition': result.get('nutrition_data', {}),
         'recommendations': result.get('recommendations', []),
-        'needs_clarification': result.get('needs_clarification', False),
-        'clarification_question': result.get('clarification_question', ''),
+        'needs_clarification': needs_clarification,
+        'clarification_question': clarification_question,
         'intent': result.get('intent', 'log_food')
     }

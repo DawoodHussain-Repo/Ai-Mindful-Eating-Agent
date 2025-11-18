@@ -8,8 +8,8 @@
         <div class="logo">🍽️ Mindful Eating Agent</div>
         <nav>
             <span class="user-greeting">Welcome, {{ user_name }}!</span>
-            <a href="{{ url_for('index') }}">Dashboard</a>
             <a href="{{ url_for('chat') }}" class="active">Chat</a>
+            <a href="{{ url_for('calendar') }}">Calendar</a>
             <a href="{{ url_for('logout') }}">Logout</a>
         </nav>
     </div>

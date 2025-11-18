@@ -1,135 +1,15 @@
 # Mindful Eating Agent
 
-AI-powered nutrition tracking with conversational interface, smart food recognition, and personalized recommendations using Flask and LangGraph.
+<div align="center">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-blue" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/Flask-3.0-green" alt="Flask 3.0">
+  <img src="https://img.shields.io/badge/MongoDB-6.0%2B-brightgreen" alt="MongoDB 6.0+">
+  <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License: MIT">
+</div>
 
-## Features
+## Overview
 
-### 💬 ChatGPT-Style AI Chat Interface
-- Natural language food logging
-- Handles misspellings and typos
-- Fuzzy matching for unknown foods
-- Context-aware responses
-- Real-time nutrition feedback
-- Inline AI insights and recommendations
-- Scrollable chat history
-- Modern, clean UI design
-
-### 📊 Smart Dashboard
-- Real-time progress tracking
-- Daily nutrition totals
-- Macro breakdown visualization
-- Goal alignment indicators
-- Today's meal history
-
-### 🎯 Personalized Onboarding
-- Custom calorie goals
-- Protein targets
-- Macro tracking (carbs, fat)
-- Flexible goal setting
-
-### 🤖 AI Recommendations (LangGraph)
-- Pattern-based insights
-- Contextual suggestions
-- Positive reinforcement
-- Behavioral nudges
-- Real-time analysis
-
-## Tech Stack
-
-**Frontend**: HTML5, CSS3, JavaScript (Vanilla)  
-**Backend**: Flask 3.0, Python 3.10+  
-**AI/ML**: LangGraph, LangChain, Custom NLP  
-**Database**: MongoDB 6.0+  
-**Features**: Fuzzy matching, Pattern recognition, Conversational AI
-
-## Quick Start
-
-### Prerequisites
-- Python 3.10+
-- MongoDB 6.0+
-
-### Installation
-
-```bash
-# 1. Clone the repository
-git clone <repository-url>
-cd mindful-eating-agent
-
-# 2. Run the startup script (Windows)
-start-fullstack.cmd
-```
-
-The script will:
-- Check Python and MongoDB
-- Create virtual environment
-- Install dependencies
-- Start Flask server
-- Open browser automatically
-
-Access at: **http://localhost:5000**
-
-### Manual Setup
-
-```bash
-# 1. Setup Backend
-cd backend
-python -m venv venv
-venv\Scripts\activate  # Windows
-# source venv/bin/activate  # Linux/Mac
-pip install -r requirements.txt
-
-# 2. Setup MongoDB
-setup_mongodb.cmd  # Windows
-# ./setup_mongodb.sh  # Linux/Mac
-
-# 3. Start Flask
-python app.py
-```
-
-## Project Structure
-
-```
-├── backend/              # Flask Application
-│   ├── app.py           # Main Flask app
-│   ├── agent.py         # Original LangGraph agent
-│   ├── agent_chat.py    # Conversational AI agent
-│   ├── templates/       # HTML templates
-│   │   ├── base.html
-│   │   ├── index.html   # Dashboard
-│   │   ├── chat.html    # Chat interface
-│   │   ├── login.html
-│   │   └── register.html
-│   ├── static/          # Static assets
-│   │   ├── css/
-│   │   │   └── style.css
-│   │   └── js/
-│   │       ├── app.js   # Dashboard JS
-│   │       └── chat.js  # Chat interface JS
-│   ├── config/          # Configuration files
-│   ├── data/            # Food database
-│   └── utils/           # Utilities
-├── docs/               # Documentation
-│   ├── SETUP.md       # Setup guide
-│   ├── ARCHITECTURE.md # System design
-│   └── API.md         # API reference
-├── Spec.md            # Technical specification
-└── Workflow.md        # System workflow
-```
-
-## Key Features
-
-### Conversational AI (LangGraph)
-- **Fuzzy Matching**: Handles misspellings (e.g., "chiken" → "chicken")
-- **Intent Detection**: Understands greetings, questions, and food logging
-- **Context Awareness**: Remembers conversation history
-- **Natural Responses**: Friendly, encouraging feedback
-- **Ingredient Estimation**: Calculates nutrition from ingredients when food is unknown
-
-### ChatGPT-Style Interface
-- **Scrollable Chat**: Smooth scrolling message history
-- **Message Types**: User messages, AI responses, and AI insights
-- **Inline Nutrition**: Food details shown directly in chat
-- **Real-time Updates**: Instant feedback and recommendations
+Mindful Eating Agent is an AI-powered nutrition tracking application that helps users log meals, track nutrition, and receive personalized recommendations through a conversational interface.
 - **Modern Design**: Clean, professional UI with gradients and animations
 
 ### Enhanced UX

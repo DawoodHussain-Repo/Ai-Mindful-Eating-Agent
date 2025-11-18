@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Calendar - Mindful Eating Agent{% endblock %}
+
+{% block content %}
+<header>
+    <div class="header-content">
+        <div class="logo">🍽️ Mindful Eating Agent</div>
+        <nav>
+            <span class="user-greeting">Welcome, {{ user_name }}!</span>
+            <a href="{{ url_for('chat') }}">Chat</a>
+            <a href="{{ url_for('calendar') }}" class="active">Calendar</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <div class="calendar-layout">
+        <div class="calendar-main">
+            <h2>📅 Daily Nutrition Calendar</h2>
+            <p class="chat-subtitle">See your logged meals and nutrition totals for each day.</p>
+            <div id="calendarDays" class="calendar-days">
+                <div class="loading pulse">Loading your recent days...</div>
+            </div>
+        </div>
+
+        <div class="calendar-sidebar">
+            <div class="calendar-summary-card">
+                <h3>📊 Weekly Summary</h3>
+                <div id="weeklySummary">
+                    <div class="loading pulse">Calculating averages...</div>
+                </div>
+            </div>
+
+            <div class="calendar-insight-card">
+                <h3>🧠 AI Weekly Insight</h3>
+                <div id="weeklyInsight">
+                    <div class="loading pulse">Analyzing your habits...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+{% endblock %}

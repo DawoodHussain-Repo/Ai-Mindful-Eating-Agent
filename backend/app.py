@@ -309,18 +309,53 @@ def generate_recommendations(user_id):
     
     return recommendations
 
+
+# Chat logging utilities
+CHAT_LOG_DIR = os.path.join(os.path.dirname(__file__), 'chat_logs')
+os.makedirs(CHAT_LOG_DIR, exist_ok=True)
+
+
+def log_chat_interaction(user_id, message, result, status='success'):
+    """Persist chat interactions (prompt + response) to JSON file and MongoDB."""
+    try:
+        timestamp = datetime.utcnow().isoformat()
+        log_entry = {
+            'user_id': user_id,
+            'timestamp': timestamp,
+            'status': status,
+            'message': message,
+            'agent_response': result.get('agent_response'),
+            'foods': result.get('foods', []),
+            'total_nutrition': result.get('total_nutrition', {}),
+            'recommendations': result.get('recommendations', []),
+            'intent': result.get('intent'),
+            'needs_clarification': result.get('needs_clarification', False),
+        }
+
+        # Write JSON file per interaction
+        safe_user = str(user_id).replace('@', '_at_').replace('.', '_')
+        filename = f"chat_{safe_user}_{timestamp.replace(':', '-').replace('.', '-')}.json"
+        filepath = os.path.join(CHAT_LOG_DIR, filename)
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(log_entry, f, ensure_ascii=False, indent=2)
+
+        # Store in MongoDB (chat_logs collection)
+        try:
+            chat_collection = mongo_client.db['chat_logs']
+            chat_collection.insert_one(log_entry)
+        except Exception as e:
+            print(f"⚠️ Failed to save chat log to MongoDB: {e}")
+    except Exception as e:
+        print(f"⚠️ Failed to log chat interaction: {e}")
+
+
 # Routes
 @app.route('/')
 def index():
     if 'user_id' not in session:
         return redirect(url_for('login'))
     
-    user = user_ops.get_user_by_email(session['user_id'])
-    if not user:
-        session.clear()
-        return redirect(url_for('login'))
-    
-    return render_template('index.html', user_name=user['name'])
+    return redirect(url_for('chat'))
 
 @app.route('/chat')
 def chat():
@@ -333,6 +368,18 @@ def chat():
         return redirect(url_for('login'))
     
     return render_template('chat.html', user_name=user['name'])
+
+@app.route('/calendar')
+def calendar():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = user_ops.get_user_by_email(session['user_id'])
+    if not user:
+        session.clear()
+        return redirect(url_for('login'))
+    
+    return render_template('calendar.html', user_name=user['name'])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -512,6 +559,145 @@ def get_stats():
     
     return jsonify({'stats': stats})
 
+@app.route('/api/chat-daily-suggestion')
+def chat_daily_suggestion():
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not authenticated'}), 401
+    
+    user_id = session['user_id']
+    
+    today_logs = food_log_ops.get_today_logs(user_id)
+    daily_total = {
+        'calories': sum(log['total_nutrition']['calories'] for log in today_logs),
+        'protein': sum(log['total_nutrition']['protein'] for log in today_logs),
+        'carbs': sum(log['total_nutrition']['carbs'] for log in today_logs),
+        'fat': sum(log['total_nutrition']['fat'] for log in today_logs),
+        'fiber': sum(log['total_nutrition']['fiber'] for log in today_logs),
+    }
+    
+    user = user_ops.get_user_by_email(user_id)
+    goals = user.get('goals', {
+        'daily_calories': 2000,
+        'daily_protein': 120,
+        'daily_carbs': 250,
+        'daily_fat': 65
+    })
+    
+    recommendations = generate_recommendations(user_id)
+    
+    if daily_total['calories'] == 0 and daily_total['protein'] == 0 and not today_logs:
+        prefix = "Good day! It looks like you haven't logged anything yet today. "
+    else:
+        prefix = (
+            f"So far today you're at {round(daily_total['calories'])} calories "
+            f"and {round(daily_total['protein'])}g protein. "
+        )
+    
+    tip = recommendations[0]['message'] if recommendations else (
+        "Start by logging your first meal and I'll track your nutrition and give gentle suggestions."
+    )
+    
+    agent_response = prefix + tip
+    
+    return jsonify({
+        'success': True,
+        'agent_response': agent_response,
+        'recommendations': recommendations,
+        'daily_total': daily_total,
+        'goals': goals
+    })
+
+@app.route('/api/weekly-insight')
+def weekly_insight():
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not authenticated'}), 401
+    
+    user_id = session['user_id']
+    days = request.args.get('days', 7, type=int)
+    
+    logs = food_log_ops.get_recent_logs(user_id, days=days)
+    
+    if not logs:
+        return jsonify({
+            'summary': None,
+            'insight': "Not enough data yet. Log meals for a couple of days and I'll summarize your week.",
+            'suggestions': []
+        })
+    
+    daily_totals = defaultdict(lambda: {
+        'calories': 0,
+        'protein': 0,
+        'carbs': 0,
+        'fat': 0
+    })
+    category_counts = defaultdict(int)
+    
+    for log in logs:
+        if isinstance(log['timestamp'], str):
+            date = log['timestamp'].split('T')[0]
+        else:
+            date = log['timestamp'].date().isoformat()
+        
+        totals = log['total_nutrition']
+        daily_totals[date]['calories'] += totals.get('calories', 0)
+        daily_totals[date]['protein'] += totals.get('protein', 0)
+        daily_totals[date]['carbs'] += totals.get('carbs', 0)
+        daily_totals[date]['fat'] += totals.get('fat', 0)
+        
+        for food in log.get('foods', []):
+            category = food.get('category')
+            if category:
+                category_counts[category] += 1
+    
+    num_days = len(daily_totals)
+    avg_calories = sum(v['calories'] for v in daily_totals.values()) / num_days
+    avg_protein = sum(v['protein'] for v in daily_totals.values()) / num_days
+    avg_carbs = sum(v['carbs'] for v in daily_totals.values()) / num_days
+    
+    fast_food_meals = category_counts.get('fast_food', 0) + category_counts.get('treats', 0)
+    veg_meals = category_counts.get('vegetables', 0)
+    fruit_meals = category_counts.get('fruits', 0)
+    
+    suggestions = []
+    
+    if fast_food_meals >= 2:
+        suggestions.append("You've had fast food or treats several times. Try swapping one of those meals for a lighter home-cooked option this week.")
+    if avg_carbs < 150:
+        suggestions.append("Your average carbs are on the lower side. If you're active, consider adding more whole grains, fruits, or starchy vegetables.")
+    if avg_protein < 70:
+        suggestions.append("Protein looks a bit low on average. Add lean protein like chicken, fish, lentils, or Greek yogurt to your meals.")
+    if avg_calories > 2200:
+        suggestions.append("Overall calories are a bit high. Slightly smaller portions or cutting sugary drinks can make a big difference.")
+    if veg_meals < num_days:
+        suggestions.append("Most days could use more veggies. Aim to add at least one colorful vegetable to your main meals.")
+    if fruit_meals < num_days:
+        suggestions.append("You're not getting fruit every day. Add a piece of fruit as a snack or dessert to boost fiber and micronutrients.")
+    
+    if not suggestions:
+        suggestions.append("Nice balance overall. Keep up the consistent logging and colorful, protein-balanced meals!")
+    
+    insight = (
+        f"In the last {num_days} day{'s' if num_days != 1 else ''}, "
+        f"you averaged about {round(avg_calories)} calories, "
+        f"{round(avg_protein)}g protein, and {round(avg_carbs)}g carbs per day."
+    )
+    
+    summary = {
+        'days_considered': num_days,
+        'avg_calories': round(avg_calories),
+        'avg_protein': round(avg_protein),
+        'avg_carbs': round(avg_carbs),
+        'fast_food_meals': fast_food_meals,
+        'vegetable_meals': veg_meals,
+        'fruit_meals': fruit_meals
+    }
+    
+    return jsonify({
+        'summary': summary,
+        'insight': insight,
+        'suggestions': suggestions
+    })
+
 @app.route('/api/chat', methods=['POST'])
 def api_chat():
     """Conversational food logging endpoint"""
@@ -539,7 +725,7 @@ def api_chat():
     )
     
     # If food was successfully logged, save to database
-    if result['success'] and result['foods']:
+    if result.get('success') and result.get('foods'):
         # Determine meal type based on time
         hour = datetime.now().hour
         if hour < 11:
@@ -560,6 +746,16 @@ def api_chat():
             original_text=message
         )
     
+    # Persist chat interaction (prompt + response) to JSON file and MongoDB
+    if result.get('success'):
+        status = 'success'
+    elif result.get('needs_clarification'):
+        status = 'clarification'
+    else:
+        status = 'info'
+    
+    log_chat_interaction(user_id, message, result, status=status)
+
     return jsonify(result)
 
 @app.route('/api/calendar-logs')

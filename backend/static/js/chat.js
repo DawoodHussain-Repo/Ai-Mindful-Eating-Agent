@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupChatInput();
     updateMessageTimes();
     setInterval(updateMessageTimes, 60000); // Update times every minute
+    loadDailySuggestion();
 });
 
 function setupChatInput() {
@@ -97,6 +98,11 @@ async function sendMessage() {
 }
 
 function addMessage(role, content, foods = null, nutrition = null) {
+    const text = content != null ? content.toString().trim() : '';
+    if (!text) {
+        return;
+    }
+
     const messagesContainer = document.getElementById('chatMessages');
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${role}-message`;
@@ -107,7 +113,7 @@ function addMessage(role, content, foods = null, nutrition = null) {
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-bubble user-bubble">
-                    <p>${escapeHtml(content)}</p>
+                    <p>${escapeHtml(text)}</p>
                 </div>
                 <div class="message-time" data-time="${timestamp}">Just now</div>
             </div>
@@ -133,7 +139,7 @@ function addMessage(role, content, foods = null, nutrition = null) {
             <div class="message-avatar">🤖</div>
             <div class="message-content">
                 <div class="message-bubble">
-                    <p>${formatMessage(content)}</p>
+                    <p>${formatMessage(text)}</p>
                 </div>
                 ${foodsHtml}
                 <div class="message-time" data-time="${timestamp}">Just now</div>
@@ -332,5 +338,29 @@ async function loadSidebarData() {
         
     } catch (error) {
         console.error('Error loading sidebar data:', error);
+    }
+}
+
+async function loadDailySuggestion() {
+    try {
+        const response = await fetch('/api/chat-daily-suggestion');
+        if (!response.ok) {
+            return;
+        }
+        const data = await response.json();
+        
+        if (data.error) {
+            return;
+        }
+        
+        if (data.agent_response && data.agent_response.trim()) {
+            addMessage('agent', data.agent_response);
+        }
+        
+        if (data.recommendations && data.recommendations.length > 0) {
+            addInsightsMessage(data.recommendations);
+        }
+    } catch (error) {
+        console.error('Error loading daily suggestion:', error);
     }
 }
