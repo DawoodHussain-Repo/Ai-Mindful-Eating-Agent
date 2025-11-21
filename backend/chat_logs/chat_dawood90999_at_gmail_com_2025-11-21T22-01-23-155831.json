@@ -1,0 +1,54 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-21T22:01:23.155831",
+  "status": "success",
+  "message": "i had a steak",
+  "agent_response": "Nice! I tracked: Steak (1 serving) ✅\n\n📊 Nutrition Summary:\n• 250 calories\n• 26g protein\n• 0g carbs\n• 15g fat",
+  "foods": [
+    {
+      "name": "Steak",
+      "portion": 1.0,
+      "portion_text": "1 serving",
+      "nutrition": {
+        "calories": 250.0,
+        "protein": 26.0,
+        "carbs": 0.0,
+        "fat": 15.0,
+        "fiber": 0.0
+      },
+      "category": "protein",
+      "confidence": 1.0
+    }
+  ],
+  "total_nutrition": {
+    "calories": 250.0,
+    "protein": 26.0,
+    "carbs": 0.0,
+    "fat": 15.0,
+    "fiber": 0.0
+  },
+  "recommendations": [
+    {
+      "type": "protein",
+      "message": "Hey! You're at 59g protein today. Your goal is 120g - try adding some chicken, fish, or Greek yogurt to your next meal! 💪",
+      "icon": "💪"
+    },
+    {
+      "type": "calories",
+      "message": "You're only at 1125 calories. Make sure you're eating enough to fuel your body! 🍽️",
+      "icon": "🍽️"
+    },
+    {
+      "type": "variety",
+      "message": "I noticed you've had Burger 5 times recently. Nothing wrong with that, but variety is the spice of life! Try something new? 🔄",
+      "icon": "🔄"
+    },
+    {
+      "type": "positive",
+      "message": "Love the consistency! You've logged 3+ meals today. That's how you build lasting habits! 🌟",
+      "icon": "🌟"
+    }
+  ],
+  "intent": "log_food",
+  "needs_clarification": false
+}

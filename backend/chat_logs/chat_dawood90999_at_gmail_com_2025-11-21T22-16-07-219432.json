@@ -1,0 +1,49 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-21T22:16:07.219432",
+  "status": "success",
+  "message": "I eat fries",
+  "agent_response": "Perfect! Logged: Fries (1 serving) 👍\n\n📊 Nutrition Summary:\n• 312 calories\n• 3g protein\n• 41g carbs\n• 15g fat",
+  "foods": [
+    {
+      "name": "Fries",
+      "portion": 1.0,
+      "portion_text": "1 serving",
+      "nutrition": {
+        "calories": 312.0,
+        "protein": 3.4,
+        "carbs": 41.0,
+        "fat": 15.0,
+        "fiber": 3.8
+      },
+      "category": "fast_food",
+      "confidence": 1.0
+    }
+  ],
+  "total_nutrition": {
+    "calories": 312.0,
+    "protein": 3.4,
+    "carbs": 41.0,
+    "fat": 15.0,
+    "fiber": 3.8
+  },
+  "recommendations": [
+    {
+      "type": "calories",
+      "message": "You're at 2853 calories today. Maybe go for something lighter next time? You've got this! 😊",
+      "icon": "⚠️"
+    },
+    {
+      "type": "variety",
+      "message": "I noticed you've had Burger 5 times recently. Nothing wrong with that, but variety is the spice of life! Try something new? 🔄",
+      "icon": "🔄"
+    },
+    {
+      "type": "positive",
+      "message": "Love the consistency! You've logged 3+ meals today. That's how you build lasting habits! 🌟",
+      "icon": "🌟"
+    }
+  ],
+  "intent": "log_food",
+  "needs_clarification": false
+}

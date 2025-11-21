@@ -1,0 +1,49 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-21T22:00:45.719955",
+  "status": "success",
+  "message": "soda",
+  "agent_response": "Nice! I tracked: Soda (1 serving) ✅\n\n📊 Nutrition Summary:\n• 150 calories\n• 0g protein\n• 40g carbs\n• 0g fat",
+  "foods": [
+    {
+      "name": "Soda",
+      "portion": 1.0,
+      "portion_text": "1 serving",
+      "nutrition": {
+        "calories": 150.0,
+        "protein": 0.0,
+        "carbs": 40.0,
+        "fat": 0.0,
+        "fiber": 0.0
+      },
+      "category": "beverages",
+      "confidence": 1.0
+    }
+  ],
+  "total_nutrition": {
+    "calories": 150.0,
+    "protein": 0.0,
+    "carbs": 40.0,
+    "fat": 0.0,
+    "fiber": 0.0
+  },
+  "recommendations": [
+    {
+      "type": "protein",
+      "message": "Hey! You're at 23g protein today. Your goal is 120g - try adding some chicken, fish, or Greek yogurt to your next meal! 💪",
+      "icon": "💪"
+    },
+    {
+      "type": "calories",
+      "message": "You're only at 816 calories. Make sure you're eating enough to fuel your body! 🍽️",
+      "icon": "🍽️"
+    },
+    {
+      "type": "variety",
+      "message": "I noticed you've had Burger 5 times recently. Nothing wrong with that, but variety is the spice of life! Try something new? 🔄",
+      "icon": "🔄"
+    }
+  ],
+  "intent": "log_food",
+  "needs_clarification": false
+}

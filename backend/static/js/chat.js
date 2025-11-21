@@ -46,6 +46,9 @@ async function sendMessage() {
     showTypingIndicator();
     
     try {
+        // Get selected meal type from global variable (set by selectMealType function)
+        const mealType = window.selectedMealType || 'breakfast';
+        
         const response = await fetch('/api/chat', {
             method: 'POST',
             headers: {
@@ -53,6 +56,7 @@ async function sendMessage() {
             },
             body: JSON.stringify({
                 message: message,
+                meal_type: mealType,
                 conversation_history: conversationHistory
             })
         });

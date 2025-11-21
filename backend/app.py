@@ -25,6 +25,9 @@ from utils.mongodb_client import (
     SessionOperations
 )
 
+# Import External API for supervisor integration
+from api.external import external_api
+
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
@@ -58,6 +61,9 @@ except Exception as e:
 
 # Initialize Flask-Session
 Session(app)
+
+# Register External API Blueprint for supervisor integration
+app.register_blueprint(external_api)
 
 # Comprehensive nutritional database
 FOOD_DATABASE = {

@@ -1,0 +1,49 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-21T22:01:34.129467",
+  "status": "success",
+  "message": "4 burgers",
+  "agent_response": "Perfect! Logged: Burger (4 servings) 👍\n\n📊 Nutrition Summary:\n• 1416 calories\n• 80g protein\n• 120g carbs\n• 68g fat\n\n💪 Great protein intake!",
+  "foods": [
+    {
+      "name": "Burger",
+      "portion": 4.0,
+      "portion_text": "4 servings",
+      "nutrition": {
+        "calories": 1416.0,
+        "protein": 80.0,
+        "carbs": 120.0,
+        "fat": 68.0,
+        "fiber": 6.0
+      },
+      "category": "fast_food",
+      "confidence": 1.0
+    }
+  ],
+  "total_nutrition": {
+    "calories": 1416.0,
+    "protein": 80.0,
+    "carbs": 120.0,
+    "fat": 68.0,
+    "fiber": 6.0
+  },
+  "recommendations": [
+    {
+      "type": "calories",
+      "message": "You're at 2541 calories today. Maybe go for something lighter next time? You've got this! 😊",
+      "icon": "⚠️"
+    },
+    {
+      "type": "variety",
+      "message": "I noticed you've had Burger 5 times recently. Nothing wrong with that, but variety is the spice of life! Try something new? 🔄",
+      "icon": "🔄"
+    },
+    {
+      "type": "positive",
+      "message": "Love the consistency! You've logged 3+ meals today. That's how you build lasting habits! 🌟",
+      "icon": "🌟"
+    }
+  ],
+  "intent": "log_food",
+  "needs_clarification": false
+}

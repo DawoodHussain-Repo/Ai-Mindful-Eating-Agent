@@ -1,12 +1,13 @@
 """
 Mindful Eating Agent - Supervisor-Worker Architecture
 AI Agent for food parsing, nutrition analysis, and personalized recommendations
-Uses a Supervisor to orchestrate specialized Workers.
+Uses a Supervisor to orchestrate specialized Workers (NO API keys required)
 """
 
 from typing import TypedDict, List, Dict, Any, Literal
 from langgraph.graph import StateGraph, END
 from datetime import datetime
+import random
 
 # Import utilities
 from utils.data_loader import (
@@ -52,12 +53,19 @@ class AgentState(TypedDict):
     needs_ingredients: bool
     ingredient_fallback: bool
     user_message: str
+    needs_clarification: bool
+    clarification_question: str
 
 # --- Supervisor Node ---
 def supervisor_node(state: AgentState) -> AgentState:
     """
     The Supervisor decides which Worker to call next based on the current state.
     """
+    # If we need clarification, stop and ask user
+    if state.get('needs_clarification'):
+        state['next_worker'] = END
+        return state
+    
     # Error handling: if an error occurred, stop or handle it
     if state.get('error') and not state.get('ingredient_fallback'):
         state['next_worker'] = END
@@ -82,19 +90,31 @@ def supervisor_node(state: AgentState) -> AgentState:
     if state.get('patterns') and not state.get('recommendations'):
         state['next_worker'] = 'recommendation_worker'
         return state
+    
+    # 5. Generate friendly response
+    if state.get('recommendations') and not state.get('user_message'):
+        state['next_worker'] = 'response_generator_worker'
+        return state
 
-    # 5. If all tasks are complete, finish
+    # 6. If all tasks are complete, finish
     state['next_worker'] = END
     return state
 
 # --- Worker Nodes ---
 
 def food_parser_worker(state: AgentState) -> AgentState:
-    """Worker 1: Specialized in parsing food text"""
+    """Worker 1: Specialized in parsing food text with advanced pattern matching"""
     text = state['input_text']
     
-    # Parse using FoodParser utility
+    # Parse using enhanced FoodParser utility
     foods_found = food_parser.parse_food_text(text)
+    
+    # Check if we need clarification
+    if foods_found and foods_found[0].get('needs_clarification'):
+        state['needs_clarification'] = True
+        state['clarification_question'] = foods_found[0].get('question')
+        state['user_message'] = foods_found[0].get('question')
+        return state
     
     # If no exact matches, try ingredient-based estimation
     if not foods_found:
@@ -159,7 +179,56 @@ def recommendation_worker(state: AgentState) -> AgentState:
     state['recommendations'] = recommendations
     return state
 
-def route_from_supervisor(state: AgentState) -> Literal['food_parser_worker', 'nutrition_worker', 'pattern_analyst_worker', 'recommendation_worker', END]:
+def response_generator_worker(state: AgentState) -> AgentState:
+    """Worker 5: Generate friendly, conversational responses using templates"""
+    
+    # Build context
+    foods = state['parsed_foods']
+    nutrition = state['nutrition_data']
+    
+    # Generate response based on food category and nutrition
+    food_names = [f['name'] for f in foods]
+    categories = [f['category'] for f in foods]
+    
+    # Response templates based on food type
+    protein_responses = [
+        f"Great choice! {food_names[0]} is packed with protein. 💪",
+        f"Nice! {food_names[0]} will help you hit your protein goals! 🎯",
+        f"Excellent! {food_names[0]} is a solid protein source. Keep it up! ✨"
+    ]
+    
+    carb_responses = [
+        f"Good energy source! {food_names[0]} will fuel you up. ⚡",
+        f"Nice! {food_names[0]} is great for sustained energy. 🔋",
+        f"Perfect! {food_names[0]} will give you the carbs you need. 🌟"
+    ]
+    
+    healthy_responses = [
+        f"Awesome! {food_names[0]} is a nutritious choice. 🥗",
+        f"Love it! {food_names[0]} is great for your health. 💚",
+        f"Perfect! {food_names[0]} is a smart pick. 🌱"
+    ]
+    
+    general_responses = [
+        f"Logged! You had {', '.join(food_names)}. Looking good! ✅",
+        f"Got it! {', '.join(food_names)} added to your log. 📝",
+        f"Nice! Logged {', '.join(food_names)} successfully. 🎉"
+    ]
+    
+    # Choose response based on primary category
+    if 'protein' in categories:
+        message = random.choice(protein_responses)
+    elif 'carbs' in categories:
+        message = random.choice(carb_responses)
+    elif 'vegetables' in categories or 'fruits' in categories:
+        message = random.choice(healthy_responses)
+    else:
+        message = random.choice(general_responses)
+    
+    state['user_message'] = message
+    return state
+
+def route_from_supervisor(state: AgentState) -> Literal['food_parser_worker', 'nutrition_worker', 'pattern_analyst_worker', 'recommendation_worker', 'response_generator_worker', END]:
     """Router function for the Supervisor"""
     return state['next_worker']
 
@@ -175,6 +244,7 @@ def create_mindful_eating_agent():
     workflow.add_node("nutrition_worker", nutrition_worker)
     workflow.add_node("pattern_analyst_worker", pattern_analyst_worker)
     workflow.add_node("recommendation_worker", recommendation_worker)
+    workflow.add_node("response_generator_worker", response_generator_worker)
     
     # Set entry point
     workflow.set_entry_point("supervisor")
@@ -190,6 +260,7 @@ def create_mindful_eating_agent():
     workflow.add_edge("nutrition_worker", "supervisor")
     workflow.add_edge("pattern_analyst_worker", "supervisor")
     workflow.add_edge("recommendation_worker", "supervisor")
+    workflow.add_edge("response_generator_worker", "supervisor")
     
     # Compile the graph
     app = workflow.compile()
@@ -226,7 +297,9 @@ def process_food_log(user_id: str, food_text: str, meal_type: str, user_history:
         'next_worker': '',
         'needs_ingredients': False,
         'ingredient_fallback': False,
-        'user_message': ''
+        'user_message': '',
+        'needs_clarification': False,
+        'clarification_question': ''
     }
     
     # Run the agent
@@ -240,5 +313,7 @@ def process_food_log(user_id: str, food_text: str, meal_type: str, user_history:
         'recommendations': result.get('recommendations', []),
         'patterns': result.get('patterns', {}),
         'user_message': result.get('user_message', ''),
-        'needs_ingredients': result.get('needs_ingredients', False)
+        'needs_ingredients': result.get('needs_ingredients', False),
+        'needs_clarification': result.get('needs_clarification', False),
+        'clarification_question': result.get('clarification_question', '')
     }

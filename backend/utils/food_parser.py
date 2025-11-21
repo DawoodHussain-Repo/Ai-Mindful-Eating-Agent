@@ -1,16 +1,60 @@
 """
-Food Parser Utility
-Handles food text parsing and portion extraction
+Enhanced Food Parser with advanced pattern matching (NO API keys required)
+Handles natural language, asks clarifying questions, and recognizes variations
 """
 
 import re
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Tuple, Any, Optional
 
 class FoodParser:
     def __init__(self, food_database: Dict, portion_patterns: Dict, portion_sizes: Dict):
         self.food_database = food_database
         self.portion_patterns = portion_patterns
         self.portion_sizes = portion_sizes
+        
+        # Build synonym mappings for better recognition
+        self.synonyms = {
+            'had': 'ate', 'consumed': 'ate', 'eating': 'ate', 'having': 'ate',
+            'drank': 'drink', 'drinking': 'drink',
+            'dinner': 'meal', 'lunch': 'meal', 'breakfast': 'meal', 'snack': 'meal'
+        }
+        
+        # Generic terms that need clarification
+        self.generic_terms = {
+            'soda': ['pepsi', 'coke', 'sprite', 'fanta', 'mountain dew'],
+            'juice': ['orange juice', 'apple juice'],
+            'meat': ['chicken', 'beef', 'pork', 'turkey'],
+            'fish': ['salmon', 'tuna', 'cod', 'tilapia']
+        }
+    
+    def normalize_text(self, text: str) -> str:
+        """Normalize text by removing filler words and applying synonyms"""
+        text = text.lower().strip()
+        
+        # Remove common filler words
+        fillers = ['i', 'a', 'an', 'the', 'some', 'for', 'my', 'today', 'just', 'ate', 'had', 'drank']
+        words = text.split()
+        words = [w for w in words if w not in fillers or len(words) <= 3]
+        
+        return ' '.join(words)
+    
+    def check_for_generic_terms(self, text: str) -> Optional[Dict[str, Any]]:
+        """Check if user mentioned a generic term that needs clarification"""
+        text_lower = text.lower()
+        
+        for generic, options in self.generic_terms.items():
+            # Check if generic term is mentioned but no specific option
+            if generic in text_lower:
+                # Check if any specific option is already mentioned
+                has_specific = any(opt in text_lower for opt in options)
+                if not has_specific:
+                    return {
+                        'needs_clarification': True,
+                        'generic_term': generic,
+                        'options': options,
+                        'question': f"Which {generic}? ({', '.join(options[:3])}...)"
+                    }
+        return None
     
     def parse_portion(self, text: str) -> Tuple[float, str]:
         """Extract portion size from text"""
@@ -70,29 +114,61 @@ class FoodParser:
         
         return portion, portion_text or "1 serving"
     
+    def fuzzy_match_food(self, text: str) -> List[str]:
+        """Find foods using fuzzy matching - handles variations and word order"""
+        text_normalized = self.normalize_text(text)
+        text_words = set(text_normalized.split())
+        
+        matched_foods = []
+        
+        for food_name in self.food_database.keys():
+            food_words = set(food_name.split())
+            
+            # Direct substring match
+            if food_name in text.lower():
+                matched_foods.append(food_name)
+                continue
+            
+            # Word overlap match (at least 50% of food name words present)
+            if food_words and len(food_words & text_words) >= len(food_words) * 0.5:
+                matched_foods.append(food_name)
+        
+        return matched_foods
+    
     def parse_food_text(self, text: str) -> List[Dict[str, Any]]:
         """Parse food text and return list of recognized foods"""
         text = text.lower().strip()
+        
+        # First check for generic terms that need clarification
+        clarification_check = self.check_for_generic_terms(text)
+        if clarification_check:
+            return [{
+                'needs_clarification': True,
+                'question': clarification_check['question']
+            }]
+        
         foods_found = []
         
-        for food_name, nutrition in self.food_database.items():
-            if food_name in text:
-                portion, portion_text = self.parse_portion(text)
-                
-                # Calculate portioned nutrition
-                portioned_nutrition = {
-                    k: round(v * portion, 1) 
-                    for k, v in nutrition.items() 
-                    if k != 'category'
-                }
-                
-                foods_found.append({
-                    'name': food_name.title(),
-                    'portion': portion,
-                    'portion_text': portion_text,
-                    'nutrition': portioned_nutrition,
-                    'category': nutrition['category']
-                })
+        # Try fuzzy matching first
+        matched_food_names = self.fuzzy_match_food(text)
+        
+        for food_name in matched_food_names:
+            nutrition = self.food_database[food_name]
+            portion, portion_text = self.parse_portion(text)
+            
+            portioned_nutrition = {
+                k: round(v * portion, 1) 
+                for k, v in nutrition.items() 
+                if k != 'category'
+            }
+            
+            foods_found.append({
+                'name': food_name.title(),
+                'portion': portion,
+                'portion_text': portion_text,
+                'nutrition': portioned_nutrition,
+                'category': nutrition['category']
+            })
         
         return foods_found
     

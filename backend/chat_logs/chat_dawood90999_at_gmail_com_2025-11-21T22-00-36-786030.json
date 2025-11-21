@@ -1,0 +1,12 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-21T22:00:36.786030",
+  "status": "info",
+  "message": "Hi",
+  "agent_response": "Hey! 👋 What did you eat? Just tell me naturally, like you're texting a friend!",
+  "foods": [],
+  "total_nutrition": {},
+  "recommendations": [],
+  "intent": "greeting",
+  "needs_clarification": false
+}

@@ -1,0 +1,49 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-21T22:20:10.262303",
+  "status": "success",
+  "message": "I had brown rice",
+  "agent_response": "Awesome! Added: Brown Rice (1 serving) 🍽️\n\n📊 Nutrition Summary:\n• 216 calories\n• 5g protein\n• 45g carbs\n• 2g fat",
+  "foods": [
+    {
+      "name": "Brown Rice",
+      "portion": 1.0,
+      "portion_text": "1 serving",
+      "nutrition": {
+        "calories": 216.0,
+        "protein": 5.0,
+        "carbs": 45.0,
+        "fat": 1.8,
+        "fiber": 3.5
+      },
+      "category": "carbs",
+      "confidence": 1.0
+    }
+  ],
+  "total_nutrition": {
+    "calories": 216.0,
+    "protein": 5.0,
+    "carbs": 45.0,
+    "fat": 1.8,
+    "fiber": 3.5
+  },
+  "recommendations": [
+    {
+      "type": "calories",
+      "message": "You're at 3069 calories today. Maybe go for something lighter next time? You've got this! 😊",
+      "icon": "⚠️"
+    },
+    {
+      "type": "variety",
+      "message": "I noticed you've had Burger 5 times recently. Nothing wrong with that, but variety is the spice of life! Try something new? 🔄",
+      "icon": "🔄"
+    },
+    {
+      "type": "positive",
+      "message": "Love the consistency! You've logged 3+ meals today. That's how you build lasting habits! 🌟",
+      "icon": "🌟"
+    }
+  ],
+  "intent": "log_food",
+  "needs_clarification": false
+}

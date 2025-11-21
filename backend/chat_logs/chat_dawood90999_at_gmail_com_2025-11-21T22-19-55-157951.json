@@ -1,0 +1,31 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-21T22:19:55.157951",
+  "status": "clarification",
+  "message": "I had brownie",
+  "agent_response": "Did you mean 'Brown Rice'? 🤔\n\n(Reply 'yes' to confirm or tell me what you actually meant)",
+  "foods": [
+    {
+      "name": "Brown Rice",
+      "portion": 1.0,
+      "portion_text": "1 serving (estimated)",
+      "nutrition": {
+        "calories": 216,
+        "protein": 5,
+        "carbs": 45,
+        "fat": 1.8,
+        "fiber": 3.5
+      },
+      "category": "carbs",
+      "confidence": 0.7,
+      "original_text": "brownie",
+      "suggestions": [
+        "Brown Rice"
+      ]
+    }
+  ],
+  "total_nutrition": {},
+  "recommendations": [],
+  "intent": "log_food",
+  "needs_clarification": true
+}
