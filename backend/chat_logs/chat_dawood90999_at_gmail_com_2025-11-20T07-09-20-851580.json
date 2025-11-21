@@ -1,0 +1,44 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-20T07:09:20.851580",
+  "status": "success",
+  "message": "2 Burgers",
+  "agent_response": "Perfect! Logged: Burger (2 servings) 👍\n\n📊 Nutrition Summary:\n• 708 calories\n• 40g protein\n• 60g carbs\n• 34g fat\n\n💪 Great protein intake!",
+  "foods": [
+    {
+      "name": "Burger",
+      "portion": 2.0,
+      "portion_text": "2 servings",
+      "nutrition": {
+        "calories": 708.0,
+        "protein": 40.0,
+        "carbs": 60.0,
+        "fat": 34.0,
+        "fiber": 3.0
+      },
+      "category": "fast_food",
+      "confidence": 1.0
+    }
+  ],
+  "total_nutrition": {
+    "calories": 708.0,
+    "protein": 40.0,
+    "carbs": 60.0,
+    "fat": 34.0,
+    "fiber": 3.0
+  },
+  "recommendations": [
+    {
+      "type": "protein",
+      "message": "Hey! You're at 44g protein today. Your goal is 120g - try adding some chicken, fish, or Greek yogurt to your next meal! 💪",
+      "icon": "💪"
+    },
+    {
+      "type": "variety",
+      "message": "I noticed you've had Burger 5 times recently. Nothing wrong with that, but variety is the spice of life! Try something new? 🔄",
+      "icon": "🔄"
+    }
+  ],
+  "intent": "log_food",
+  "needs_clarification": false
+}

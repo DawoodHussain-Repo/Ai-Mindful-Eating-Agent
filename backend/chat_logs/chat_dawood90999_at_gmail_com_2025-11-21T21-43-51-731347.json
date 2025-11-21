@@ -1,0 +1,31 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-21T21:43:51.731347",
+  "status": "clarification",
+  "message": "2 Sodas",
+  "agent_response": "Did you mean 'Toast'? 🤔\n\n(Reply 'yes' to confirm or tell me what you actually meant)",
+  "foods": [
+    {
+      "name": "Toast",
+      "portion": 1.0,
+      "portion_text": "1 serving (estimated)",
+      "nutrition": {
+        "calories": 79,
+        "protein": 2.6,
+        "carbs": 15,
+        "fat": 1,
+        "fiber": 0.8
+      },
+      "category": "carbs",
+      "confidence": 0.7,
+      "original_text": "sodas",
+      "suggestions": [
+        "Toast"
+      ]
+    }
+  ],
+  "total_nutrition": {},
+  "recommendations": [],
+  "intent": "log_food",
+  "needs_clarification": true
+}

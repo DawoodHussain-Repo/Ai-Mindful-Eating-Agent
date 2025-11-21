@@ -1,0 +1,44 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-21T21:43:36.021988",
+  "status": "success",
+  "message": "I ate Burger",
+  "agent_response": "Nice! I tracked: Burger (1 serving) ✅\n\n📊 Nutrition Summary:\n• 354 calories\n• 20g protein\n• 30g carbs\n• 17g fat",
+  "foods": [
+    {
+      "name": "Burger",
+      "portion": 1.0,
+      "portion_text": "1 serving",
+      "nutrition": {
+        "calories": 354.0,
+        "protein": 20.0,
+        "carbs": 30.0,
+        "fat": 17.0,
+        "fiber": 1.5
+      },
+      "category": "fast_food",
+      "confidence": 1.0
+    }
+  ],
+  "total_nutrition": {
+    "calories": 354.0,
+    "protein": 20.0,
+    "carbs": 30.0,
+    "fat": 17.0,
+    "fiber": 1.5
+  },
+  "recommendations": [
+    {
+      "type": "protein",
+      "message": "Hey! You're at 20g protein today. Your goal is 120g - try adding some chicken, fish, or Greek yogurt to your next meal! 💪",
+      "icon": "💪"
+    },
+    {
+      "type": "variety",
+      "message": "I noticed you've had Burger 5 times recently. Nothing wrong with that, but variety is the spice of life! Try something new? 🔄",
+      "icon": "🔄"
+    }
+  ],
+  "intent": "log_food",
+  "needs_clarification": false
+}

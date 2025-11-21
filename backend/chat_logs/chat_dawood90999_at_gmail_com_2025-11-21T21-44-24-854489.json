@@ -1,0 +1,31 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-21T21:44:24.854489",
+  "status": "clarification",
+  "message": "pepsi",
+  "agent_response": "Did you mean 'Peas'? 🤔\n\n(Reply 'yes' to confirm or tell me what you actually meant)",
+  "foods": [
+    {
+      "name": "Peas",
+      "portion": 1.0,
+      "portion_text": "1 serving (estimated)",
+      "nutrition": {
+        "calories": 81,
+        "protein": 5,
+        "carbs": 14,
+        "fat": 0.4,
+        "fiber": 5.7
+      },
+      "category": "vegetables",
+      "confidence": 0.7,
+      "original_text": "pepsi",
+      "suggestions": [
+        "Peas"
+      ]
+    }
+  ],
+  "total_nutrition": {},
+  "recommendations": [],
+  "intent": "log_food",
+  "needs_clarification": true
+}

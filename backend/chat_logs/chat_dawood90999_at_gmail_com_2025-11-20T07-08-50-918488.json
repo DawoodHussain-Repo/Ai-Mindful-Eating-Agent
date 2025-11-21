@@ -1,0 +1,44 @@
+{
+  "user_id": "dawood90999@gmail.com",
+  "timestamp": "2025-11-20T07:08:50.918488",
+  "status": "success",
+  "message": "1 ice cream",
+  "agent_response": "Nice! I tracked: Ice Cream (1 serving) ✅\n\n📊 Nutrition Summary:\n• 207 calories\n• 4g protein\n• 24g carbs\n• 11g fat",
+  "foods": [
+    {
+      "name": "Ice Cream",
+      "portion": 1.0,
+      "portion_text": "1 serving",
+      "nutrition": {
+        "calories": 207.0,
+        "protein": 3.5,
+        "carbs": 24.0,
+        "fat": 11.0,
+        "fiber": 0.7
+      },
+      "category": "treats",
+      "confidence": 1.0
+    }
+  ],
+  "total_nutrition": {
+    "calories": 207.0,
+    "protein": 3.5,
+    "carbs": 24.0,
+    "fat": 11.0,
+    "fiber": 0.7
+  },
+  "recommendations": [
+    {
+      "type": "protein",
+      "message": "Hey! You're at 4g protein today. Your goal is 120g - try adding some chicken, fish, or Greek yogurt to your next meal! 💪",
+      "icon": "💪"
+    },
+    {
+      "type": "variety",
+      "message": "I noticed you've had Burger 5 times recently. Nothing wrong with that, but variety is the spice of life! Try something new? 🔄",
+      "icon": "🔄"
+    }
+  ],
+  "intent": "log_food",
+  "needs_clarification": false
+}

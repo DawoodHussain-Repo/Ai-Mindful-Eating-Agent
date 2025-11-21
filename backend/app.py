@@ -350,6 +350,24 @@ def log_chat_interaction(user_id, message, result, status='success'):
 
 
 # Routes
+@app.route('/health')
+def health_check():
+    """System health check endpoint"""
+    db_status = "connected"
+    try:
+        # Simple command to check connection
+        mongo_client.client.admin.command('ping')
+    except Exception:
+        db_status = "disconnected"
+        
+    return jsonify({
+        'status': 'healthy',
+        'service': 'Mindful Eating Agent API',
+        'timestamp': datetime.utcnow().isoformat(),
+        'database': db_status,
+        'version': '1.0.0'
+    })
+
 @app.route('/')
 def index():
     if 'user_id' not in session:
@@ -798,27 +816,13 @@ def calendar_logs():
     calendar_data = [
         {
             'date': date,
-            'meals': data['meals'],
-            'summary': {
-                'total_calories': round(data['total_calories']),
-                'total_protein': round(data['total_protein']),
-                'total_carbs': round(data['total_carbs']),
-                'total_fat': round(data['total_fat']),
-                'meal_count': data['meal_count']
-            }
+            'data': data
         }
         for date, data in logs_by_date.items()
     ]
-    
     calendar_data.sort(key=lambda x: x['date'], reverse=True)
     
-    return jsonify({'calendar_data': calendar_data})
+    return jsonify({'calendar': calendar_data})
 
 if __name__ == '__main__':
-    print("=" * 60)
-    print("🍽️  Mindful Eating Agent - Flask Backend")
-    print("=" * 60)
-    print("Server starting on http://localhost:5000")
-    print("Press CTRL+C to stop the server")
-    print("=" * 60)
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, port=5000)

@@ -1,10 +1,10 @@
 """
-Mindful Eating Agent - LangGraph Implementation (Refactored)
+Mindful Eating Agent - Supervisor-Worker Architecture
 AI Agent for food parsing, nutrition analysis, and personalized recommendations
-Uses JSON configuration files for better maintainability
+Uses a Supervisor to orchestrate specialized Workers.
 """
 
-from typing import TypedDict, List, Dict, Any
+from typing import TypedDict, List, Dict, Any, Literal
 from langgraph.graph import StateGraph, END
 from datetime import datetime
 
@@ -48,14 +48,49 @@ class AgentState(TypedDict):
     patterns: Dict[str, Any]
     recommendations: List[Dict[str, str]]
     error: str
-    step: str
+    next_worker: str
     needs_ingredients: bool
     ingredient_fallback: bool
     user_message: str
 
-# Agent Node Functions
-def parse_food_node(state: AgentState) -> AgentState:
-    """Node 1: Parse food text using NLP with ingredient fallback"""
+# --- Supervisor Node ---
+def supervisor_node(state: AgentState) -> AgentState:
+    """
+    The Supervisor decides which Worker to call next based on the current state.
+    """
+    # Error handling: if an error occurred, stop or handle it
+    if state.get('error') and not state.get('ingredient_fallback'):
+        state['next_worker'] = END
+        return state
+
+    # 1. If foods haven't been parsed yet, call the FoodParser Worker
+    if not state.get('parsed_foods') and not state.get('needs_ingredients'):
+        state['next_worker'] = 'food_parser_worker'
+        return state
+
+    # 2. If foods are parsed but nutrition isn't calculated, call Nutrition Worker
+    if state.get('parsed_foods') and not state.get('nutrition_data'):
+        state['next_worker'] = 'nutrition_worker'
+        return state
+
+    # 3. If nutrition is done but patterns aren't analyzed, call Analyst Worker
+    if state.get('nutrition_data') and not state.get('patterns'):
+        state['next_worker'] = 'pattern_analyst_worker'
+        return state
+
+    # 4. If patterns are ready but no recommendations, call Recommendation Worker
+    if state.get('patterns') and not state.get('recommendations'):
+        state['next_worker'] = 'recommendation_worker'
+        return state
+
+    # 5. If all tasks are complete, finish
+    state['next_worker'] = END
+    return state
+
+# --- Worker Nodes ---
+
+def food_parser_worker(state: AgentState) -> AgentState:
+    """Worker 1: Specialized in parsing food text"""
     text = state['input_text']
     
     # Parse using FoodParser utility
@@ -80,7 +115,6 @@ def parse_food_node(state: AgentState) -> AgentState:
             )
     
     state['parsed_foods'] = foods_found
-    state['step'] = 'parsed'
     
     if not foods_found:
         state['needs_ingredients'] = True
@@ -90,11 +124,8 @@ def parse_food_node(state: AgentState) -> AgentState:
     
     return state
 
-def calculate_nutrition_node(state: AgentState) -> AgentState:
-    """Node 2: Calculate total nutrition"""
-    if state.get('error') and not state.get('ingredient_fallback'):
-        return state
-    
+def nutrition_worker(state: AgentState) -> AgentState:
+    """Worker 2: Specialized in calculating nutrition totals"""
     total_nutrition = {
         'calories': sum(f['nutrition']['calories'] for f in state['parsed_foods']),
         'protein': sum(f['nutrition']['protein'] for f in state['parsed_foods']),
@@ -104,35 +135,21 @@ def calculate_nutrition_node(state: AgentState) -> AgentState:
     }
     
     state['nutrition_data'] = total_nutrition
-    state['step'] = 'nutrition_calculated'
-    
     return state
 
-def analyze_patterns_node(state: AgentState) -> AgentState:
-    """Node 3: Analyze eating patterns"""
-    if state.get('error') and not state.get('ingredient_fallback'):
-        return state
-    
+def pattern_analyst_worker(state: AgentState) -> AgentState:
+    """Worker 3: Specialized in analyzing user history"""
     user_history = state.get('user_history', [])
-    
-    # Use recommendation engine to analyze patterns
     patterns = recommendation_engine.analyze_patterns(user_history)
-    
     state['patterns'] = patterns
-    state['step'] = 'patterns_analyzed'
-    
     return state
 
-def generate_recommendations_node(state: AgentState) -> AgentState:
-    """Node 4: Generate personalized, friendly recommendations"""
-    if state.get('error') and not state.get('ingredient_fallback'):
-        return state
-    
+def recommendation_worker(state: AgentState) -> AgentState:
+    """Worker 4: Specialized in generating advice"""
     nutrition_data = state.get('nutrition_data', {})
     user_history = state.get('user_history', [])
     patterns = state.get('patterns', {})
     
-    # Use recommendation engine to generate recommendations
     recommendations = recommendation_engine.generate_recommendations(
         nutrition_data,
         user_history,
@@ -140,72 +157,39 @@ def generate_recommendations_node(state: AgentState) -> AgentState:
     )
     
     state['recommendations'] = recommendations
-    state['step'] = 'recommendations_generated'
-    
     return state
 
-def should_continue(state: AgentState) -> str:
-    """Determine if agent should continue or end"""
-    if state.get('error') and not state.get('ingredient_fallback'):
-        return END
-    
-    step = state.get('step', '')
-    
-    if step == 'parsed':
-        return 'calculate_nutrition'
-    elif step == 'nutrition_calculated':
-        return 'analyze_patterns'
-    elif step == 'patterns_analyzed':
-        return 'generate_recommendations'
-    elif step == 'recommendations_generated':
-        return END
-    
-    return END
+def route_from_supervisor(state: AgentState) -> Literal['food_parser_worker', 'nutrition_worker', 'pattern_analyst_worker', 'recommendation_worker', END]:
+    """Router function for the Supervisor"""
+    return state['next_worker']
 
-# Build the LangGraph Agent
+# Build the Supervisor-Worker Graph
 def create_mindful_eating_agent():
-    """Create the LangGraph agent workflow"""
+    """Create the LangGraph agent workflow with Supervisor architecture"""
     
     workflow = StateGraph(AgentState)
     
-    # Add nodes
-    workflow.add_node("parse_food", parse_food_node)
-    workflow.add_node("calculate_nutrition", calculate_nutrition_node)
-    workflow.add_node("analyze_patterns", analyze_patterns_node)
-    workflow.add_node("generate_recommendations", generate_recommendations_node)
+    # Add Supervisor and Workers
+    workflow.add_node("supervisor", supervisor_node)
+    workflow.add_node("food_parser_worker", food_parser_worker)
+    workflow.add_node("nutrition_worker", nutrition_worker)
+    workflow.add_node("pattern_analyst_worker", pattern_analyst_worker)
+    workflow.add_node("recommendation_worker", recommendation_worker)
     
     # Set entry point
-    workflow.set_entry_point("parse_food")
+    workflow.set_entry_point("supervisor")
     
-    # Add edges
+    # Supervisor Routing Logic
     workflow.add_conditional_edges(
-        "parse_food",
-        should_continue,
-        {
-            "calculate_nutrition": "calculate_nutrition",
-            END: END
-        }
+        "supervisor",
+        route_from_supervisor
     )
     
-    workflow.add_conditional_edges(
-        "calculate_nutrition",
-        should_continue,
-        {
-            "analyze_patterns": "analyze_patterns",
-            END: END
-        }
-    )
-    
-    workflow.add_conditional_edges(
-        "analyze_patterns",
-        should_continue,
-        {
-            "generate_recommendations": "generate_recommendations",
-            END: END
-        }
-    )
-    
-    workflow.add_edge("generate_recommendations", END)
+    # Workers always report back to Supervisor
+    workflow.add_edge("food_parser_worker", "supervisor")
+    workflow.add_edge("nutrition_worker", "supervisor")
+    workflow.add_edge("pattern_analyst_worker", "supervisor")
+    workflow.add_edge("recommendation_worker", "supervisor")
     
     # Compile the graph
     app = workflow.compile()
@@ -217,7 +201,7 @@ mindful_eating_agent = create_mindful_eating_agent()
 
 def process_food_log(user_id: str, food_text: str, meal_type: str, user_history: List[Dict]) -> Dict:
     """
-    Process food log using the LangGraph agent
+    Process food log using the Supervisor-Worker Agent
     
     Args:
         user_id: User identifier
@@ -239,7 +223,7 @@ def process_food_log(user_id: str, food_text: str, meal_type: str, user_history:
         'patterns': {},
         'recommendations': [],
         'error': '',
-        'step': 'initial',
+        'next_worker': '',
         'needs_ingredients': False,
         'ingredient_fallback': False,
         'user_message': ''
