@@ -107,17 +107,22 @@ def detect_intent_node(state: ConversationalAgentState) -> ConversationalAgentSt
     """Node 1: Detect user intent from message"""
     message = state['user_message'].lower().strip()
     
-    # Greeting patterns
-    greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening']
-    if any(greeting in message for greeting in greetings):
+    # Greeting patterns (use word boundaries to avoid false matches like "sushi")
+    greetings = [r'\bhi\b', r'\bhello\b', r'\bhey\b', r'\bgood morning\b', r'\bgood afternoon\b', r'\bgood evening\b']
+    if any(re.search(pattern, message) for pattern in greetings):
         state['intent'] = 'greeting'
         state['agent_response'] = "Hey! 👋 What did you eat? Just tell me naturally, like you're texting a friend!"
         state['step'] = 'complete'
         return state
     
-    # Question patterns
-    question_words = ['what', 'how', 'why', 'when', 'can', 'should', 'is', '?']
-    if any(word in message for word in question_words) and 'ate' not in message and 'had' not in message:
+    # Question patterns (use word boundaries to avoid false matches)
+    question_patterns = [r'\bwhat\b', r'\bhow\b', r'\bwhy\b', r'\bwhen\b', r'\bcan\b', r'\bshould\b', r'\bis\b', r'\?']
+    # Only treat as question if it starts with question word or contains '?'
+    is_question = (
+        message.startswith(tuple(['what', 'how', 'why', 'when', 'can', 'should', 'is'])) or 
+        '?' in message
+    )
+    if is_question and 'ate' not in message and 'had' not in message:
         state['intent'] = 'ask_question'
         state['agent_response'] = "I'm here to help you log your meals! Just tell me what you ate, and I'll track the nutrition for you. 😊"
         state['step'] = 'complete'
@@ -183,13 +188,70 @@ def parse_conversational_food_node(state: ConversationalAgentState) -> Conversat
     if state['intent'] != 'log_food':
         return state
     
-    message = state['user_message'].lower()
+    message = state['user_message'].lower().strip()
+    conversation_history = state.get('conversation_history', [])
     
-    # Check if this is a response to ingredient request
-    if state.get('unknown_foods') and any(word in message for word in ['yes', 'yeah', 'yep', 'sure', 'ok']):
-        # User confirmed the suggestion, use previous unknown food
-        state['needs_clarification'] = False
-        state['step'] = 'parsed'
+    # Check if this is a confirmation response (yes/no)
+    confirmation_words = ['yes', 'yeah', 'yep', 'yup', 'sure', 'ok', 'okay', 'correct', 'right']
+    rejection_words = ['no', 'nope', 'nah', 'wrong', 'not']
+    
+    # Check if the last agent message was asking for confirmation
+    last_agent_message = ''
+    if conversation_history:
+        for msg in reversed(conversation_history):
+            if msg.get('role') == 'assistant':
+                last_agent_message = msg.get('content', '').lower()
+                break
+    
+    # If user is confirming a previous suggestion
+    if any(word == message or message.startswith(word) for word in confirmation_words):
+        # Check if last message was asking "Did you mean..."
+        if 'did you mean' in last_agent_message or ('reply' in last_agent_message and 'yes' in last_agent_message):
+            # Extract the food name from the last message
+            # Look for food names in quotes or after "Did you mean"
+            quoted_foods = re.findall(r"'([^']+)'", last_agent_message)
+            if quoted_foods:
+                # Use the suggested food
+                food_name = quoted_foods[0].lower()
+                if food_name in FOOD_DATABASE:
+                    nutrition = FOOD_DATABASE[food_name]
+                    foods_found = [{
+                        'name': food_name.title(),
+                        'portion': 1.0,
+                        'portion_text': '1 serving',
+                        'nutrition': {k: v for k, v in nutrition.items() if k != 'category'},
+                        'category': nutrition['category'],
+                        'confidence': 1.0
+                    }]
+                    state['parsed_foods'] = foods_found
+                    state['needs_clarification'] = False
+                    state['step'] = 'parsed'
+                    return state
+            else:
+                # Try to extract from "Did you mean X?" pattern
+                match = re.search(r'did you mean\s+([a-z\s]+)\?', last_agent_message)
+                if match:
+                    food_name = match.group(1).strip().lower()
+                    if food_name in FOOD_DATABASE:
+                        nutrition = FOOD_DATABASE[food_name]
+                        foods_found = [{
+                            'name': food_name.title(),
+                            'portion': 1.0,
+                            'portion_text': '1 serving',
+                            'nutrition': {k: v for k, v in nutrition.items() if k != 'category'},
+                            'category': nutrition['category'],
+                            'confidence': 1.0
+                        }]
+                        state['parsed_foods'] = foods_found
+                        state['needs_clarification'] = False
+                        state['step'] = 'parsed'
+                        return state
+    
+    # If user is rejecting a suggestion
+    if any(word == message or message.startswith(word) for word in rejection_words):
+        state['needs_clarification'] = True
+        state['clarification_question'] = "No problem! Can you describe what you ate differently? Or tell me the ingredients?"
+        state['step'] = 'needs_clarification'
         return state
     
     # Check if user is providing ingredients (contains multiple food items separated by commas)
@@ -293,6 +355,40 @@ def parse_conversational_food_node(state: ConversationalAgentState) -> Conversat
                 else:
                     unknown_foods.append(food_word)
     
+    # Try Gemini AI for unknown foods
+    if unknown_foods and not foods_found:
+        try:
+            from utils.gemini_nutrition import get_gemini_nutrition_lookup
+            gemini = get_gemini_nutrition_lookup()
+            
+            for unknown_food in unknown_foods:
+                # Ask Gemini AI
+                print(f"🔍 Asking Gemini about: {unknown_food}")
+                gemini_result = gemini.get_nutrition_data(unknown_food, "1 serving")
+                
+                if gemini_result:
+                    # Add Gemini result to foods_found
+                    foods_found.append({
+                        'name': gemini_result.get('name', unknown_food.title()),
+                        'portion': 1.0,
+                        'portion_text': '1 serving (AI recognized)',
+                        'nutrition': {
+                            'calories': gemini_result.get('calories', 0),
+                            'protein': gemini_result.get('protein', 0),
+                            'carbs': gemini_result.get('carbs', 0),
+                            'fat': gemini_result.get('fat', 0),
+                            'fiber': gemini_result.get('fiber', 0),
+                        },
+                        'category': gemini_result.get('category', 'mixed'),
+                        'confidence': gemini_result.get('confidence', 0.85),
+                        'source': 'gemini'
+                    })
+                    print(f"✅ Gemini recognized: {unknown_food}")
+                else:
+                    print(f"❌ Gemini couldn't recognize: {unknown_food}")
+        except Exception as e:
+            print(f"❌ Gemini lookup error: {e}")
+    
     state['parsed_foods'] = foods_found
     state['unknown_foods'] = unknown_foods
     
@@ -304,11 +400,12 @@ def parse_conversational_food_node(state: ConversationalAgentState) -> Conversat
         state['unknown_foods'] = unknown_foods
         state['step'] = 'needs_clarification'
     elif foods_found and any(f['confidence'] < 0.9 for f in foods_found):
-        # Low confidence matches
+        # Low confidence matches - keep the foods in state for confirmation
         low_conf_foods = [f for f in foods_found if f['confidence'] < 0.9]
         suggestions_text = ', '.join([f"'{f['name']}'" for f in low_conf_foods])
         state['needs_clarification'] = True
         state['clarification_question'] = f"Did you mean {suggestions_text}? 🤔\n\n(Reply 'yes' to confirm or tell me what you actually meant)"
+        state['parsed_foods'] = foods_found  # Keep the suggested foods for confirmation
         state['step'] = 'needs_clarification'
     else:
         state['needs_clarification'] = False

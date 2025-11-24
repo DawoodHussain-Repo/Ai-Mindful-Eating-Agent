@@ -448,7 +448,12 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
         name = request.form.get('name')
-        goals_json = request.form.get('goals')
+        
+        # Get custom goals from form
+        daily_calories = request.form.get('daily_calories', type=int)
+        daily_protein = request.form.get('daily_protein', type=int)
+        daily_carbs = request.form.get('daily_carbs', type=int)
+        daily_fat = request.form.get('daily_fat', type=int)
         
         if user_ops.user_exists(email):
             if request.content_type == 'application/x-www-form-urlencoded':
@@ -457,13 +462,13 @@ def register():
         
         password_hash = generate_password_hash(password)
         
-        # Parse custom goals if provided
-        custom_goals = None
-        if goals_json:
-            try:
-                custom_goals = json.loads(goals_json)
-            except:
-                pass
+        # Create custom goals dictionary
+        custom_goals = {
+            'daily_calories': daily_calories or 2000,
+            'daily_protein': daily_protein or 120,
+            'daily_carbs': daily_carbs or 250,
+            'daily_fat': daily_fat or 65
+        }
         
         result = user_ops.create_user(email, name, password_hash, custom_goals)
         
@@ -481,6 +486,53 @@ def register():
         return jsonify({'success': True}), 200
     
     return render_template('register.html')
+
+@app.route('/settings', methods=['GET', 'POST'])
+def settings():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = user_ops.get_user_by_email(session['user_id'])
+    if not user:
+        session.clear()
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        # Get updated goals from form
+        daily_calories = request.form.get('daily_calories', type=int)
+        daily_protein = request.form.get('daily_protein', type=int)
+        daily_carbs = request.form.get('daily_carbs', type=int)
+        daily_fat = request.form.get('daily_fat', type=int)
+        
+        # Update goals
+        new_goals = {
+            'daily_calories': daily_calories or 2000,
+            'daily_protein': daily_protein or 120,
+            'daily_carbs': daily_carbs or 250,
+            'daily_fat': daily_fat or 65
+        }
+        
+        success = user_ops.update_user_goals(session['user_id'], new_goals)
+        
+        if success:
+            # Refresh user data
+            user = user_ops.get_user_by_email(session['user_id'])
+            return render_template('settings.html', 
+                                 user_name=user['name'],
+                                 user_email=session['user_id'],
+                                 goals=user['goals'],
+                                 success='Goals updated successfully!')
+        else:
+            return render_template('settings.html', 
+                                 user_name=user['name'],
+                                 user_email=session['user_id'],
+                                 goals=user['goals'],
+                                 error='Failed to update goals. Please try again.')
+    
+    return render_template('settings.html', 
+                         user_name=user['name'],
+                         user_email=session['user_id'],
+                         goals=user['goals'])
 
 @app.route('/logout')
 def logout():
