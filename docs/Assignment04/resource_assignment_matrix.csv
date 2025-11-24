@@ -1,0 +1,45 @@
+WBS_ID,Task_Name,Duration_Days,Dawood_Hussain,Gulsher_Khan,Ahsan_Faraz,Phase
+1.1.1,Project Coordination,106,R,C,I,Continuous
+1.1.2,Risk Management,106,R,C,A,Continuous
+1.1.3,Change Management,76,C,R,I,Continuous
+1.1.4,Quality Management,106,R,A,R,Continuous
+1.2.1,Market Research,5,C,I,R,Phase 1 - Initiation
+1.2.2,Stakeholder Identification,5,R,C,I,Phase 1 - Initiation
+1.2.3,Feasibility Study,7,I,R,C,Phase 1 - Initiation
+1.2.4,Business Case Development,5,R,C,I,Phase 1 - Initiation
+M1,Project Authorization,0,R,I,I,Phase 1 - Initiation
+1.3.1,Requirements Gathering,6,R,C,A,Phase 2 - Planning
+M2,Requirements Approved,0,R,I,I,Phase 2 - Planning
+1.3.2,System Architecture Design,8,C,R,I,Phase 2 - Planning
+1.3.3,UI/UX Design,11,I,R,C,Phase 2 - Planning
+1.3.4,Database Design,10,I,C,R,Phase 2 - Planning
+1.3.5,Schedule Development,8,R,C,I,Phase 2 - Planning
+1.3.6,Risk Planning,7,R,A,C,Phase 2 - Planning
+M3,Design Approved,0,I,R,I,Phase 2 - Planning
+1.4.1,Environment Setup,10,I,R,C,Phase 3 - Development
+1.4.2,Backend API Development (Flask),14,C,R,I,Phase 3 - Development
+1.4.3,LangGraph Agent Development,24,I,C,R,Phase 3 - Development
+1.4.3.1,Agent Workflow Design,6,I,C,R,Phase 3 - Development
+1.4.3.2,LangGraph Implementation,9,I,C,R,Phase 3 - Development
+1.4.3.3,Agent Testing & Validation,6,C,I,R,Phase 3 - Development
+1.4.3.4,Agent Integration,3,I,A,R,Phase 3 - Development
+1.4.4,Frontend Development (HTML/CSS/Flask),20,C,R,I,Phase 3 - Development
+1.4.5,Integration Testing,10,C,R,A,Phase 3 - Development
+M4,Development Complete,0,I,R,I,Phase 3 - Development
+1.5.1,Functional Testing,6,C,I,R,Phase 4 - Testing
+1.5.2,User Acceptance Testing,5,R,C,I,Phase 4 - Testing
+1.5.3,Production Environment Setup,4,I,R,C,Phase 4 - Deployment
+1.5.4,Production Deployment,2,C,R,I,Phase 4 - Deployment
+1.5.5,User Training,2,R,C,I,Phase 4 - Deployment
+M5,Go Live,0,R,I,I,Phase 4 - Deployment
+1.6.1,Deliverable Acceptance,2,R,A,I,Phase 5 - Closure
+1.6.2,Knowledge Transfer,1,C,R,A,Phase 5 - Closure
+1.6.3,Lessons Learned,1,R,C,C,Phase 5 - Closure
+1.6.4,Administrative Closure,1,R,I,I,Phase 5 - Closure
+M6,Project Closed,0,R,I,I,Phase 5 - Closure
+
+Legend:
+R = Responsible (Does the work)
+A = Accountable (Final authority/approval)
+C = Consulted (Provides input)
+I = Informed (Kept updated)

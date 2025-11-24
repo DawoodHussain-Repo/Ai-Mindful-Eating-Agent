@@ -1,0 +1,108 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\title{AI Mindful Eating Agent}
+\subtitle{Supervisor-Worker Architecture using LangGraph}
+\author{Dawood Hussain \and Gulsher Khan \and Ahsan Faraz}
+\institute{FAST National University}
+\date{November 30, 2025}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Overview}
+    \tableofcontents
+\end{frame}
+
+\section{Problem \& Solution}
+\begin{frame}{The Challenge}
+    \begin{itemize}
+        \item \textbf{Problem:} Maintaining healthy eating habits is difficult.
+        \item \textbf{Pain Points:}
+        \begin{itemize}
+            \item Manual calorie counting is tedious.
+            \item Lack of personalized guidance.
+            \item Nutritional data is hard to interpret.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Our Solution: AI Mindful Eating Agent}
+    An intelligent conversational agent that:
+    \begin{itemize}
+        \item \textbf{Understands Natural Language:} "I had a burger" $\rightarrow$ Parsed Data.
+        \item \textbf{Calculates Nutrition:} Calories, Protein, Carbs, Fat.
+        \item \textbf{Learns Patterns:} "You've been eating a lot of sugar lately."
+        \item \textbf{Provides Recommendations:} Context-aware advice.
+    \end{itemize}
+\end{frame}
+
+\section{System Architecture}
+\begin{frame}{Supervisor-Worker Architecture}
+    \begin{center}
+        \includegraphics[width=0.9\textwidth]{network_diagram_image.png} % Placeholder for architecture diagram if available, or just text
+    \end{center}
+    \begin{itemize}
+        \item \textbf{Supervisor Node:} Orchestrates the workflow.
+        \item \textbf{Worker Nodes:}
+        \begin{itemize}
+            \item Food Parser
+            \item Nutrition Calculator
+            \item Pattern Analyst
+            \item Response Generator
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Key Features}
+\begin{frame}{Key Features}
+    \begin{enumerate}
+        \item \textbf{Natural Language Processing:} Fuzzy matching for food items.
+        \item \textbf{Supervisor Integration:} REST API for external control.
+        \item \textbf{Memory Management:}
+        \begin{itemize}
+            \item Short-term: Session-based context.
+            \item Long-term: MongoDB user history.
+        \end{itemize}
+        \item \textbf{Scalability:} Modular design allows adding new workers easily.
+    \end{enumerate}
+\end{frame}
+
+\section{Live Demo}
+\begin{frame}{Live Demo Scenario}
+    \textbf{Scenario 1: Logging a Meal}
+    \begin{itemize}
+        \item User: "I had grilled chicken and rice."
+        \item Agent: Calculates nutrition and confirms.
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    
+    \textbf{Scenario 2: Asking for Advice}
+    \begin{itemize}
+        \item User: "Is this healthy?"
+        \item Agent: Checks history and provides recommendation.
+    \end{itemize}
+\end{frame}
+
+\section{Project Management}
+\begin{frame}{Project Status}
+    \begin{itemize}
+        \item \textbf{Schedule:} Completed ahead of schedule (106 days vs 112 planned).
+        \item \textbf{Budget:} Under budget (CPI = 1.019).
+        \item \textbf{Quality:} 90\% accuracy in food recognition.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+    \centering
+    \Large \textbf{Thank You!}\\
+    \vspace{1cm}
+    \normalsize Questions?
+\end{frame}
+
+\end{document}

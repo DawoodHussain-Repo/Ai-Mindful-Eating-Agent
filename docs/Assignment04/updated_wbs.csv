@@ -1,0 +1,39 @@
+WBS_ID,Task_Name,Duration_Days,Start_Date,Finish_Date,Responsible,ES,EF,LS,LF,Total_Slack,Free_Slack,Critical_Path,Resource_Change,Tech_Stack
+1.1.1,Project Coordination,119,Sep 1 2025,Dec 24 2025,Dawood,0,119,0,119,0,0,Yes,Extended +7 days,N/A
+1.1.2,Risk Management,119,Sep 1 2025,Dec 24 2025,Dawood,0,119,0,119,0,0,Yes,Extended +7 days,N/A
+1.1.3,Change Management,76,Sep 15 2025,Nov 30 2025,Gulsher,14,90,14,90,0,0,Yes,No change,N/A
+1.1.4,Quality Management,119,Sep 1 2025,Dec 24 2025,Dawood/Gulsher,0,119,0,119,0,0,Yes,Extended +7 days,N/A
+1.2.1,Market Research,5,Sep 1 2025,Sep 5 2025,Ahsan,0,5,0,5,0,0,Yes,No change,N/A
+1.2.2,Stakeholder Identification,5,Sep 6 2025,Sep 10 2025,Dawood,5,10,5,10,0,0,Yes,No change,N/A
+1.2.3,Feasibility Study,7,Sep 6 2025,Sep 12 2025,Gulsher,5,12,8,15,3,0,No,No change,N/A
+1.2.4,Business Case Development,5,Sep 10 2025,Sep 15 2025,Dawood,10,15,10,15,0,0,Yes,No change,N/A
+M1,Project Authorization,0,Sep 15 2025,Sep 15 2025,Dawood,15,15,15,15,0,0,Yes,Milestone,N/A
+1.3.1,Requirements Gathering,6,Sep 16 2025,Sep 21 2025,Dawood/Ahsan,15,21,15,21,0,0,Yes,No change,N/A
+M2,Requirements Approved,0,Sep 29 2025,Sep 29 2025,Dawood,21,21,21,21,0,0,Yes,Milestone,N/A
+1.3.2,System Architecture Design,8,Sep 22 2025,Sep 30 2025,Gulsher,21,29,21,29,0,0,Yes,No change,Flask Backend
+1.3.3,UI/UX Design,11,Sep 22 2025,Oct 3 2025,Gulsher,21,32,29,40,8,8,No,No change,HTML/CSS
+1.3.4,Database Design,10,Sep 25 2025,Oct 5 2025,Ahsan,24,34,30,40,6,6,No,No change,PostgreSQL
+1.3.5,Schedule Development,8,Oct 1 2025,Oct 8 2025,Dawood,29,37,32,40,3,3,No,No change,N/A
+1.3.6,Risk Planning,7,Oct 5 2025,Oct 12 2025,Dawood/Gulsher,33,40,33,40,0,0,Yes,No change,N/A
+M3,Design Approved,0,Oct 14 2025,Oct 14 2025,Gulsher,40,40,40,40,0,0,Yes,Milestone,N/A
+1.4.1,Environment Setup,10,Oct 16 2025,Oct 25 2025,Gulsher,40,50,40,50,0,0,Yes,No change,Flask/Python
+1.4.2,Backend API Development,14,Oct 20 2025,Nov 5 2025,Gulsher,44,58,44,58,0,0,Yes,No change,Flask/Python
+1.4.3,LangGraph Agent Development,29,Oct 20 2025,Nov 20 2025,Ahsan,40,69,40,69,0,0,Yes,Extended +5 days,LangGraph
+1.4.3.1,Agent Workflow Design,6,Oct 20 2025,Oct 27 2025,Ahsan,40,46,40,46,0,0,Yes,Extended +1 day,LangGraph
+1.4.3.2,LangGraph Implementation,12,Oct 28 2025,Nov 8 2025,Ahsan,46,58,46,58,0,0,Yes,Extended +3 days,LangGraph
+1.4.3.3,Agent Testing & Validation,8,Nov 9 2025,Nov 16 2025,Ahsan,58,66,58,66,0,0,Yes,Extended +2 days,LangGraph
+1.4.3.4,Agent Integration,3,Nov 17 2025,Nov 20 2025,Ahsan/Gulsher,66,69,66,69,0,0,Yes,Extended +1 day,LangGraph/Flask
+1.4.4,Frontend Development,28,Nov 6 2025,Nov 30 2025,Gulsher,58,86,58,86,0,0,Yes,Delayed +12 days,HTML/CSS/Flask
+1.4.5,Integration Testing,14,Dec 1 2025,Dec 12 2025,All Team,87,101,87,101,0,0,Yes,Extended +4 days,Full Stack
+M4,Development Complete,0,Dec 12 2025,Dec 12 2025,Gulsher,101,101,101,101,0,0,Yes,Delayed +12 days,N/A
+1.5.1,Functional Testing,6,Dec 13 2025,Dec 18 2025,Ahsan,102,108,102,108,0,0,Yes,Delayed +12 days,Full Stack
+1.5.2,User Acceptance Testing,5,Dec 16 2025,Dec 20 2025,Dawood,106,111,106,111,0,0,Yes,Delayed +11 days,Full Stack
+1.5.3,Production Environment Setup,4,Dec 13 2025,Dec 16 2025,Gulsher,102,106,106,110,4,4,No,Delayed +7 days,AWS/Flask
+1.5.4,Production Deployment,2,Dec 20 2025,Dec 21 2025,Gulsher,111,113,111,113,0,0,Yes,Delayed +11 days,AWS/Flask
+1.5.5,User Training,2,Dec 20 2025,Dec 21 2025,Dawood,111,113,111,113,0,0,Yes,Delayed +11 days,N/A
+M5,Go Live,0,Dec 21 2025,Dec 21 2025,Dawood,113,113,113,113,0,0,Yes,Delayed +11 days,N/A
+1.6.1,Deliverable Acceptance,2,Dec 22 2025,Dec 23 2025,Dawood/Gulsher,114,116,114,116,0,0,Yes,Delayed +11 days,N/A
+1.6.2,Knowledge Transfer,1,Dec 23 2025,Dec 23 2025,Dawood/Ahsan,116,117,116,117,0,0,Yes,Delayed +10 days,N/A
+1.6.3,Lessons Learned,1,Dec 24 2025,Dec 24 2025,Dawood,118,119,118,119,0,0,Yes,Delayed +10 days,N/A
+1.6.4,Administrative Closure,1,Dec 24 2025,Dec 24 2025,Dawood,119,119,119,119,0,0,Yes,Delayed +9 days,N/A
+M6,Project Closed,0,Dec 24 2025,Dec 24 2025,Dawood,119,119,119,119,0,0,Yes,Delayed +9 days,N/A

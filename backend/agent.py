@@ -18,6 +18,9 @@ from utils.data_loader import (
 )
 from utils.food_parser import FoodParser
 from utils.recommendation_engine import RecommendationEngine
+from utils.gemini_nutrition import get_gemini_nutrition_lookup
+from utils.nutrition_cache import NutritionCache
+from utils.chromadb_client import ChromaDBClient
 
 # Load configurations
 FOOD_DATABASE = load_food_database()
@@ -25,17 +28,56 @@ USER_PROMPTS = load_user_prompts()
 APP_CONFIG = load_app_config()
 NUTRITION_GOALS = load_nutrition_goals()
 
-# Initialize utilities
-food_parser = FoodParser(
-    FOOD_DATABASE,
-    APP_CONFIG.get('portion_patterns', {}),
-    APP_CONFIG.get('portion_sizes', {})
-)
+# Initialize ChromaDB and cache (will be set by app.py)
+_chroma_client = None
+_nutrition_cache = None
+_gemini_lookup = None
+_food_parser = None
+_recommendation_engine = None
 
-recommendation_engine = RecommendationEngine(
-    APP_CONFIG.get('recommendation_thresholds', {}),
-    USER_PROMPTS
-)
+def initialize_agent(chroma_client: ChromaDBClient):
+    """Initialize agent with ChromaDB client"""
+    global _chroma_client, _nutrition_cache, _gemini_lookup, _food_parser, _recommendation_engine
+    
+    _chroma_client = chroma_client
+    
+    # Initialize nutrition cache
+    _nutrition_cache = NutritionCache(chroma_client)
+    
+    # Populate cache with static database
+    _nutrition_cache.populate_from_static_db(FOOD_DATABASE)
+    
+    # Initialize Gemini lookup
+    try:
+        _gemini_lookup = get_gemini_nutrition_lookup()
+    except Exception as e:
+        print(f"⚠️ Gemini not available: {e}")
+        _gemini_lookup = None
+    
+    # Initialize food parser with cache and Gemini
+    _food_parser = FoodParser(
+        FOOD_DATABASE,
+        APP_CONFIG.get('portion_patterns', {}),
+        APP_CONFIG.get('portion_sizes', {}),
+        nutrition_cache=_nutrition_cache,
+        gemini_lookup=_gemini_lookup
+    )
+    
+    # Initialize recommendation engine
+    _recommendation_engine = RecommendationEngine(
+        APP_CONFIG.get('recommendation_thresholds', {}),
+        USER_PROMPTS
+    )
+    
+    print("✅ Agent initialized with Gemini AI and nutrition cache")
+
+def get_food_parser():
+    """Get the food parser instance"""
+    return _food_parser
+
+def get_recommendation_engine():
+    """Get the recommendation engine instance"""
+    return _recommendation_engine
 
 # Define the Agent State
 class AgentState(TypedDict):
@@ -106,8 +148,14 @@ def food_parser_worker(state: AgentState) -> AgentState:
     """Worker 1: Specialized in parsing food text with advanced pattern matching"""
     text = state['input_text']
     
+    # Get food parser instance
+    parser = get_food_parser()
+    if not parser:
+        state['error'] = 'parser_not_initialized'
+        return state
+    
     # Parse using enhanced FoodParser utility
-    foods_found = food_parser.parse_food_text(text)
+    foods_found = parser.parse_food_text(text)
     
     # Check if we need clarification
     if foods_found and foods_found[0].get('needs_clarification'):
@@ -118,7 +166,8 @@ def food_parser_worker(state: AgentState) -> AgentState:
     
     # If no exact matches, try ingredient-based estimation
     if not foods_found:
-        ingredient_result = food_parser.estimate_from_ingredients(text)
+        parser = get_food_parser()
+        ingredient_result = parser.estimate_from_ingredients(text) if parser else {'success': False}
         if ingredient_result['success']:
             foods_found.append({
                 'name': 'Mixed Dish (estimated)',
@@ -160,7 +209,8 @@ def nutrition_worker(state: AgentState) -> AgentState:
 def pattern_analyst_worker(state: AgentState) -> AgentState:
     """Worker 3: Specialized in analyzing user history"""
     user_history = state.get('user_history', [])
-    patterns = recommendation_engine.analyze_patterns(user_history)
+    engine = get_recommendation_engine()
+    patterns = engine.analyze_patterns(user_history) if engine else {}
     state['patterns'] = patterns
     return state
 
@@ -170,11 +220,12 @@ def recommendation_worker(state: AgentState) -> AgentState:
     user_history = state.get('user_history', [])
     patterns = state.get('patterns', {})
     
-    recommendations = recommendation_engine.generate_recommendations(
+    engine = get_recommendation_engine()
+    recommendations = engine.generate_recommendations(
         nutrition_data,
         user_history,
         patterns
-    )
+    ) if engine else []
     
     state['recommendations'] = recommendations
     return state

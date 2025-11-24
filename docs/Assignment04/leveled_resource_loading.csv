@@ -1,0 +1,33 @@
+Week,Week_Start,Week_End,Dawood_Hours,Gulsher_Hours,Ahsan_Hours,Total_Hours,Dawood_Allocation_%,Gulsher_Allocation_%,Ahsan_Allocation_%,Changes_Applied
+1,Sep 1,Sep 7,40,32,40,112,100,80,100,None
+2,Sep 8,Sep 14,40,40,32,112,100,100,80,None
+3,Sep 15,Sep 21,40,32,40,112,100,80,100,None
+4,Sep 22,Sep 28,32,40,40,112,80,100,100,None
+5,Sep 29,Oct 5,32,40,40,112,80,100,100,None
+6,Oct 6,Oct 12,40,32,32,104,100,80,80,None
+7,Oct 13,Oct 19,32,40,32,104,80,100,80,Reduced continuous activities
+8,Oct 20,Oct 26,32,40,40,112,80,100,100,Leveled - Backend API focus
+9,Oct 27,Nov 2,32,40,40,112,80,100,100,Leveled - LangGraph development
+10,Nov 3,Nov 9,32,40,40,112,80,100,100,Leveled - Continued development
+11,Nov 10,Nov 16,36,40,40,116,90,100,100,Leveled - Frontend starts
+12,Nov 17,Nov 23,36,40,40,116,90,100,100,Leveled - Parallel development
+13,Nov 24,Nov 30,36,40,40,116,90,100,100,Leveled - Integration prep
+14,Dec 1,Dec 7,40,40,40,120,100,100,100,Leveled - Integration testing
+15,Dec 8,Dec 14,40,40,32,112,100,100,80,Testing & deployment
+16,Dec 15,Dec 21,40,32,24,96,100,80,60,Extended - Deployment & UAT
+17,Dec 22,Dec 24,32,24,16,72,80,60,40,Closure activities
+
+Summary of Leveling Changes:
+1. Extended project duration from 112 to 119 days (7 days extension)
+2. Reduced peak allocations from 120% to 100% for Gulsher and Ahsan
+3. Increased Dawood's allocation during critical periods (60% → 80-90%)
+4. Staggered Frontend Development to start Week 11 instead of Week 9
+5. Extended LangGraph development with reduced daily intensity
+6. Distributed integration testing across more team members
+7. Added buffer week for deployment and UAT activities
+
+Resource Utilization Improvement:
+- Gulsher: Peak 120% → 100% (20% reduction)
+- Ahsan: Peak 120% → 100% (20% reduction)
+- Dawood: Average 70% → 85% (15% increase)
+- Overall team utilization: More balanced and sustainable

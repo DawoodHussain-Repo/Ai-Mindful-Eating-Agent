@@ -1,16 +1,19 @@
 """
-Enhanced Food Parser with advanced pattern matching (NO API keys required)
-Handles natural language, asks clarifying questions, and recognizes variations
+Enhanced Food Parser with Gemini AI integration
+Handles natural language, asks clarifying questions, and uses AI for unknown foods
 """
 
 import re
 from typing import Dict, List, Tuple, Any, Optional
 
 class FoodParser:
-    def __init__(self, food_database: Dict, portion_patterns: Dict, portion_sizes: Dict):
+    def __init__(self, food_database: Dict, portion_patterns: Dict, portion_sizes: Dict, 
+                 nutrition_cache=None, gemini_lookup=None):
         self.food_database = food_database
         self.portion_patterns = portion_patterns
         self.portion_sizes = portion_sizes
+        self.nutrition_cache = nutrition_cache
+        self.gemini_lookup = gemini_lookup
         
         # Build synonym mappings for better recognition
         self.synonyms = {
@@ -149,7 +152,7 @@ class FoodParser:
         
         foods_found = []
         
-        # Try fuzzy matching first
+        # Try fuzzy matching in static database first
         matched_food_names = self.fuzzy_match_food(text)
         
         for food_name in matched_food_names:
@@ -167,8 +170,62 @@ class FoodParser:
                 'portion': portion,
                 'portion_text': portion_text,
                 'nutrition': portioned_nutrition,
-                'category': nutrition['category']
+                'category': nutrition['category'],
+                'source': 'static'
             })
+        
+        # If no matches in static DB, try cache
+        if not foods_found and self.nutrition_cache:
+            cached_nutrition = self.nutrition_cache.get(text)
+            if cached_nutrition:
+                portion, portion_text = self.parse_portion(text)
+                
+                portioned_nutrition = {
+                    k: round(v * portion, 1) 
+                    for k, v in cached_nutrition.items() 
+                    if k not in ['category', 'source', 'cached_at', 'name']
+                }
+                
+                foods_found.append({
+                    'name': cached_nutrition['name'],
+                    'portion': portion,
+                    'portion_text': portion_text,
+                    'nutrition': portioned_nutrition,
+                    'category': cached_nutrition['category'],
+                    'source': 'cache'
+                })
+        
+        # If still no matches, try Gemini AI
+        if not foods_found and self.gemini_lookup:
+            print(f"🤖 Using Gemini AI to lookup: {text}")
+            portion, portion_text = self.parse_portion(text)
+            
+            # Extract just the food name (remove portion words)
+            food_name = re.sub(r'\d+\.?\d*\s*(oz|ounce|cup|g|gram|serving|piece|slice)?s?', '', text).strip()
+            
+            gemini_nutrition = self.gemini_lookup.get_nutrition_data(food_name, portion_text)
+            
+            if gemini_nutrition:
+                # Cache the result for future use
+                if self.nutrition_cache:
+                    self.nutrition_cache.set(food_name, gemini_nutrition)
+                
+                # Apply portion
+                portioned_nutrition = {
+                    k: round(v * portion, 1) 
+                    for k, v in gemini_nutrition.items() 
+                    if k not in ['category', 'source', 'confidence', 'name']
+                }
+                
+                foods_found.append({
+                    'name': gemini_nutrition['name'],
+                    'portion': portion,
+                    'portion_text': portion_text,
+                    'nutrition': portioned_nutrition,
+                    'category': gemini_nutrition['category'],
+                    'source': 'gemini',
+                    'confidence': gemini_nutrition.get('confidence', 0.85)
+                })
         
         return foods_found
     

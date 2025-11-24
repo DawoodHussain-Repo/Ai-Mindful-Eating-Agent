@@ -22,9 +22,12 @@ wheels/
 
 # Virtual Environment
 venv/
+venv39/
 env/
 ENV/
 .venv
+backend/venv/
+backend/venv39/
 
 # Flask
 instance/
@@ -43,17 +46,45 @@ Thumbs.db
 
 # Logs
 *.log
+logs/
+backend/chat_logs/
 
 # Database
 *.db
 *.sqlite
 *.sqlite3
+chroma_data/
+backend/chroma_data/
+mongodb_data/
 
 # Environment variables
 .env
 .env.local
+backend/.env
 
 # Temporary files
 *.tmp
 *.bak
 *.swp
+
+# LaTeX auxiliary files
+*.aux
+*.toc
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+docs/*.aux
+docs/*.toc
+docs/*.out
+docs/*.log
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Node modules (if frontend added)
+node_modules/

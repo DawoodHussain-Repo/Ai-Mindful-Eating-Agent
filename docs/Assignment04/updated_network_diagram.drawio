@@ -1,0 +1,261 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+  <diagram name="Updated Network Diagram" id="updated-aon-leveled">
+    <mxGraphModel dx="854" dy="465" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="5000" pageHeight="2500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Mindful Eating Agent - Updated Network Diagram (After Resource Leveling)&#xa;Project Duration: 119 Days (Sep 1 - Dec 24, 2025)" style="text;fontSize=20;fontStyle=1;align=center;fillColor=#fff3cd;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="1600" y="30" width="800" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" value="LEGEND" style="text;fontSize=14;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="50" y="80" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-critical" value="Critical Path&#xa;TS=0" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="50" y="120" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-noncritical" value="Non-Critical&#xa;TS&gt;0" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="210" y="120" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-milestone" value="Milestone" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="370" y="110" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-leveled" value="Resource Leveled&#xa;(Extended/Delayed)" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="510" y="120" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="phase1-label" value="PHASE 1: INITIATION" style="text;fontSize=14;fontStyle=1;fillColor=#e3f2fd;strokeColor=#1976d2;" parent="1" vertex="1">
+          <mxGeometry x="100" y="220" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1.2.1" value="1.2.1: Market Research&#xa;ES:0 EF:5 LS:0 LF:5&#xa;Dur:5 TS:0&#xa;Owner: Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="100" y="280" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.2.2" value="1.2.2: Stakeholder ID&#xa;ES:5 EF:10 LS:5 LF:10&#xa;Dur:5 TS:0&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="100" y="400" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.2.3" value="1.2.3: Feasibility Study&#xa;ES:5 EF:12 LS:8 LF:15&#xa;Dur:7 TS:3&#xa;Owner: Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="100" y="520" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.2.4" value="1.2.4: Business Case&#xa;ES:10 EF:15 LS:10 LF:15&#xa;Dur:5 TS:0&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="350" y="400" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="M1" value="M1: Project&#xa;Authorization&#xa;Day 15" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="600" y="380" width="150" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.2.1-1.2.2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.2.1" target="1.2.2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.2.2-1.2.4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.2.2" target="1.2.4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.2.3-1.2.4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=2;dashed=1;" parent="1" source="1.2.3" target="1.2.4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.2.4-M1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.2.4" target="M1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="phase2-label" value="PHASE 2: PLANNING" style="text;fontSize=14;fontStyle=1;fillColor=#e8f5e9;strokeColor=#388e3c;" parent="1" vertex="1">
+          <mxGeometry x="850" y="220" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1.3.1" value="1.3.1: Requirements&#xa;ES:15 EF:21 LS:15 LF:21&#xa;Dur:6 TS:0&#xa;Owner: Dawood/Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="850" y="400" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="M2" value="M2: Requirements&#xa;Approved&#xa;Day 21" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="1100" y="380" width="150" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="1.3.2" value="1.3.2: System Arch&#xa;ES:21 EF:29 LS:21 LF:29&#xa;Dur:8 TS:0&#xa;Owner: Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="1320" y="280" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.3.3" value="1.3.3: UI/UX Design&#xa;ES:21 EF:32 LS:29 LF:40&#xa;Dur:11 TS:8&#xa;Owner: Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="1320" y="400" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.3.4" value="1.3.4: Database Design&#xa;ES:24 EF:34 LS:30 LF:40&#xa;Dur:10 TS:6&#xa;Owner: Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="1320" y="520" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.3.5" value="1.3.5: Schedule Dev&#xa;ES:29 EF:37 LS:32 LF:40&#xa;Dur:8 TS:3&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="1560" y="280" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.3.6" value="1.3.6: Risk Planning&#xa;ES:33 EF:40 LS:33 LF:40&#xa;Dur:7 TS:0&#xa;Owner: Dawood/Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="1800" y="280" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="M3" value="M3: Design&#xa;Approved&#xa;Day 40" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="2050" y="260" width="150" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-M1-1.3.1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="M1" target="1.3.1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.3.1-M2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.3.1" target="M2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-M2-1.3.2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="M2" target="1.3.2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1175" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-M2-1.3.3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=2;dashed=1;" parent="1" source="M2" target="1.3.3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-M2-1.3.4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=2;dashed=1;" parent="1" source="M2" target="1.3.4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.3.2-1.3.5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=2;dashed=1;" parent="1" source="1.3.2" target="1.3.5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.3.5-1.3.6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.3.5" target="1.3.6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.3.6-M3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.3.6" target="M3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="phase3-label" value="PHASE 3: DEVELOPMENT (RESOURCE LEVELED)" style="text;fontSize=14;fontStyle=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;" parent="1" vertex="1">
+          <mxGeometry x="2300" y="220" width="500" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1.4.1" value="1.4.1: Environment Setup&#xa;ES:40 EF:50 LS:40 LF:50&#xa;Dur:10 TS:0&#xa;Owner: Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="2300" y="280" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.4.2" value="1.4.2: Backend API (Flask)&#xa;ES:44 EF:58 LS:44 LF:58&#xa;Dur:14 TS:0&#xa;Owner: Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="2540" y="280" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.4.3" value="1.4.3: LangGraph Agent&#xa;ES:40 EF:69 LS:40 LF:69&#xa;Dur:29 TS:0 EXTENDED&#xa;Owner: Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="2300" y="520" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="1.4.3.1" value="1.4.3.1: Workflow&#xa;ES:40 EF:46 Dur:6&#xa;Owner: Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="2540" y="460" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="1.4.3.2" value="1.4.3.2: LangGraph&#xa;ES:46 EF:58 Dur:12&#xa;Owner: Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="2540" y="550" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="1.4.3.3" value="1.4.3.3: Testing&#xa;ES:58 EF:66 Dur:8&#xa;Owner: Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="2540" y="640" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="1.4.3.4" value="1.4.3.4: Integration&#xa;ES:66 EF:69 Dur:3&#xa;Owner: Ahsan/Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="2540" y="730" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="1.4.4" value="1.4.4: Frontend (HTML/CSS)&#xa;ES:58 EF:86 LS:58 LF:86&#xa;Dur:28 TS:0 DELAYED&#xa;Owner: Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="2780" y="280" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="1.4.5" value="1.4.5: Integration Testing&#xa;ES:87 EF:101 LS:87 LF:101&#xa;Dur:14 TS:0 EXTENDED&#xa;Owner: All Team" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="3020" y="480" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="M4" value="M4: Development&#xa;Complete&#xa;Day 101" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="3260" y="460" width="150" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-M3-1.4.1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="M3" target="1.4.1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-M3-1.4.3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=3;" parent="1" source="M3" target="1.4.3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.4.1-1.4.2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.4.1" target="1.4.2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.4.3-1.4.3.1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#7c3aed;strokeWidth=2;" parent="1" source="1.4.3" target="1.4.3.1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.4.3.1-1.4.3.2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#7c3aed;strokeWidth=2;" parent="1" source="1.4.3.1" target="1.4.3.2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.4.3.2-1.4.3.3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#7c3aed;strokeWidth=2;" parent="1" source="1.4.3.2" target="1.4.3.3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.4.3.3-1.4.3.4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#7c3aed;strokeWidth=2;" parent="1" source="1.4.3.3" target="1.4.3.4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.4.2-1.4.4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=3;" parent="1" source="1.4.2" target="1.4.4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.4.4-1.4.5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=3;" parent="1" source="1.4.4" target="1.4.5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.4.3.4-1.4.5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=3;" parent="1" source="1.4.3.4" target="1.4.5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.4.5-M4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.4.5" target="M4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="phase4-label" value="PHASE 4: TESTING &amp; DEPLOYMENT" style="text;fontSize=14;fontStyle=1;fillColor=#fff3e0;strokeColor=#e65100;" parent="1" vertex="1">
+          <mxGeometry x="3500" y="220" width="400" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1.5.1" value="1.5.1: Functional Testing&#xa;ES:102 EF:108 LS:102 LF:108&#xa;Dur:6 TS:0&#xa;Owner: Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="3500" y="360" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.5.2" value="1.5.2: UAT&#xa;ES:106 EF:111 LS:106 LF:111&#xa;Dur:5 TS:0&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="3740" y="320" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.5.3" value="1.5.3: Prod Env Setup&#xa;ES:102 EF:106 LS:106 LF:110&#xa;Dur:4 TS:4&#xa;Owner: Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="3500" y="480" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.5.4" value="1.5.4: Deployment&#xa;ES:111 EF:113 LS:111 LF:113&#xa;Dur:2 TS:0&#xa;Owner: Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="3740" y="440" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.5.5" value="1.5.5: User Training&#xa;ES:111 EF:113 LS:111 LF:113&#xa;Dur:2 TS:0&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="3740" y="560" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="M5" value="M5: Go Live&#xa;Day 113" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="3980" y="440" width="150" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-M4-1.5.1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="M4" target="1.5.1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3335" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-M4-1.5.3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=2;dashed=1;" parent="1" source="M4" target="1.5.3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.5.1-1.5.2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.5.1" target="1.5.2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.5.2-1.5.4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.5.2" target="1.5.4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.5.3-1.5.4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=2;dashed=1;" parent="1" source="1.5.3" target="1.5.4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.5.1-1.5.5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.5.1" target="1.5.5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.5.4-M5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.5.4" target="M5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.5.5-M5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.5.5" target="M5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="phase5-label" value="PHASE 5: CLOSURE" style="text;fontSize=14;fontStyle=1;fillColor=#fce4ec;strokeColor=#c2185b;" parent="1" vertex="1">
+          <mxGeometry x="100" y="900" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1.6.1" value="1.6.1: Deliverable Accept&#xa;ES:114 EF:116 LS:114 LF:116&#xa;Dur:2 TS:0&#xa;Owner: Dawood/Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="100" y="960" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.6.2" value="1.6.2: Knowledge Transfer&#xa;ES:116 EF:117 LS:116 LF:117&#xa;Dur:1 TS:0&#xa;Owner: Dawood/Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="340" y="960" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.6.3" value="1.6.3: Lessons Learned&#xa;ES:118 EF:119 LS:118 LF:119&#xa;Dur:1 TS:0&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="580" y="960" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="1.6.4" value="1.6.4: Admin Closure&#xa;ES:119 EF:119 LS:119 LF:119&#xa;Dur:1 TS:0&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="820" y="960" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="M6" value="M6: Project&#xa;Closed&#xa;Day 119" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="1060" y="940" width="150" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.6.1-1.6.2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.6.1" target="1.6.2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.6.2-1.6.3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.6.2" target="1.6.3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.6.3-1.6.4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.6.3" target="1.6.4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1.6.4-M6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=3;" parent="1" source="1.6.4" target="M6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="summary" value="KEY CHANGES AFTER RESOURCE LEVELING:&#xa;&#xa;1. LangGraph Agent Development: 24 → 29 days (+5 days)&#xa;2. Frontend Development: Delayed start by 12 days&#xa;3. Integration Testing: 10 → 14 days (+4 days)&#xa;4. Project Duration: 112 → 119 days (+7 days)&#xa;5. New Completion: December 24, 2025&#xa;&#xa;RESOURCE IMPROVEMENTS:&#xa;• Gulsher: Peak 120% → 100%&#xa;• Ahsan: Peak 120% → 100%&#xa;• Dawood: Average 70% → 85%&#xa;&#xa;CRITICAL PATH: 119 days (maintained)" style="rounded=0;whiteSpace=wrap;fillColor=#fff9c4;strokeColor=#f57f17;align=left;verticalAlign=top;fontStyle=0;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="100" y="1150" width="500" height="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

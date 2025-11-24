@@ -1,0 +1,233 @@
+UPDATED ACTIVITY-ON-NODE (AON) NETWORK DIAGRAM
+After Resource Leveling and Schedule Adjustment
+Project: Mindful Eating Agent
+Updated Duration: 119 days (Sep 1 - Dec 24, 2025)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+LEGEND:
+[CRITICAL PATH] - Red boxes with TS=0
+[NON-CRITICAL] - Blue boxes with TS>0
+<MILESTONE> - Diamond shapes
+→ Critical dependency (solid line)
+⇢ Non-critical dependency (dashed line)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PHASE 1: INITIATION (Days 0-15)
+═══════════════════════════════════════════════════════════════════════════════
+
+[1.2.1: Market Research]          [1.2.3: Feasibility Study]
+ES:0  EF:5  LS:0  LF:5             ES:5  EF:12  LS:8  LF:15
+Dur:5  TS:0  CRITICAL              Dur:7  TS:3  NON-CRITICAL
+Owner: Ahsan                       Owner: Gulsher
+         ↓                                  ↓
+         ↓                                  ⇢
+[1.2.2: Stakeholder ID]                    ↓
+ES:5  EF:10  LS:5  LF:10                   ↓
+Dur:5  TS:0  CRITICAL                      ↓
+Owner: Dawood                              ↓
+         ↓                                  ↓
+         └──────────→ [1.2.4: Business Case] ←┘
+                      ES:10  EF:15  LS:10  LF:15
+                      Dur:5  TS:0  CRITICAL
+                      Owner: Dawood
+                              ↓
+                      <M1: Project Authorization>
+                      Day 15 - MILESTONE
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PHASE 2: PLANNING (Days 15-40)
+═══════════════════════════════════════════════════════════════════════════════
+
+                      <M1: Authorization>
+                              ↓
+                   [1.3.1: Requirements Gathering]
+                   ES:15  EF:21  LS:15  LF:21
+                   Dur:6  TS:0  CRITICAL
+                   Owner: Dawood/Ahsan
+                              ↓
+                   <M2: Requirements Approved>
+                   Day 21 - MILESTONE
+                              ↓
+         ┌────────────────────┼────────────────────┐
+         ↓                    ↓                    ↓
+[1.3.2: System Arch]  [1.3.3: UI/UX Design]  [1.3.4: Database Design]
+ES:21 EF:29 LS:21 LF:29  ES:21 EF:32 LS:29 LF:40  ES:24 EF:34 LS:30 LF:40
+Dur:8 TS:0 CRITICAL      Dur:11 TS:8 NON-CRIT     Dur:10 TS:6 NON-CRIT
+Owner: Gulsher           Owner: Gulsher            Owner: Ahsan
+         ↓                    ⇢                         ⇢
+         ↓                    ↓                         ↓
+[1.3.5: Schedule Dev]        ↓                         ↓
+ES:29 EF:37 LS:32 LF:40      ↓                         ↓
+Dur:8 TS:3 NON-CRITICAL      ↓                         ↓
+Owner: Dawood                ↓                         ↓
+         ⇢                    ↓                         ↓
+         ↓                    ↓                         ↓
+[1.3.6: Risk Planning] ←─────┴─────────────────────────┘
+ES:33  EF:40  LS:33  LF:40
+Dur:7  TS:0  CRITICAL
+Owner: Dawood/Gulsher
+         ↓
+<M3: Design Approved>
+Day 40 - MILESTONE
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PHASE 3: DEVELOPMENT (Days 40-101) - RESOURCE LEVELED
+═══════════════════════════════════════════════════════════════════════════════
+
+<M3: Design Approved>
+         ↓
+         ├──────────────────────────────────────┐
+         ↓                                      ↓
+[1.4.1: Environment Setup]          [1.4.3: LangGraph Agent Dev]
+ES:40  EF:50  LS:40  LF:50          ES:40  EF:69  LS:40  LF:69
+Dur:10  TS:0  CRITICAL               Dur:29  TS:0  CRITICAL (EXTENDED +5)
+Owner: Gulsher                       Owner: Ahsan
+         ↓                                   ↓
+         ↓                           ┌───────┼───────┐
+[1.4.2: Backend API (Flask)]        ↓       ↓       ↓
+ES:44  EF:58  LS:44  LF:58    [1.4.3.1]  [1.4.3.2]  [1.4.3.3]
+Dur:14  TS:0  CRITICAL         Workflow   LangGraph  Testing
+Owner: Gulsher                  6 days     12 days    8 days
+         ↓                      Ahsan      Ahsan      Ahsan
+         ↓                           ↓       ↓       ↓
+         ↓                           └───────┼───────┘
+         ↓                                   ↓
+         ↓                           [1.4.3.4: Integration]
+         ↓                           ES:66  EF:69  TS:0
+         ↓                           Dur:3  CRITICAL
+         ↓                           Owner: Ahsan/Gulsher
+         ↓                                   ↓
+         ↓ (DELAYED START)                   ↓
+[1.4.4: Frontend Dev (HTML/CSS)]            ↓
+ES:58  EF:86  LS:58  LF:86                  ↓
+Dur:28  TS:0  CRITICAL (DELAYED +12)        ↓
+Owner: Gulsher                               ↓
+         ↓                                   ↓
+         └──────────→ [1.4.5: Integration Testing] ←┘
+                      ES:87  EF:101  LS:87  LF:101
+                      Dur:14  TS:0  CRITICAL (EXTENDED +4)
+                      Owner: Gulsher/Ahsan/Dawood
+                              ↓
+                      <M4: Development Complete>
+                      Day 101 - MILESTONE (DELAYED +12)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PHASE 4: TESTING & DEPLOYMENT (Days 101-116)
+═══════════════════════════════════════════════════════════════════════════════
+
+<M4: Development Complete>
+         ↓
+         ├──────────────────────────────────┐
+         ↓                                  ↓
+[1.5.1: Functional Testing]    [1.5.3: Prod Env Setup]
+ES:102  EF:108  LS:102  LF:108  ES:102  EF:106  LS:106  LF:110
+Dur:6  TS:0  CRITICAL            Dur:4  TS:4  NON-CRITICAL
+Owner: Ahsan                     Owner: Gulsher
+         ↓                                  ⇢
+         ↓                                  ↓
+[1.5.2: User Acceptance Testing]           ↓
+ES:106  EF:111  LS:106  LF:111             ↓
+Dur:5  TS:0  CRITICAL                      ↓
+Owner: Dawood                               ↓
+         ↓                                  ↓
+         └──────────→ [1.5.4: Deployment] ←┘
+         ┌────────────ES:111  EF:113  TS:0──┐
+         ↓            Dur:2  CRITICAL        ↓
+         ↓            Owner: Gulsher         ↓
+         ↓                                   ↓
+[1.5.5: User Training]                      ↓
+ES:111  EF:113  LS:111  LF:113              ↓
+Dur:2  TS:0  CRITICAL                       ↓
+Owner: Dawood                                ↓
+         ↓                                   ↓
+         └──────────→ <M5: Go Live> ←───────┘
+                      Day 113 - MILESTONE
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PHASE 5: CLOSURE (Days 113-119)
+═══════════════════════════════════════════════════════════════════════════════
+
+<M5: Go Live>
+     ↓
+[1.6.1: Deliverable Acceptance]
+ES:114  EF:116  LS:114  LF:116
+Dur:2  TS:0  CRITICAL
+Owner: Dawood/Gulsher
+     ↓
+[1.6.2: Knowledge Transfer]
+ES:116  EF:117  LS:116  LF:117
+Dur:1  TS:0  CRITICAL
+Owner: Dawood/Ahsan
+     ↓
+[1.6.3: Lessons Learned]
+ES:118  EF:119  LS:118  LF:119
+Dur:1  TS:0  CRITICAL
+Owner: Dawood
+     ↓
+[1.6.4: Administrative Closure]
+ES:119  EF:119  LS:119  LF:119
+Dur:1  TS:0  CRITICAL
+Owner: Dawood
+     ↓
+<M6: Project Closed>
+Day 119 - FINAL MILESTONE
+
+═══════════════════════════════════════════════════════════════════════════════
+
+CONTINUOUS ACTIVITIES (Span entire project)
+═══════════════════════════════════════════════════════════════════════════════
+
+[1.1.1: Project Coordination]     [1.1.2: Risk Management]
+Days 0-119, Owner: Dawood         Days 0-119, Owner: Dawood
+
+[1.1.3: Change Management]        [1.1.4: Quality Management]
+Days 14-90, Owner: Gulsher        Days 0-119, Owner: Dawood/Gulsher
+
+═══════════════════════════════════════════════════════════════════════════════
+
+KEY CHANGES FROM ORIGINAL NETWORK DIAGRAM:
+═══════════════════════════════════════════════════════════════════════════════
+
+1. ✓ LangGraph Agent Development: Extended from 24 to 29 days
+   - Reduced daily intensity from 120% to 100% allocation
+   - Sub-tasks extended proportionally
+
+2. ✓ Frontend Development: Start delayed from Day 58 to Day 66
+   - Avoids resource conflict with Backend API Development
+   - Reduces Gulsher's peak allocation from 120% to 100%
+
+3. ✓ Integration Testing: Extended from 10 to 14 days
+   - More thorough testing with balanced team involvement
+   - Dawood participates more actively (increased from 60% to 80%)
+
+4. ✓ Overall Project Duration: 112 → 119 days (+7 days)
+   - New completion date: December 24, 2025
+   - Critical path maintained but extended
+   - All resource over-allocations eliminated
+
+5. ✓ Resource Utilization Balanced:
+   - Gulsher: Peak 120% → 100%
+   - Ahsan: Peak 120% → 100%
+   - Dawood: Average 70% → 85%
+
+═══════════════════════════════════════════════════════════════════════════════
+
+CRITICAL PATH (Updated):
+═══════════════════════════════════════════════════════════════════════════════
+
+1.2.1 → 1.2.2 → 1.2.4 → M1 → 1.3.1 → M2 → 1.3.2 → 1.3.6 → M3 → 
+1.4.1 → 1.4.2 → 1.4.4 → 1.4.5 → M4 → 1.5.1 → 1.5.2 → 1.5.4 → 
+1.5.5 → M5 → 1.6.1 → 1.6.2 → 1.6.3 → 1.6.4 → M6
+
+Parallel Critical Path:
+M3 → 1.4.3 (LangGraph) → 1.4.3.1 → 1.4.3.2 → 1.4.3.3 → 1.4.3.4 → 1.4.5
+
+Total Critical Path Duration: 119 days
+
+═══════════════════════════════════════════════════════════════════════════════

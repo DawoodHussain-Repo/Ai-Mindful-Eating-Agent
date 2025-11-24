@@ -1,0 +1,1093 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{pdflscape}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{caption}
+
+% Page setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Assignment 04 - Resource Management}
+\fancyhead[R]{Mindful Eating Agent}
+\fancyfoot[C]{\thepage}
+
+% Title formatting
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\begin{document}
+
+% Cover Page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\Huge\bfseries Assignment 04\par}
+    \vspace{0.5cm}
+    {\LARGE Resource Management and Leveling\par}
+    \vspace{2cm}
+    
+    {\Large\bfseries Mindful Eating Agent Development Project\par}
+    \vspace{1cm}
+    
+    {\large Course: Fundamentals of Software Project Management\par}
+    {\large Section: E\par}
+    \vspace{2cm}
+    
+    {\large\bfseries Team Members:\par}
+    \vspace{0.5cm}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Name} & \textbf{Roll Number} & \textbf{Role} \\
+        \hline
+        Dawood Hussain & 22i-2410 & Project Manager \\
+        \hline
+        Gulsher Khan & 22i-2637 & Technical Lead \\
+        \hline
+        Ahsan Faraz & 22i-8791 & AI/ML Developer \\
+        \hline
+    \end{tabular}
+    
+    \vspace{2cm}
+    {\large Submission Date: November 30, 2025\par}
+    \vspace{1cm}
+    
+    {\large\bfseries Project Overview:\par}
+    \vspace{0.3cm}
+    \begin{tabular}{ll}
+        Original Duration: & 112 days (Sep 1 - Nov 30, 2025) \\
+        Updated Duration: & 112 days (Sep 1 - Nov 30, 2025) \\
+        Extension: & No extension (deadline maintained) \\
+    \end{tabular}
+    
+    \vspace{1cm}
+    {\large\bfseries Tech Stack:\par}
+    \vspace{0.3cm}
+    \begin{itemize}[left=2cm]
+        \item Backend: Flask (Python)
+        \item Frontend: HTML/CSS (Flask templates)
+        \item AI Framework: LangGraph
+        \item Database: PostgreSQL
+        \item Deployment: AWS
+    \end{itemize}
+    
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Executive Summary}
+
+This report presents a comprehensive resource management analysis for the Mindful Eating Agent project, focusing on resource assignment, loading analysis, leveling techniques, and schedule optimization under resource constraints.
+
+\subsection{Key Findings}
+
+\textbf{Initial Schedule Issues:}
+\begin{itemize}
+    \item \textbf{Gulsher Khan:} Over-allocated at 120\% (48 hours/week) during Weeks 8-13
+    \item \textbf{Ahsan Faraz:} Over-allocated at 120\% (48 hours/week) during Weeks 8-13
+    \item \textbf{Dawood Hussain:} Under-allocated at 60-70\% during development phase
+\end{itemize}
+
+\textbf{After Resource Leveling:}
+\begin{itemize}
+    \item All team members balanced at $\leq$100\% allocation
+    \item Project duration: 112 days (maintained original deadline)
+    \item Completion date: November 30, 2025
+    \item Sustainable workload distribution achieved
+    \item Quality risk reduced through adequate task time allocation
+\end{itemize}
+
+\subsection{Assignment Deliverables}
+
+This assignment addresses four main tasks:
+
+\begin{enumerate}
+    \item \textbf{Resource Assignment Matrix (RAM)} - RACI matrix showing clear responsibility assignments for all WBS activities
+    \item \textbf{Resource Loading Analysis} - Week-by-week workload distribution with identification of over/under-allocation
+    \item \textbf{Resource Leveling} - Application of leveling techniques to resolve conflicts and balance workload
+    \item \textbf{Updated Network Diagram \& Schedule} - Adjusted project timeline reflecting resource constraints
+\end{enumerate}
+
+\newpage
+
+\section{Task 1: Resource Assignment Matrix (RAM)}
+
+\subsection{Overview}
+
+The Responsibility Assignment Matrix (RAM) uses the RACI model to clearly define roles and responsibilities for each project activity:
+
+\begin{itemize}
+    \item \textbf{R} = Responsible (Does the work)
+    \item \textbf{A} = Accountable (Final authority/approval)
+    \item \textbf{C} = Consulted (Provides input)
+    \item \textbf{I} = Informed (Kept updated)
+\end{itemize}
+
+\subsection{Team Member Responsibilities}
+
+\subsubsection{Dawood Hussain (Project Manager)}
+
+\textbf{Primary Responsibilities (R):}
+\begin{itemize}
+    \item Project Coordination (119 days)
+    \item Risk Management (119 days)
+    \item Stakeholder Identification (5 days)
+    \item Business Case Development (5 days)
+    \item Requirements Gathering (6 days)
+    \item Schedule Development (8 days)
+    \item Risk Planning (7 days)
+    \item User Acceptance Testing (5 days)
+    \item User Training (2 days)
+    \item All closure activities (4 days total)
+\end{itemize}
+
+\subsubsection{Gulsher Khan (Technical Lead)}
+
+\textbf{Primary Responsibilities (R):}
+\begin{itemize}
+    \item Change Management (76 days)
+    \item Feasibility Study (7 days)
+    \item System Architecture Design (8 days)
+    \item UI/UX Design (11 days)
+    \item Environment Setup (10 days)
+    \item Backend API Development - Flask (14 days)
+    \item Frontend Development - HTML/CSS/Flask (20 days)
+    \item Integration Testing (10 days)
+    \item Production Environment Setup (4 days)
+    \item Production Deployment (2 days)
+    \item Knowledge Transfer (1 day)
+\end{itemize}
+
+\subsubsection{Ahsan Faraz (AI/ML Developer)}
+
+\textbf{Primary Responsibilities (R):}
+\begin{itemize}
+    \item Market Research (5 days)
+    \item Database Design (10 days)
+    \item LangGraph Agent Development (24 days total):
+    \begin{itemize}
+        \item Agent Workflow Design (6 days)
+        \item LangGraph Implementation (9 days)
+        \item Agent Testing \& Validation (6 days)
+        \item Agent Integration (3 days)
+    \end{itemize}
+    \item Functional Testing (6 days)
+    \item Quality Management (shared with Dawood, 119 days)
+\end{itemize}
+
+\subsection{Collaborative Tasks}
+
+Several critical tasks require collaboration across team members:
+
+\begin{itemize}
+    \item \textbf{Integration Testing:} Gulsher (R), Ahsan (A), Dawood (C)
+    \item \textbf{Agent Integration:} Ahsan (R), Gulsher (A)
+    \item \textbf{Quality Management:} Dawood (R), Ahsan (R), Gulsher (A)
+    \item \textbf{Risk Planning:} Dawood (R), Gulsher (A), Ahsan (C)
+    \item \textbf{Requirements Gathering:} Dawood (R), Ahsan (A), Gulsher (C)
+\end{itemize}
+
+\subsection{Complete RACI Matrix}
+
+The complete Resource Assignment Matrix is provided in Table~\ref{tab:raci} on the following page, showing RACI assignments for all 40 project activities across 6 phases.
+
+\newpage
+
+\subsection{Resource Assignment Matrix (RAM)}
+
+The following table presents a clean RACI matrix showing responsibility assignments:
+
+\begin{table}[H]
+\centering
+\caption{Resource Assignment Matrix - Summary by Phase}
+\label{tab:ram-summary}
+\small
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Phase / Activity} & \textbf{Dawood} & \textbf{Gulsher} & \textbf{Ahsan} \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Continuous Activities}} \\
+\hline
+Project Coordination & R & C & I \\
+Risk Management & R & C & A \\
+Change Management & C & R & I \\
+Quality Management & R & A & R \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Phase 1: Initiation}} \\
+\hline
+Market Research & C & I & R \\
+Stakeholder Identification & R & C & I \\
+Feasibility Study & I & R & C \\
+Business Case Development & R & C & I \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Phase 2: Planning}} \\
+\hline
+Requirements Gathering & R & C & A \\
+System Architecture Design & C & R & I \\
+UI/UX Design & I & R & C \\
+Database Design & I & C & R \\
+Schedule Development & R & C & I \\
+Risk Planning & R & A & C \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Phase 3: Development}} \\
+\hline
+Environment Setup & I & R & C \\
+Backend API (Flask) & C & R & I \\
+LangGraph Agent Development & I & C & R \\
+Frontend (HTML/CSS/Flask) & C & R & I \\
+Integration Testing & C & R & A \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Phase 4: Testing \& Deployment}} \\
+\hline
+Functional Testing & C & I & R \\
+User Acceptance Testing & R & C & I \\
+Production Environment Setup & I & R & C \\
+Production Deployment & C & R & I \\
+User Training & R & C & I \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Phase 5: Closure}} \\
+\hline
+Deliverable Acceptance & R & A & I \\
+Knowledge Transfer & C & R & A \\
+Lessons Learned & R & C & C \\
+Administrative Closure & R & I & I \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Legend:} R = Responsible, A = Accountable, C = Consulted, I = Informed
+
+\newpage
+
+\section{Task 2: Resource Loading Analysis}
+
+\subsection{Initial Resource Loading (Before Leveling)}
+
+The initial project schedule revealed significant resource allocation issues during the development phase (Weeks 8-13).
+
+\subsubsection{Week-by-Week Analysis}
+
+\textbf{Weeks 1-7 (Sep 1 - Oct 19): Planning Phase}
+\begin{itemize}
+    \item Balanced workload across team
+    \item Average utilization: 80-100\%
+    \item No significant conflicts identified
+\end{itemize}
+
+\textbf{Weeks 8-13 (Oct 20 - Nov 30): Development Phase - CRITICAL OVER-ALLOCATION}
+\begin{itemize}
+    \item \textbf{Gulsher Khan:} 48 hours/week (120\% allocation)
+    \begin{itemize}
+        \item Backend API Development (Flask) - 14 days
+        \item Frontend Development (HTML/CSS) - overlapping start
+        \item Environment setup responsibilities
+    \end{itemize}
+    
+    \item \textbf{Ahsan Faraz:} 48 hours/week (120\% allocation)
+    \begin{itemize}
+        \item LangGraph Agent Development (complex, 29 days)
+        \item Agent workflow design
+        \item LangGraph implementation
+        \item Testing and validation
+    \end{itemize}
+    
+    \item \textbf{Dawood Hussain:} 24 hours/week (60\% allocation)
+    \begin{itemize}
+        \item Under-utilized during critical development phase
+        \item Available capacity not leveraged
+    \end{itemize}
+\end{itemize}
+
+\textbf{Weeks 14-16 (Nov 16 - Nov 30): Testing \& Deployment}
+\begin{itemize}
+    \item Return to balanced allocation
+    \item All team members at 80-100\%
+\end{itemize}
+
+\subsection{Initial Resource Loading Data}
+
+Table~\ref{tab:initial-loading} presents the week-by-week resource allocation before leveling.
+
+\begin{table}[H]
+\centering
+\caption{Initial Resource Loading (Before Leveling)}
+\label{tab:initial-loading}
+\small
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Week} & \textbf{Dawood} & \textbf{Gulsher} & \textbf{Ahsan} & \textbf{Total} & \textbf{Status} \\
+\hline
+1-7 & 32-40h & 32-40h & 32-40h & 96-120h & Balanced \\
+\hline
+\rowcolor{yellow!20}
+8-9 & 32h (80\%) & 42h (105\%) & 42h (105\%) & 116h & Minor Over-alloc \\
+\rowcolor{yellow!20}
+10-11 & 36h (90\%) & 42h (105\%) & 40h (100\%) & 118h & Minor Over-alloc \\
+\hline
+12-13 & 36h (90\%) & 40h (100\%) & 40h (100\%) & 116h & Balanced \\
+\hline
+14-16 & 40h & 36-40h & 32-40h & 108-120h & Balanced \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Key Observations:}
+\begin{itemize}
+    \item Minor over-allocation (105\%) for Gulsher and Ahsan during Weeks 8-11
+    \item Manageable workload with proper task scheduling
+    \item Dawood maintains consistent 80-90\% utilization
+    \item Overall team capacity well-managed
+\end{itemize}
+
+\newpage
+
+\subsection{Resource Histograms (Initial)}
+
+Figure~\ref{fig:initial-histograms} shows the initial resource loading for each team member, clearly highlighting the over-allocation issues during the development phase.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{initial_individual_histograms.png}
+    \caption{Initial Resource Loading Histograms (Before Leveling)}
+    \label{fig:initial-histograms}
+\end{figure}
+
+\textbf{Histogram Analysis:}
+\begin{itemize}
+    \item \textbf{Red bars:} Over-allocation (>40 hours/week)
+    \item \textbf{Orange bars:} Under-allocation (<40 hours/week)
+    \item \textbf{Blue bars:} Normal allocation (40 hours/week)
+    \item \textbf{Green line:} Standard capacity (40 hours/week)
+\end{itemize}
+
+The histograms clearly show:
+\begin{enumerate}
+    \item Gulsher's workload peaks at 48 hours/week for 6 consecutive weeks
+    \item Ahsan's workload peaks at 48 hours/week for 4 consecutive weeks
+    \item Dawood's workload drops to 24 hours/week during the same period
+\end{enumerate}
+
+\newpage
+
+\subsection{Project-Level Resource Usage (Initial)}
+
+Figure~\ref{fig:project-comparison} shows the total team resource usage before and after leveling.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{project_level_comparison.png}
+    \caption{Project-Level Resource Usage: Before vs After Leveling}
+    \label{fig:project-comparison}
+\end{figure}
+
+\textbf{Before Leveling (Top Chart):}
+\begin{itemize}
+    \item Total team capacity: 120 hours/week (3 members × 40 hours)
+    \item Weeks 8-13: Exactly at capacity limit (120 hours)
+    \item No buffer for unexpected issues
+    \item High risk of schedule delays
+\end{itemize}
+
+\textbf{After Leveling (Bottom Chart):}
+\begin{itemize}
+    \item Extended to 17 weeks (from 16 weeks)
+    \item Peak utilization: 120 hours (Week 14)
+    \item More sustainable distribution
+    \item Buffer time available for quality assurance
+\end{itemize}
+
+\newpage
+
+\section{Task 3: Resource Leveling}
+
+\subsection{Identified Resource Conflicts}
+
+\subsubsection{Conflict 1: Gulsher Khan (Technical Lead)}
+
+\textbf{Period:} Weeks 8-11 (Oct 20 - Nov 16) \\
+\textbf{Allocation:} 105\% (42 hours/week) \\
+\textbf{Over-allocation:} 2 hours/week (minor)
+
+\textbf{Conflicting Tasks:}
+\begin{itemize}
+    \item Backend API Development (Flask) - 14 days
+    \item Frontend Development (HTML/CSS/Flask) - initial phase
+    \item System integration coordination
+\end{itemize}
+
+\textbf{Impact:}
+\begin{itemize}
+    \item Minor workload pressure during peak development
+    \item Manageable with proper task scheduling
+    \item Minimal risk to quality or timeline
+\end{itemize}
+
+\subsubsection{Conflict 2: Ahsan Faraz (AI/ML Developer)}
+
+\textbf{Period:} Weeks 8-9 (Oct 20 - Nov 2) \\
+\textbf{Allocation:} 105\% (42 hours/week) \\
+\textbf{Over-allocation:} 2 hours/week (minor)
+
+\textbf{Conflicting Tasks:}
+\begin{itemize}
+    \item LangGraph Agent Development - initial intensive phase
+    \item Agent workflow design
+    \item LangGraph implementation setup
+\end{itemize}
+
+\textbf{Impact:}
+\begin{itemize}
+    \item Minor workload increase during setup phase
+    \item Manageable with focused effort
+    \item Quality maintained through proper planning
+\end{itemize}
+
+\subsubsection{Opportunity: Dawood Hussain (Project Manager)}
+
+\textbf{Period:} Weeks 8-11 (Oct 20 - Nov 16) \\
+\textbf{Allocation:} 80-90\% (32-36 hours/week) \\
+\textbf{Status:} Well-balanced
+
+\textbf{Opportunity:}
+\begin{itemize}
+    \item Consistent utilization throughout project
+    \item Available for coordination and support
+    \item Effective PM capacity management
+\end{itemize}
+
+\subsection{Leveling Strategy Applied}
+
+\subsubsection{Strategy 1: Task Redistribution}
+
+\textbf{1. Optimized Task Scheduling}
+\begin{itemize}
+    \item Staggered Backend and Frontend development start times
+    \item Reduced overlap between major development activities
+    \item Impact: Reduces Gulsher's peak from 105\% to 100\%
+    \item Rationale: Better task sequencing maintains quality
+\end{itemize}
+
+\textbf{2. Balanced LangGraph Development}
+\begin{itemize}
+    \item Distributed intensive work across multiple weeks
+    \item Balanced daily workload throughout development
+    \item Impact: Reduces Ahsan's allocation from 105\% to 100\%
+    \item Rationale: Sustainable pace for complex AI work
+\end{itemize}
+
+\textbf{3. Optimized PM Involvement}
+\begin{itemize}
+    \item Dawood maintains consistent 90\% utilization
+    \item Active coordination during critical development phases
+    \item Impact: Better capacity utilization (80\% → 90\%)
+\end{itemize}
+
+\newpage
+
+\subsubsection{Strategy 2: Task Decomposition}
+
+\begin{itemize}
+    \item Broke down large tasks into smaller, manageable chunks
+    \item Created clear handoff points for collaborative work
+    \item Distributed sub-tasks based on availability
+\end{itemize}
+
+\subsubsection{Strategy 3: Buffer Management}
+
+\begin{itemize}
+    \item Used available project buffer (7 days)
+    \item Extended critical activities rather than compress
+    \item Prioritized quality over aggressive timeline
+\end{itemize}
+
+\subsection{Leveling Results}
+
+\begin{table}[H]
+\centering
+\caption{Resource Utilization: Before vs After Leveling}
+\label{tab:leveling-results}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Team Member} & \textbf{Before} & \textbf{After} & \textbf{Improvement} \\
+\hline
+Gulsher Khan (Peak) & 105\% & 100\% & -5\% \\
+Ahsan Faraz (Peak) & 105\% & 100\% & -5\% \\
+Dawood Hussain (Avg) & 80\% & 90\% & +10\% \\
+\hline
+\textbf{Over-allocated Weeks} & 4 weeks & 0 weeks & \textbf{Eliminated} \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Schedule Impact:}
+\begin{itemize}
+    \item Project duration: 112 days (maintained)
+    \item Completion: November 30, 2025
+    \item Critical path maintained
+    \item Resource leveling applied without extending deadline
+\end{itemize}
+
+\textbf{Quality \& Risk Benefits:}
+\begin{itemize}
+    \item Eliminated burnout risk
+    \item Adequate time for complex LangGraph development
+    \item More thorough integration testing (14 days vs 10)
+    \item Reduced technical debt risk
+    \item Better team morale and retention
+\end{itemize}
+
+\newpage
+
+\subsection{Leveled Resource Histograms}
+
+Figure~\ref{fig:leveled-histograms} shows the resource loading after applying leveling techniques.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{leveled_individual_histograms.png}
+    \caption{Leveled Resource Loading Histograms (After Leveling)}
+    \label{fig:leveled-histograms}
+\end{figure}
+
+\textbf{Key Improvements:}
+\begin{itemize}
+    \item All bars in green (balanced allocation)
+    \item No over-allocation periods
+    \item Smooth workload distribution
+    \item Extended to 17 weeks to accommodate changes
+\end{itemize}
+
+\subsection{Stacked Resource Distribution}
+
+Figure~\ref{fig:stacked-comparison} provides a stacked view of resource distribution before and after leveling.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{stacked_comparison.png}
+    \caption{Stacked Resource Distribution: Before vs After}
+    \label{fig:stacked-comparison}
+\end{figure}
+
+The stacked charts clearly show:
+\begin{enumerate}
+    \item \textbf{Before:} Weeks 8-13 reach exactly 120 hours (team capacity limit)
+    \item \textbf{After:} More balanced distribution across all weeks
+    \item \textbf{Extension:} One additional week added for sustainable completion
+\end{enumerate}
+
+\newpage
+
+\section{Task 4: Updated Network Diagram \& Schedule}
+
+\subsection{Schedule Adjustments}
+
+\subsubsection{Major Changes}
+
+\textbf{1. LangGraph Agent Development}
+\begin{itemize}
+    \item Duration: 24 → 29 days (+5 days)
+    \item Sub-tasks extended proportionally:
+    \begin{itemize}
+        \item Agent Workflow Design: 6 → 7 days
+        \item LangGraph Implementation: 9 → 12 days
+        \item Testing \& Validation: 6 → 8 days
+        \item Integration: 2 → 3 days
+    \end{itemize}
+\end{itemize}
+
+\textbf{2. Frontend Development (HTML/CSS/Flask)}
+\begin{itemize}
+    \item Start date delayed: Oct 25 → Nov 6 (+12 days)
+    \item Duration unchanged: 28 days
+    \item Finish date: Nov 30 (instead of Nov 20)
+\end{itemize}
+
+\textbf{3. Integration Testing}
+\begin{itemize}
+    \item Duration: 10 → 14 days (+4 days)
+    \item More thorough testing with balanced team
+    \item Start: Dec 1 (delayed from Nov 21)
+\end{itemize}
+
+\textbf{4. All Subsequent Activities}
+\begin{itemize}
+    \item Shifted by 10-12 days
+    \item Proportional delay maintained
+    \item Dependencies preserved
+\end{itemize}
+
+\newpage
+
+\subsection{Updated Critical Path}
+
+The critical path has been extended but maintains its integrity:
+
+\textbf{Critical Path Sequence (119 days):}
+\begin{enumerate}
+    \item Market Research (1.2.1) → Stakeholder ID (1.2.2)
+    \item Business Case (1.2.4) → Project Authorization (M1)
+    \item Requirements Gathering (1.3.1) → Requirements Approved (M2)
+    \item System Architecture (1.3.2) → Risk Planning (1.3.6)
+    \item Design Approved (M3) → Environment Setup (1.4.1)
+    \item Backend API (1.4.2) → Frontend Dev (1.4.4)
+    \item Integration Testing (1.4.5) → Development Complete (M4)
+    \item Functional Testing (1.5.1) → UAT (1.5.2)
+    \item Deployment (1.5.4) → Training (1.5.5) → Go Live (M5)
+    \item Closure activities (1.6.1 → 1.6.2 → 1.6.3 → 1.6.4)
+    \item Project Closed (M6)
+\end{enumerate}
+
+\textbf{Parallel Critical Path:}
+\begin{itemize}
+    \item M3 → LangGraph Agent (1.4.3) → Sub-tasks → Integration Testing (1.4.5)
+\end{itemize}
+
+\subsection{Updated Network Diagram}
+
+Figure~\ref{fig:network-diagram} shows the updated Activity-on-Node (AON) network diagram with resource leveling changes highlighted.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{updated_network_diagram.png}
+    \caption{Updated Network Diagram (After Resource Leveling)}
+    \label{fig:network-diagram}
+\end{figure}
+
+\textbf{Color Coding:}
+\begin{itemize}
+    \item \textbf{Black:} Critical path tasks (TS=0)
+    \item \textbf{Blue:} Resource-leveled tasks (extended/delayed)
+    \item \textbf{Light Blue:} Non-critical tasks (TS>0)
+    \item \textbf{White:} Milestones
+\end{itemize}
+
+\newpage
+
+\subsection{Updated Work Breakdown Structure}
+
+Figure~\ref{fig:wbs-diagram} presents the updated WBS with resource leveling changes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{updated_wbs.drawio.png}
+    \caption{Updated Work Breakdown Structure}
+    \label{fig:wbs-diagram}
+\end{figure}
+
+\textbf{WBS Highlights:}
+\begin{itemize}
+    \item 6 major phases
+    \item 40 work packages and milestones
+    \item Clear responsibility assignments
+    \item Resource-leveled tasks highlighted in blue
+    \item Professional color scheme (black, blue, white)
+\end{itemize}
+
+\subsection{Updated Gantt Chart}
+
+Figure~\ref{fig:gantt-chart} shows the updated project schedule in Gantt chart format.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{GanttChartUpdated.png}
+    \caption{Updated Gantt Chart (After Resource Leveling)}
+    \label{fig:gantt-chart}
+\end{figure}
+
+\textbf{Gantt Chart Features:}
+\begin{itemize}
+    \item Timeline: September 1 - November 30, 2025
+    \item All dependencies shown
+    \item Critical path highlighted
+    \item Milestones marked
+    \item Resource assignments indicated
+\end{itemize}
+
+\newpage
+
+\subsection{Schedule Comparison}
+
+Table~\ref{tab:schedule-comparison} compares the initial and updated schedules.
+
+\begin{table}[H]
+\centering
+\caption{Schedule Comparison: Initial vs Updated}
+\label{tab:schedule-comparison}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Metric} & \textbf{Initial} & \textbf{Updated} & \textbf{Change} \\
+\hline
+Project Duration & 112 days & 112 days & No change \\
+Start Date & Sep 1, 2025 & Sep 1, 2025 & No change \\
+End Date & Nov 30, 2025 & Nov 30, 2025 & No change \\
+Critical Path Length & 112 days & 112 days & No change \\
+\hline
+Gulsher Peak Alloc & 105\% & 100\% & -5\% \\
+Ahsan Peak Alloc & 105\% & 100\% & -5\% \\
+Dawood Avg Alloc & 80\% & 90\% & +10\% \\
+\hline
+Over-allocated Weeks & 4 weeks & 0 weeks & Eliminated \\
+LangGraph Dev & 24 days & 24 days & No change \\
+Frontend Start & Oct 25 & Oct 27 & +2 days \\
+Integration Testing & 10 days & 10 days & No change \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Key Schedule Changes Summary}
+
+\begin{enumerate}
+    \item \textbf{Phase 1 (Initiation):} No changes - completed as planned
+    \item \textbf{Phase 2 (Planning):} No changes - completed as planned
+    \item \textbf{Phase 3 (Development):} Major changes
+    \begin{itemize}
+        \item LangGraph extended by 5 days
+        \item Frontend delayed by 12 days
+        \item Integration testing extended by 4 days
+    \end{itemize}
+    \item \textbf{Phase 4 (Testing \& Deployment):} Shifted by 10-12 days
+    \item \textbf{Phase 5 (Closure):} Shifted by 9-11 days
+\end{enumerate}
+
+\newpage
+
+\section{Benefits of Resource Leveling}
+
+\subsection{Sustainable Workload}
+
+\begin{itemize}
+    \item No team member exceeds 100\% allocation
+    \item Reduced burnout risk
+    \item Improved work-life balance
+    \item Better long-term productivity
+\end{itemize}
+
+\subsection{Improved Quality}
+
+\begin{itemize}
+    \item Adequate time for complex LangGraph development
+    \item More thorough integration testing (14 days vs 10)
+    \item Reduced technical debt
+    \item Better code review opportunities
+\end{itemize}
+
+\subsection{Risk Mitigation}
+
+\begin{itemize}
+    \item Lower schedule risk due to realistic allocation
+    \item Reduced dependency on over-worked individuals
+    \item Better contingency for unexpected issues
+    \item Improved team morale and retention
+\end{itemize}
+
+\subsection{Better Resource Utilization}
+
+\begin{itemize}
+    \item Dawood's capacity better utilized (70\% → 85\%)
+    \item More balanced team collaboration
+    \item Clearer task ownership and accountability
+\end{itemize}
+
+\subsection{Realistic Schedule}
+
+\begin{itemize}
+    \item Stakeholder expectations properly set
+    \item Buffer time for quality assurance
+    \item Flexibility for scope adjustments
+    \item Achievable milestones
+\end{itemize}
+
+\newpage
+
+\section{Risks and Mitigation}
+
+\subsection{Risk 1: Extended Timeline}
+
+\textbf{Impact:} Project completes 7 days later than originally planned
+
+\textbf{Mitigation:}
+\begin{itemize}
+    \item Communicate early with stakeholders
+    \item Emphasize quality benefits
+    \item Use buffer time wisely
+    \item Monitor progress weekly
+\end{itemize}
+
+\subsection{Risk 2: Tech Stack Change Impact}
+
+\textbf{Impact:} Flask/LangGraph may have learning curve
+
+\textbf{Mitigation:}
+\begin{itemize}
+    \item Allocated extra time in LangGraph development
+    \item Team training during early phases
+    \item Technical documentation emphasis
+    \item Pair programming for knowledge transfer
+\end{itemize}
+
+\subsection{Risk 3: Integration Complexity}
+
+\textbf{Impact:} Flask backend + LangGraph + HTML frontend integration
+
+\textbf{Mitigation:}
+\begin{itemize}
+    \item Extended integration testing (14 days)
+    \item Early integration checkpoints
+    \item Continuous integration practices
+    \item Dedicated integration task (1.4.3.4)
+\end{itemize}
+
+\newpage
+
+\section{Recommendations}
+
+\subsection{Maintain Leveled Schedule}
+
+\begin{itemize}
+    \item Do not compress timeline to meet original deadline
+    \item Quality and team health are priorities
+    \item Communicate benefits to stakeholders
+\end{itemize}
+
+\subsection{Monitor Resource Utilization Weekly}
+
+\begin{itemize}
+    \item Track actual hours vs planned
+    \item Adjust allocations proactively
+    \item Address emerging conflicts early
+\end{itemize}
+
+\subsection{Leverage Dawood's Increased Capacity}
+
+\begin{itemize}
+    \item More active involvement in testing
+    \item Enhanced stakeholder communication
+    \item Risk monitoring and mitigation
+    \item Documentation and knowledge management
+\end{itemize}
+
+\subsection{Protect LangGraph Development Time}
+
+\begin{itemize}
+    \item Most complex and critical component
+    \item Requires sustained focus
+    \item Quality directly impacts project success
+    \item Do not compress this timeline
+\end{itemize}
+
+\subsection{Plan for Contingencies}
+
+\begin{itemize}
+    \item 7-day extension provides some buffer
+    \item Identify tasks that could be fast-tracked if needed
+    \item Maintain risk register
+    \item Regular status reviews
+\end{itemize}
+
+\newpage
+
+\section{Conclusion}
+
+Resource leveling has transformed the Mindful Eating Agent project schedule from an aggressive, risky timeline to a sustainable, achievable plan. While the project duration increased by 7 days (6\% extension), the benefits far outweigh the cost.
+
+\subsection{Key Achievements}
+
+\begin{enumerate}
+    \item \textbf{Eliminated all resource over-allocations}
+    \begin{itemize}
+        \item Gulsher: 120\% → 100\% allocation
+        \item Ahsan: 120\% → 100\% allocation
+        \item 6 weeks of over-allocation eliminated
+    \end{itemize}
+    
+    \item \textbf{Improved team utilization and balance}
+    \begin{itemize}
+        \item Dawood: 70\% → 85\% utilization
+        \item More balanced workload distribution
+        \item Better collaboration opportunities
+    \end{itemize}
+    
+    \item \textbf{Reduced quality and schedule risks}
+    \begin{itemize}
+        \item Adequate time for complex LangGraph development
+        \item Extended integration testing (14 days)
+        \item Reduced technical debt risk
+    \end{itemize}
+    
+    \item \textbf{Created realistic stakeholder expectations}
+    \begin{itemize}
+        \item Completion: November 30, 2025 (on schedule)
+        \item Transparent communication of resource optimization
+        \item Quality-focused approach
+    \end{itemize}
+    
+    \item \textbf{Enabled sustainable development pace}
+    \begin{itemize}
+        \item No burnout risk
+        \item Improved team morale
+        \item Better long-term productivity
+    \end{itemize}
+\end{enumerate}
+
+\newpage
+
+\subsection{Success Factors}
+
+The successful resource leveling was achieved through:
+
+\begin{enumerate}
+    \item \textbf{Comprehensive Analysis}
+    \begin{itemize}
+        \item Detailed week-by-week resource loading
+        \item Clear identification of conflicts
+        \item Data-driven decision making
+    \end{itemize}
+    
+    \item \textbf{Strategic Task Redistribution}
+    \begin{itemize}
+        \item Frontend development delayed strategically
+        \item LangGraph development extended appropriately
+        \item PM capacity better utilized
+    \end{itemize}
+    
+    \item \textbf{Effective Communication}
+    \begin{itemize}
+        \item Clear RACI matrix
+        \item Transparent schedule changes
+        \item Stakeholder buy-in
+    \end{itemize}
+    
+    \item \textbf{Quality Focus}
+    \begin{itemize}
+        \item Prioritized quality over speed
+        \item Extended testing phases
+        \item Reduced technical debt
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Final Remarks}
+
+The updated schedule, with completion on November 30, 2025, provides a solid foundation for successful project delivery with high quality and team satisfaction. The resource leveling optimization maintains the original deadline while ensuring sustainable workload, which will pay dividends in:
+
+\begin{itemize}
+    \item Higher quality deliverables
+    \item Better team morale and retention
+    \item Reduced post-deployment issues
+    \item Sustainable development practices
+    \item Improved stakeholder satisfaction
+\end{itemize}
+
+The Mindful Eating Agent project demonstrates strong project management practices with clear scheduling, well-defined dependencies, and effective resource management. The positive outcomes from resource leveling position the project for successful completion within the planned timeframe and budget.
+
+\newpage
+
+\section{Appendices}
+
+\subsection{Appendix A: Files Delivered}
+
+\begin{enumerate}
+    \item \texttt{resource\_assignment\_matrix.csv} - RACI matrix
+    \item \texttt{initial\_resource\_loading.csv} - Pre-leveling data
+    \item \texttt{leveled\_resource\_loading.csv} - Post-leveling data
+    \item \texttt{resource\_conflicts\_analysis.md} - Detailed conflict analysis
+    \item \texttt{updated\_schedule.csv} - Complete schedule with changes
+    \item \texttt{updated\_wbs.csv} - Updated work breakdown structure
+    \item \texttt{gantt\_chart\_visio.csv} - Visio-compatible Gantt data
+    \item \texttt{updated\_network\_diagram.drawio} - AON diagram (Draw.io)
+    \item \texttt{updated\_wbs.drawio} - WBS diagram (Draw.io)
+    \item \texttt{initial\_individual\_histograms.png} - Resource histograms (before)
+    \item \texttt{leveled\_individual\_histograms.png} - Resource histograms (after)
+    \item \texttt{project\_level\_comparison.png} - Before/after comparison
+    \item \texttt{stacked\_comparison.png} - Stacked resource distribution
+    \item \texttt{updated\_network\_diagram.png} - Network diagram image
+    \item \texttt{updated\_wbs.drawio.png} - WBS diagram image
+    \item \texttt{GanttChartUpdated.png} - Gantt chart image
+\end{enumerate}
+
+\subsection{Appendix B: Tools Used}
+
+\begin{itemize}
+    \item \textbf{Microsoft Excel} - Resource calculations and data analysis
+    \item \textbf{Python (matplotlib, pandas)} - Histogram generation and visualization
+    \item \textbf{Draw.io} - Network diagram and WBS creation
+    \item \textbf{CSV} - Data exchange format
+    \item \textbf{LaTeX} - Professional report documentation
+\end{itemize}
+
+\subsection{Appendix C: Color Scheme}
+
+All diagrams use a professional color palette:
+
+\begin{itemize}
+    \item \textbf{Black (\#000000):} Critical path tasks
+    \item \textbf{Blue (\#1976d2):} Resource-leveled tasks
+    \item \textbf{Light Blue (\#e3f2fd):} Non-critical tasks
+    \item \textbf{White (\#ffffff):} Milestones
+    \item \textbf{Gray (\#f5f5f5):} Phase headers
+\end{itemize}
+
+\newpage
+
+\subsection{Appendix D: References}
+
+\begin{enumerate}
+    \item Project Management Institute (PMI). (2021). \textit{A Guide to the Project Management Body of Knowledge (PMBOK® Guide)} – Seventh Edition.
+    
+    \item Project Management Institute (PMI). (2017). \textit{Practice Standard for Scheduling} – Third Edition.
+    
+    \item Kerzner, H. (2017). \textit{Project Management: A Systems Approach to Planning, Scheduling, and Controlling}. John Wiley \& Sons.
+    
+    \item Larson, E. W., \& Gray, C. F. (2021). \textit{Project Management: The Managerial Process}. McGraw-Hill Education.
+    
+    \item Assignment 02 - Work Breakdown Structure and Project Scope (Previous submission)
+    
+    \item Assignment 03 - Timeline Estimation, Network Analysis, and Cost Management (Previous submission)
+\end{enumerate}
+
+\subsection{Appendix E: Team Contributions}
+
+\begin{table}[H]
+\centering
+\caption{Team Member Contributions to Assignment 04}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Member} & \textbf{Contributions} \\
+\hline
+Dawood Hussain & Resource assignment matrix, schedule analysis, report writing, stakeholder communication \\
+\hline
+Gulsher Khan & Network diagram creation, WBS updates, Gantt chart development, technical documentation \\
+\hline
+Ahsan Faraz & Resource loading analysis, histogram generation, conflict identification, data analysis \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{2cm}
+
+\begin{center}
+\textbf{--- End of Report ---}
+\end{center}
+
+\end{document}

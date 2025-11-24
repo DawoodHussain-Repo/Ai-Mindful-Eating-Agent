@@ -1,0 +1,51 @@
+WBS_ID,Task_Name,Duration_Days,Original_Start,Original_Finish,Updated_Start,Updated_Finish,Responsible,Schedule_Change,Reason_for_Change
+1.1.1,Project Coordination,119,Sep 1,Dec 15,Sep 1,Dec 24,Dawood,Extended 7 days,Project duration extended
+1.1.2,Risk Management,119,Sep 1,Dec 15,Sep 1,Dec 24,Dawood,Extended 7 days,Project duration extended
+1.1.3,Change Management,76,Sep 15,Nov 30,Sep 15,Nov 30,Gulsher,No change,Not affected by leveling
+1.1.4,Quality Management,119,Sep 1,Dec 15,Sep 1,Dec 24,Dawood/Gulsher,Extended 7 days,Project duration extended
+1.2.1,Market Research,5,Sep 1,Sep 5,Sep 1,Sep 5,Ahsan,No change,Completed
+1.2.2,Stakeholder Identification,5,Sep 6,Sep 10,Sep 6,Sep 10,Dawood,No change,Completed
+1.2.3,Feasibility Study,7,Sep 6,Sep 12,Sep 6,Sep 12,Gulsher,No change,Completed
+1.2.4,Business Case Development,5,Sep 10,Sep 15,Sep 10,Sep 15,Dawood,No change,Completed
+M1,Project Authorization,0,Sep 15,Sep 15,Sep 15,Sep 15,Dawood,No change,Milestone
+1.3.1,Requirements Gathering,6,Sep 16,Sep 21,Sep 16,Sep 21,Dawood/Ahsan,No change,Completed
+M2,Requirements Approved,0,Sep 29,Sep 29,Sep 29,Sep 29,Dawood,No change,Milestone
+1.3.2,System Architecture Design,8,Sep 22,Sep 30,Sep 22,Sep 30,Gulsher,No change,Completed
+1.3.3,UI/UX Design,11,Sep 22,Oct 3,Sep 22,Oct 3,Gulsher,No change,Completed
+1.3.4,Database Design,10,Sep 25,Oct 5,Sep 25,Oct 5,Ahsan,No change,Completed
+1.3.5,Schedule Development,8,Oct 1,Oct 8,Oct 1,Oct 8,Dawood,No change,Completed
+1.3.6,Risk Planning,7,Oct 5,Oct 12,Oct 5,Oct 12,Dawood/Gulsher,No change,Completed
+M3,Design Approved,0,Oct 14,Oct 14,Oct 14,Oct 14,Gulsher,No change,Milestone
+1.4.1,Environment Setup,10,Oct 16,Oct 25,Oct 16,Oct 25,Gulsher,No change,Completed
+1.4.2,Backend API Development (Flask),14,Oct 20,Nov 5,Oct 20,Nov 5,Gulsher,No change,On critical path
+1.4.3,LangGraph Agent Development,24,Oct 20,Nov 15,Oct 20,Nov 20,Ahsan,Extended 5 days,Resource leveling - reduced intensity
+1.4.3.1,Agent Workflow Design,6,Oct 20,Oct 26,Oct 20,Oct 27,Ahsan,Extended 1 day,Resource leveling
+1.4.3.2,LangGraph Implementation,9,Oct 27,Nov 5,Oct 28,Nov 8,Ahsan,Extended 3 days,Resource leveling
+1.4.3.3,Agent Testing & Validation,6,Nov 6,Nov 12,Nov 9,Nov 16,Ahsan,Extended 2 days,Resource leveling
+1.4.3.4,Agent Integration,3,Nov 13,Nov 15,Nov 17,Nov 20,Ahsan/Gulsher,Extended 1 day,Resource leveling
+1.4.4,Frontend Development (HTML/CSS/Flask),20,Oct 25,Nov 20,Nov 6,Nov 30,Gulsher,Delayed 12 days,Resource leveling - avoid overlap with Backend
+1.4.5,Integration Testing,10,Nov 21,Nov 30,Dec 1,Dec 12,Gulsher/Ahsan,Delayed 10 days,Dependency on Frontend completion
+M4,Development Complete,0,Nov 30,Nov 30,Dec 12,Dec 12,Gulsher,Delayed 12 days,Milestone shift
+1.5.1,Functional Testing,6,Dec 1,Dec 6,Dec 13,Dec 18,Ahsan,Delayed 12 days,Dependency on Development Complete
+1.5.2,User Acceptance Testing,5,Dec 5,Dec 9,Dec 16,Dec 20,Dawood,Delayed 11 days,Dependency on Functional Testing
+1.5.3,Production Environment Setup,4,Dec 6,Dec 9,Dec 13,Dec 16,Gulsher,Delayed 7 days,Can start during testing
+1.5.4,Production Deployment,2,Dec 9,Dec 10,Dec 20,Dec 21,Gulsher,Delayed 11 days,Dependency on UAT completion
+1.5.5,User Training,2,Dec 9,Dec 10,Dec 20,Dec 21,Dawood,Delayed 11 days,Parallel with deployment
+M5,Go Live,0,Dec 10,Dec 10,Dec 21,Dec 21,Dawood,Delayed 11 days,Milestone shift
+1.6.1,Deliverable Acceptance,2,Dec 11,Dec 12,Dec 22,Dec 23,Dawood/Gulsher,Delayed 11 days,Dependency on Go Live
+1.6.2,Knowledge Transfer,1,Dec 13,Dec 13,Dec 23,Dec 23,Dawood/Ahsan,Delayed 10 days,Dependency on Acceptance
+1.6.3,Lessons Learned,1,Dec 14,Dec 14,Dec 24,Dec 24,Dawood,Delayed 10 days,Dependency on Knowledge Transfer
+1.6.4,Administrative Closure,1,Dec 15,Dec 15,Dec 24,Dec 24,Dawood,Delayed 9 days,Final task
+M6,Project Closed,0,Dec 15,Dec 15,Dec 24,Dec 24,Dawood,Delayed 9 days,Final milestone
+
+Summary of Schedule Changes:
+- Original Project Duration: 112 days (Sep 1 - Dec 15)
+- Updated Project Duration: 119 days (Sep 1 - Dec 24)
+- Extension: 7 working days (9 calendar days)
+- Critical Path: Extended due to Frontend Development delay and LangGraph extension
+- Key Changes:
+  1. LangGraph Agent Development: 24 → 29 days (5-day extension)
+  2. Frontend Development: Delayed start by 12 days (Oct 25 → Nov 6)
+  3. Integration Testing: Delayed by 10 days
+  4. All subsequent activities shifted accordingly
+- Benefits: Eliminated resource over-allocation, improved quality, sustainable workload

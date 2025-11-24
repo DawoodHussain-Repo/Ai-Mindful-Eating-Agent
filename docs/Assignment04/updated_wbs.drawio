@@ -1,0 +1,322 @@
+<mxfile host="app.diagrams.net" modified="2025-11-24T00:00:00.000Z" agent="Assignment 4" version="21.0.0">
+  <diagram name="Updated WBS - Professional" id="wbs-updated">
+    <mxGraphModel dx="2400" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3500" pageHeight="2200">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Title -->
+        <mxCell id="title" value="Mindful Eating Agent - Work Breakdown Structure (Updated)&#xa;Project Duration: 119 Days | Sep 1 - Dec 24, 2025 | Tech Stack: Flask + LangGraph + HTML/CSS" style="text;fontSize=16;fontStyle=1;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="800" y="20" width="900" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Legend -->
+        <mxCell id="legend-box" value="LEGEND" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="50" y="100" width="300" height="140" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend-critical" value="Critical Path Task" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="130" width="120" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend-leveled" value="Resource Leveled" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="210" y="130" width="120" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend-normal" value="Normal Task" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="170" width="120" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend-milestone" value="Milestone" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="220" y="165" width="100" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="legend-phase" value="Phase" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="210" width="120" height="20" as="geometry"/>
+        </mxCell>
+        
+        <!-- Root Node -->
+        <mxCell id="root" value="1.0 Mindful Eating Agent&#xa;Development Project&#xa;Duration: 119 days&#xa;Owner: Dawood Hussain" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="100" width="260" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Level 1: Main Phases -->
+        <mxCell id="phase1" value="1.1 Project Management&#xa;Duration: 119 days&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="280" width="200" height="70" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="phase2" value="1.2 Project Initiation&#xa;Duration: 15 days&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="280" width="200" height="70" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="phase3" value="1.3 Planning and Design&#xa;Duration: 30 days&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="280" width="200" height="70" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="phase4" value="1.4 Execution and Development&#xa;Duration: 61 days (EXTENDED)&#xa;Owner: Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="280" width="220" height="70" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="phase5" value="1.5 Testing and Deployment&#xa;Duration: 16 days (EXTENDED)&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="280" width="220" height="70" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="phase6" value="1.6 Project Closure&#xa;Duration: 4 days&#xa;Owner: Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1690" y="280" width="200" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- Edges from Root -->
+        <mxCell id="edge-root-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="root" target="phase1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-root-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="root" target="phase2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-root-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="root" target="phase3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-root-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="root" target="phase4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-root-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="root" target="phase5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-root-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="root" target="phase6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 1: Project Management Tasks -->
+        <mxCell id="1.1.1" value="1.1.1 Project Coordination&#xa;119 days | Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="420" width="150" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.1.2" value="1.1.2 Risk Management&#xa;119 days | Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="470" y="420" width="150" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.1.3" value="1.1.3 Change Mgmt&#xa;76 days | Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="490" width="150" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.1.4" value="1.1.4 Quality Mgmt&#xa;119 days | Dawood/Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="470" y="490" width="150" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="edge-1.1-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase1" target="1.1.1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.1-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase1" target="1.1.2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.1-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase1" target="1.1.3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase1" target="1.1.4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 2: Initiation Tasks -->
+        <mxCell id="1.2.1" value="1.2.1 Market Research&#xa;5 days | Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="640" y="420" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.2.2" value="1.2.2 Stakeholder ID&#xa;5 days | Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="420" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.2.3" value="1.2.3 Feasibility Study&#xa;7 days | Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="640" y="490" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.2.4" value="1.2.4 Business Case&#xa;5 days | Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="490" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="M1" value="M1: Project&#xa;Authorization" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="570" width="100" height="80" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="edge-1.2-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase2" target="1.2.1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.2-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase2" target="1.2.2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.2-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;" edge="1" parent="1" source="phase2" target="1.2.3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.2-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase2" target="1.2.4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 3: Planning Tasks -->
+        <mxCell id="1.3.1" value="1.3.1 Requirements&#xa;6 days | Dawood/Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="960" y="420" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.3.2" value="1.3.2 System Arch&#xa;8 days | Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="420" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.3.3" value="1.3.3 UI/UX Design&#xa;11 days | Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="960" y="490" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.3.4" value="1.3.4 Database Design&#xa;10 days | Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="490" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.3.5" value="1.3.5 Schedule Dev&#xa;8 days | Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="960" y="560" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.3.6" value="1.3.6 Risk Planning&#xa;7 days | Dawood/Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="560" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="M2" value="M2: Req&#xa;Approved" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="570" width="80" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="M3" value="M3: Design&#xa;Approved" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="640" width="80" height="70" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="edge-1.3-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase3" target="1.3.1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.3-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase3" target="1.3.2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.3-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;" edge="1" parent="1" source="phase3" target="1.3.3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.3-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;" edge="1" parent="1" source="phase3" target="1.3.4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.3-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;" edge="1" parent="1" source="phase3" target="1.3.5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.3-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase3" target="1.3.6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 4: Development Tasks (RESOURCE LEVELED) -->
+        <mxCell id="1.4.1" value="1.4.1 Environment Setup&#xa;10 days | Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="420" width="150" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.4.2" value="1.4.2 Backend API (Flask)&#xa;14 days | Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="420" width="150" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.4.3" value="1.4.3 LangGraph Agent&#xa;29 days | Ahsan&#xa;LEVELED +5 days" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="490" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.4.4" value="1.4.4 Frontend (HTML/CSS)&#xa;28 days | Gulsher&#xa;DELAYED +12 days" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="490" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.4.5" value="1.4.5 Integration Testing&#xa;14 days | All Team&#xa;EXTENDED +4 days" style="rounded=1;whiteSpace=wrap;fillColor=#1976d2;strokeColor=#0d47a1;fontColor=#ffffff;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="570" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="M4" value="M4: Dev&#xa;Complete" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1490" y="575" width="80" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- LangGraph Sub-tasks -->
+        <mxCell id="1.4.3.1" value="1.4.3.1 Workflow&#xa;6d | Ahsan" style="rounded=0;whiteSpace=wrap;fillColor=#bbdefb;strokeColor=#1976d2;fontColor=#000000;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="670" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.4.3.2" value="1.4.3.2 LangGraph&#xa;12d | Ahsan" style="rounded=0;whiteSpace=wrap;fillColor=#bbdefb;strokeColor=#1976d2;fontColor=#000000;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="670" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.4.3.3" value="1.4.3.3 Testing&#xa;8d | Ahsan" style="rounded=0;whiteSpace=wrap;fillColor=#bbdefb;strokeColor=#1976d2;fontColor=#000000;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="670" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.4.3.4" value="1.4.3.4 Integration&#xa;3d | Ahsan/Gulsher" style="rounded=0;whiteSpace=wrap;fillColor=#bbdefb;strokeColor=#1976d2;fontColor=#000000;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1540" y="670" width="110" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="edge-1.4-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase4" target="1.4.1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.4-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase4" target="1.4.2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.4-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=2;" edge="1" parent="1" source="phase4" target="1.4.3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.4-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=2;" edge="1" parent="1" source="phase4" target="1.4.4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.4-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;strokeWidth=2;" edge="1" parent="1" source="phase4" target="1.4.5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.4.3-sub" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;" edge="1" parent="1" source="1.4.3" target="1.4.3.1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 5: Testing & Deployment -->
+        <mxCell id="1.5.1" value="1.5.1 Functional Testing&#xa;6 days | Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1680" y="420" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.5.2" value="1.5.2 UAT&#xa;5 days | Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1840" y="420" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.5.3" value="1.5.3 Prod Env Setup&#xa;4 days | Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1680" y="490" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.5.4" value="1.5.4 Deployment&#xa;2 days | Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1840" y="490" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.5.5" value="1.5.5 User Training&#xa;2 days | Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1680" y="560" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="M5" value="M5: Go Live" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1870" y="570" width="80" height="70" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="edge-1.5-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase5" target="1.5.1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.5-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase5" target="1.5.2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.5-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#1976d2;" edge="1" parent="1" source="phase5" target="1.5.3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.5-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase5" target="1.5.4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.5-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase5" target="1.5.5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 6: Closure -->
+        <mxCell id="1.6.1" value="1.6.1 Deliverable Accept&#xa;2 days | Dawood/Gulsher" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="2020" y="420" width="150" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.6.2" value="1.6.2 Knowledge Transfer&#xa;1 day | Dawood/Ahsan" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="2190" y="420" width="150" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.6.3" value="1.6.3 Lessons Learned&#xa;1 day | Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="2020" y="490" width="150" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="1.6.4" value="1.6.4 Admin Closure&#xa;1 day | Dawood" style="rounded=1;whiteSpace=wrap;fillColor=#000000;strokeColor=#000000;fontColor=#ffffff;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="2190" y="490" width="150" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="M6" value="M6: Project&#xa;Closed" style="shape=diamond;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2055" y="570" width="80" height="70" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="edge-1.6-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase6" target="1.6.1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.6-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase6" target="1.6.2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.6-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase6" target="1.6.3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-1.6-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#000000;" edge="1" parent="1" source="phase6" target="1.6.4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Summary Box -->
+        <mxCell id="summary" value="RESOURCE LEVELING SUMMARY:&#xa;&#xa;• LangGraph Agent: 24 → 29 days (+5 days)&#xa;• Frontend Development: Delayed start by 12 days&#xa;• Integration Testing: 10 → 14 days (+4 days)&#xa;• Total Duration: 112 → 119 days (+7 days)&#xa;• New Completion: December 24, 2025&#xa;&#xa;BENEFITS:&#xa;• Gulsher: 120% → 100% allocation&#xa;• Ahsan: 120% → 100% allocation&#xa;• Dawood: 70% → 85% utilization&#xa;• Eliminated all resource conflicts" style="rounded=0;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;align=left;verticalAlign=top;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="800" width="400" height="240" as="geometry"/>
+        </mxCell>
+        
+        <!-- Tech Stack Box -->
+        <mxCell id="techstack" value="TECH STACK UPDATE:&#xa;&#xa;• Backend: Flask (Python)&#xa;• Frontend: HTML/CSS (Flask templates)&#xa;• AI Framework: LangGraph&#xa;• Database: PostgreSQL&#xa;• Deployment: AWS&#xa;&#xa;Changed from original React Native&#xa;mobile app to web-based application" style="rounded=0;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#000000;align=left;verticalAlign=top;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="500" y="800" width="350" height="180" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

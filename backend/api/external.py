@@ -6,19 +6,19 @@ Production-grade with proper error handling and validation
 
 from flask import Blueprint, request, jsonify
 from agent import process_food_log
-from utils.mongodb_client import MongoDBClient, FoodLogOperations
+from utils.chromadb_client import ChromaDBClient, FoodLogOperations
 import os
 
 # Create Blueprint for external API
 external_api = Blueprint('external_api', __name__, url_prefix='/api/v1/agent')
 
-# Initialize MongoDB client
+# Initialize ChromaDB client
 try:
-    mongo_client = MongoDBClient()
-    food_log_ops = FoodLogOperations(mongo_client)
+    chroma_client = ChromaDBClient()
+    food_log_ops = FoodLogOperations(chroma_client)
 except Exception as e:
-    print(f"Warning: MongoDB not available for external API: {e}")
-    mongo_client = None
+    print(f"Warning: ChromaDB not available for external API: {e}")
+    chroma_client = None
     food_log_ops = None
 
 @external_api.route('/health', methods=['GET'])
@@ -27,14 +27,15 @@ def health_check():
     Health check endpoint for supervisor systems
     Returns system status and availability
     """
-    db_status = "connected" if mongo_client else "disconnected"
+    db_status = "connected" if chroma_client else "disconnected"
     
     return jsonify({
         "status": "healthy",
         "service": "Mindful Eating Agent",
         "version": "1.0.0",
         "architecture": "Supervisor-Worker (LangGraph)",
-        "database": db_status,
+        "database": "ChromaDB",
+        "database_status": db_status,
         "capabilities": [
             "food_parsing",
             "nutrition_calculation",

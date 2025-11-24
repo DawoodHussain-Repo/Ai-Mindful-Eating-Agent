@@ -3,6 +3,11 @@ Mindful Eating Agent - Flask Backend
 Text-based food logging with AI-powered nutrition analysis using LangGraph
 """
 
+# Suppress NumPy warnings on Windows
+import warnings
+warnings.filterwarnings('ignore', category=RuntimeWarning)
+warnings.filterwarnings('ignore', message='.*MINGW-W64.*')
+
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from flask_session import Session
 from flask_cors import CORS
@@ -14,16 +19,18 @@ from collections import defaultdict
 import re
 
 # Import LangGraph Agents
-from agent import process_food_log, mindful_eating_agent
+from agent import process_food_log, mindful_eating_agent, initialize_agent
 from agent_chat import process_conversational_message
 
-# Import MongoDB utilities
-from utils.mongodb_client import (
-    MongoDBClient, 
+# Import ChromaDB utilities
+from utils.chromadb_client import (
+    ChromaDBClient, 
     UserOperations, 
     FoodLogOperations,
-    SessionOperations
+    SessionOperations,
+    ChatLogOperations
 )
+from utils.chroma_session import ChromaSessionInterface
 
 # Import External API for supervisor integration
 from api.external import external_api
@@ -34,33 +41,45 @@ app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-producti
 # Enable CORS for Next.js frontend
 CORS(app, supports_credentials=True, origins=['http://localhost:3000'])
 
-# MongoDB Session Configuration
-app.config['SESSION_TYPE'] = 'mongodb'
+# Session Configuration
 app.config['SESSION_PERMANENT'] = True
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
-app.config['SESSION_USE_SIGNER'] = True
-app.config['SESSION_KEY_PREFIX'] = 'mindful_eating:'
+app.config['SESSION_COOKIE_NAME'] = 'mindful_eating_session'
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
-# Initialize MongoDB
+# Initialize ChromaDB
 try:
-    mongo_client = MongoDBClient('config/mongodb_config.json')
-    app.config['SESSION_MONGODB'] = mongo_client.client
-    app.config['SESSION_MONGODB_DB'] = mongo_client.db.name
-    app.config['SESSION_MONGODB_COLLECT'] = 'sessions'
+    print("🔌 Connecting to ChromaDB...")
+    chroma_client = ChromaDBClient()
     
     # Initialize database operations
-    user_ops = UserOperations(mongo_client)
-    food_log_ops = FoodLogOperations(mongo_client)
-    session_ops = SessionOperations(mongo_client)
+    user_ops = UserOperations(chroma_client)
+    food_log_ops = FoodLogOperations(chroma_client)
+    session_ops = SessionOperations(chroma_client)
+    chat_log_ops = ChatLogOperations(chroma_client)
     
-    print("✅ MongoDB initialized successfully")
+    print("✅ ChromaDB initialized successfully")
+    
+    # Initialize AI agent with ChromaDB and Gemini
+    print("🤖 Initializing AI agent...")
+    initialize_agent(chroma_client)
+    print("✅ AI agent initialized")
+    
 except Exception as e:
-    print(f"❌ Failed to initialize MongoDB: {e}")
-    print("Please ensure MongoDB is running on localhost:27017")
+    print(f"❌ Failed to initialize ChromaDB: {e}")
+    print(f"Error details: {type(e).__name__}")
+    import traceback
+    traceback.print_exc()
+    print("\n⚠️ Please check:")
+    print("  1. Your .env file exists in backend/ directory")
+    print("  2. ChromaDB credentials are correct")
+    print("  3. Python version compatibility (ChromaDB may not support Python 3.13 yet)")
+    print("\nTry: pip install --upgrade chromadb")
     exit(1)
 
-# Initialize Flask-Session
-Session(app)
+# Set custom session interface for ChromaDB
+app.session_interface = ChromaSessionInterface(session_ops)
 
 # Register External API Blueprint for supervisor integration
 app.register_blueprint(external_api)
@@ -322,7 +341,7 @@ os.makedirs(CHAT_LOG_DIR, exist_ok=True)
 
 
 def log_chat_interaction(user_id, message, result, status='success'):
-    """Persist chat interactions (prompt + response) to JSON file and MongoDB."""
+    """Persist chat interactions (prompt + response) to JSON file and ChromaDB."""
     try:
         timestamp = datetime.utcnow().isoformat()
         log_entry = {
@@ -345,12 +364,11 @@ def log_chat_interaction(user_id, message, result, status='success'):
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(log_entry, f, ensure_ascii=False, indent=2)
 
-        # Store in MongoDB (chat_logs collection)
+        # Store in ChromaDB (chat_logs collection)
         try:
-            chat_collection = mongo_client.db['chat_logs']
-            chat_collection.insert_one(log_entry)
+            chat_log_ops.create_chat_log(user_id, message, result, status)
         except Exception as e:
-            print(f"⚠️ Failed to save chat log to MongoDB: {e}")
+            print(f"⚠️ Failed to save chat log to ChromaDB: {e}")
     except Exception as e:
         print(f"⚠️ Failed to log chat interaction: {e}")
 
@@ -361,8 +379,8 @@ def health_check():
     """System health check endpoint"""
     db_status = "connected"
     try:
-        # Simple command to check connection
-        mongo_client.client.admin.command('ping')
+        # Simple command to check ChromaDB connection
+        chroma_client.client.heartbeat()
     except Exception:
         db_status = "disconnected"
         
@@ -370,7 +388,8 @@ def health_check():
         'status': 'healthy',
         'service': 'Mindful Eating Agent API',
         'timestamp': datetime.utcnow().isoformat(),
-        'database': db_status,
+        'database': 'ChromaDB',
+        'database_status': db_status,
         'version': '1.0.0'
     })
 
@@ -721,6 +740,51 @@ def weekly_insight():
         'insight': insight,
         'suggestions': suggestions
     })
+
+@app.route('/api/meal-suggestions', methods=['GET'])
+def get_meal_suggestions():
+    """Get AI-powered meal suggestions based on current nutrition"""
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not authenticated'}), 401
+    
+    user_id = session['user_id']
+    
+    # Get today's nutrition
+    today_logs = food_log_ops.get_today_logs(user_id)
+    daily_total = {
+        'calories': sum(log['total_nutrition']['calories'] for log in today_logs),
+        'protein': sum(log['total_nutrition']['protein'] for log in today_logs),
+        'carbs': sum(log['total_nutrition']['carbs'] for log in today_logs),
+        'fat': sum(log['total_nutrition']['fat'] for log in today_logs),
+    }
+    
+    # Get user goals
+    user = user_ops.get_user_by_email(user_id)
+    goals = user.get('goals', {
+        'daily_calories': 2000,
+        'daily_protein': 120,
+        'daily_carbs': 250,
+        'daily_fat': 65
+    })
+    
+    # Get suggestions from Gemini
+    try:
+        from utils.gemini_nutrition import get_gemini_nutrition_lookup
+        gemini = get_gemini_nutrition_lookup()
+        suggestions = gemini.get_meal_suggestions(daily_total, goals)
+        
+        return jsonify({
+            'success': True,
+            'suggestions': suggestions,
+            'current_nutrition': daily_total,
+            'goals': goals
+        })
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'suggestions': []
+        }), 500
 
 @app.route('/api/chat', methods=['POST'])
 def api_chat():

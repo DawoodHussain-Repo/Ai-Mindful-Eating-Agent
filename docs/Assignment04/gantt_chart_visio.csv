@@ -1,0 +1,39 @@
+Task ID,Task Name,Start Date,Finish Date,Duration (Days),% Complete,Predecessors,Resource Names,Milestone,Critical
+1,Project Coordination,9/1/2025,12/24/2025,119,30%,,Dawood Hussain,No,Yes
+2,Risk Management,9/1/2025,12/24/2025,119,30%,,Dawood Hussain,No,Yes
+3,Change Management,9/15/2025,11/30/2025,76,40%,1,Gulsher Khan,No,Yes
+4,Quality Management,9/1/2025,12/24/2025,119,30%,,Dawood/Gulsher,No,Yes
+5,Market Research,9/1/2025,9/5/2025,5,100%,,Ahsan Faraz,No,Yes
+6,Stakeholder Identification,9/6/2025,9/10/2025,5,100%,,Dawood Hussain,No,Yes
+7,Feasibility Study,9/6/2025,9/12/2025,7,100%,,Gulsher Khan,No,No
+8,Business Case Development,9/10/2025,9/15/2025,5,100%,"6,7",Dawood Hussain,No,Yes
+9,Project Authorization,9/15/2025,9/15/2025,0,100%,8,Dawood Hussain,Yes,Yes
+10,Requirements Gathering,9/16/2025,9/21/2025,6,100%,9,Dawood/Ahsan,No,Yes
+11,Requirements Approved,9/29/2025,9/29/2025,0,100%,10,Dawood Hussain,Yes,Yes
+12,System Architecture Design,9/22/2025,9/30/2025,8,100%,10,Gulsher Khan,No,Yes
+13,UI/UX Design,9/22/2025,10/3/2025,11,100%,10,Gulsher Khan,No,No
+14,Database Design,9/25/2025,10/5/2025,10,100%,10,Ahsan Faraz,No,No
+15,Schedule Development,10/1/2025,10/8/2025,8,100%,12,Dawood Hussain,No,No
+16,Risk Planning,10/5/2025,10/12/2025,7,100%,15,Dawood/Gulsher,No,Yes
+17,Design Approved,10/14/2025,10/14/2025,0,100%,16,Gulsher Khan,Yes,Yes
+18,Environment Setup,10/16/2025,10/25/2025,10,100%,17,Gulsher Khan,No,Yes
+19,Backend API Development (Flask),10/20/2025,11/5/2025,14,80%,18,Gulsher Khan,No,Yes
+20,LangGraph Agent Development,10/20/2025,11/20/2025,29,70%,14,Ahsan Faraz,No,Yes
+21,Agent Workflow Design,10/20/2025,10/27/2025,6,100%,20,Ahsan Faraz,No,Yes
+22,LangGraph Implementation,10/28/2025,11/8/2025,12,80%,21,Ahsan Faraz,No,Yes
+23,Agent Testing & Validation,11/9/2025,11/16/2025,8,60%,22,Ahsan Faraz,No,Yes
+24,Agent Integration,11/17/2025,11/20/2025,3,40%,23,Ahsan/Gulsher,No,Yes
+25,Frontend Development (HTML/CSS),11/6/2025,11/30/2025,28,50%,19,Gulsher Khan,No,Yes
+26,Integration Testing,12/1/2025,12/12/2025,14,0%,"25,24",All Team,No,Yes
+27,Development Complete,12/12/2025,12/12/2025,0,0%,26,Gulsher Khan,Yes,Yes
+28,Functional Testing,12/13/2025,12/18/2025,6,0%,27,Ahsan Faraz,No,Yes
+29,User Acceptance Testing,12/16/2025,12/20/2025,5,0%,28,Dawood Hussain,No,Yes
+30,Production Environment Setup,12/13/2025,12/16/2025,4,0%,26,Gulsher Khan,No,No
+31,Production Deployment,12/20/2025,12/21/2025,2,0%,"30,29",Gulsher Khan,No,Yes
+32,User Training,12/20/2025,12/21/2025,2,0%,29,Dawood Hussain,No,Yes
+33,Go Live,12/21/2025,12/21/2025,0,0%,31,Dawood Hussain,Yes,Yes
+34,Deliverable Acceptance,12/22/2025,12/23/2025,2,0%,33,Dawood/Gulsher,No,Yes
+35,Knowledge Transfer,12/23/2025,12/23/2025,1,0%,34,Dawood/Ahsan,No,Yes
+36,Lessons Learned,12/24/2025,12/24/2025,1,0%,35,Dawood Hussain,No,Yes
+37,Administrative Closure,12/24/2025,12/24/2025,1,0%,36,Dawood Hussain,No,Yes
+38,Project Closed,12/24/2025,12/24/2025,0,0%,37,Dawood Hussain,Yes,Yes

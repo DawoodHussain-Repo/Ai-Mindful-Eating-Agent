@@ -5,9 +5,9 @@ import time
 
 def test_health():
     """Test the health endpoint"""
-    print("Testing /health endpoint...")
+    print("Testing /api/v1/agent/health endpoint...")
     try:
-        with urllib.request.urlopen('http://localhost:5000/health') as response:
+        with urllib.request.urlopen('http://localhost:5000/api/v1/agent/health') as response:
             if response.getcode() == 200:
                 data = json.loads(response.read().decode())
                 print(f"✅ Health Check Passed: {data}")
