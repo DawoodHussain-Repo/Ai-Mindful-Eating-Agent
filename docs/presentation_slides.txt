@@ -1,0 +1,458 @@
+================================================================================
+            AI MINDFUL EATING AGENT - PRESENTATION SLIDES
+================================================================================
+Course: Fundamentals of Software Project Management
+Date: November 30, 2025
+Time: 8-10 minutes
+
+================================================================================
+                        SPEAKER ASSIGNMENTS
+================================================================================
+DAWOOD HUSSAIN (22i-2410) - Project Manager     : Slides 1-5
+GULSHER KHAN (22i-2637) - Technical Lead        : Slides 6-10
+AHSAN FARAZ (22i-8791) - AI/ML Developer        : Slides 11-15
+
+================================================================================
+================================================================================
+                    DAWOOD HUSSAIN - SLIDES 1-5
+                    (Project Overview & Management)
+================================================================================
+================================================================================
+
+--------------------------------------------------------------------------------
+SLIDE 1: TITLE SLIDE
+--------------------------------------------------------------------------------
+Title:          AI MINDFUL EATING AGENT
+Subtitle:       Supervisor-Worker Architecture using LangGraph
+
+Team Members:
+  • Dawood Hussain    (22i-2410) - Project Manager
+  • Gulsher Khan      (22i-2637) - Technical Lead
+  • Ahsan Faraz       (22i-8791) - AI/ML Developer
+
+Course:         Fundamentals of Software Project Management
+Section:        E
+Date:           November 30, 2025
+
+--------------------------------------------------------------------------------
+SLIDE 2: THE PROBLEM
+--------------------------------------------------------------------------------
+Title:          The Challenge We're Solving
+
+Key Points:
+  ✗ Manual calorie counting is tedious and time-consuming
+  ✗ Generic nutrition apps lack personalization
+  ✗ People don't understand nutritional content of meals
+  ✗ No conversational interface - rigid input formats required
+
+Statistics:
+  • 80% of diet tracking apps are abandoned within 2 weeks
+  • Users need an easier, smarter way to track nutrition
+
+Visual:         [Show frustrated user with complex app interface]
+
+Speaker Notes:
+"Today we face a health crisis where people want to eat better but 
+tools make it too hard. We're changing that with AI."
+
+--------------------------------------------------------------------------------
+SLIDE 3: OUR SOLUTION
+--------------------------------------------------------------------------------
+Title:          AI Mindful Eating Agent - The Solution
+
+What We Built:
+  ✓ Natural Language Understanding
+    → "I had grilled chicken and rice" → Parsed & Calculated
+  
+  ✓ Automatic Nutrition Calculation
+    → Calories, Protein, Carbs, Fat, Fiber
+  
+  ✓ Pattern Recognition
+    → "You've been eating a lot of sugar this week"
+  
+  ✓ Personalized Recommendations
+    → Context-aware dietary advice
+
+Key Differentiator:
+  "Talk to it like a friend, not a database"
+
+Visual:         [Show chat interface screenshot]
+
+--------------------------------------------------------------------------------
+SLIDE 4: PROJECT MANAGEMENT OVERVIEW
+--------------------------------------------------------------------------------
+Title:          Project Timeline & Management
+
+Project Duration:
+  • Original Plan: 112 days (Sep 1 - Dec 15, 2025)
+  • After Resource Leveling: 119 days (Sep 1 - Dec 24, 2025)
+  • Extension Reason: Sustainable workload distribution
+
+Key Milestones:
+  ┌─────────────────────────────────────────────────────────┐
+  │ M1: Project Authorization       → Day 15  (Sep 15)     │
+  │ M2: Requirements Approved       → Day 21  (Sep 21)     │
+  │ M3: Design Approved             → Day 40  (Oct 10)     │
+  │ M4: Development Complete        → Day 103 (Dec 12)     │
+  │ M5: Go Live                     → Day 114 (Dec 23)     │
+  │ M6: Project Closed              → Day 119 (Dec 24)     │
+  └─────────────────────────────────────────────────────────┘
+
+Visual:         [Show Gantt Chart - GanttChartUpdated.png]
+
+--------------------------------------------------------------------------------
+SLIDE 5: RESOURCE MANAGEMENT
+--------------------------------------------------------------------------------
+Title:          Resource Leveling Success
+
+The Problem (Before Leveling):
+  • Gulsher & Ahsan: 120% allocation (48 hrs/week) 
+  • Dawood: Under-utilized at 60-70%
+  • High burnout risk during Weeks 8-13
+
+The Solution (After Leveling):
+  • All team members: ≤100% allocation
+  • Extended LangGraph development: 24 → 29 days
+  • Extended Integration Testing: 10 → 14 days
+  • Better workload distribution
+
+Result:
+  ✓ Eliminated burnout risk
+  ✓ Improved quality through adequate time
+  ✓ Sustainable pace for complex AI development
+  ✓ Only 6% schedule extension (7 days)
+
+Visual:         [Show before/after resource histograms]
+
+================================================================================
+================================================================================
+                    GULSHER KHAN - SLIDES 6-10
+                    (Architecture & Technical Implementation)
+================================================================================
+================================================================================
+
+--------------------------------------------------------------------------------
+SLIDE 6: TECHNOLOGY STACK
+--------------------------------------------------------------------------------
+Title:          Technology Stack
+
+Backend:
+  ┌────────────────────────────────────────┐
+  │  Flask (Python)     - REST API         │
+  │  MongoDB            - Database         │
+  │  Flask-Session      - Session Mgmt     │
+  └────────────────────────────────────────┘
+
+Frontend:
+  ┌────────────────────────────────────────┐
+  │  HTML/CSS           - UI Templates     │
+  │  Jinja2             - Templating       │
+  │  JavaScript         - Interactivity    │
+  └────────────────────────────────────────┘
+
+AI Framework:
+  ┌────────────────────────────────────────┐
+  │  LangGraph          - Agent Workflow   │
+  │  Custom NLP         - Food Parsing     │
+  │  Fuzzy Matching     - Text Recognition │
+  └────────────────────────────────────────┘
+
+Speaker Notes:
+"We chose Flask for simplicity, MongoDB for flexibility, 
+and LangGraph for sophisticated agent orchestration."
+
+--------------------------------------------------------------------------------
+SLIDE 7: SUPERVISOR-WORKER ARCHITECTURE
+--------------------------------------------------------------------------------
+Title:          System Architecture
+
+                    ┌─────────────────┐
+                    │   User Input    │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │   SUPERVISOR    │
+                    │     NODE        │
+                    └────────┬────────┘
+                             │
+         ┌───────────┬───────┼───────┬───────────┐
+         ▼           ▼       ▼       ▼           ▼
+    ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐
+    │  Food   │ │Nutrition│ │ Pattern │ │ Recomm- │ │Response │
+    │ Parser  │ │  Calc   │ │ Analyst │ │ ender   │ │Generator│
+    └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘
+         │           │           │           │           │
+         └───────────┴───────────┴───────────┴───────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │  User Response  │
+                    └─────────────────┘
+
+Key Concept:
+  • Supervisor orchestrates workflow
+  • Workers are specialized agents
+  • State shared via LangGraph StateGraph
+
+Visual:         [Show network_diagram_image.png]
+
+--------------------------------------------------------------------------------
+SLIDE 8: API CONTRACT
+--------------------------------------------------------------------------------
+Title:          External API for Supervisor Integration
+
+Health Check Endpoint:
+  GET /api/v1/agent/health
+  
+  Response:
+  {
+    "status": "healthy",
+    "service": "Mindful Eating Agent",
+    "version": "1.0.0",
+    "capabilities": ["food_parsing", "nutrition_calculation", 
+                     "pattern_analysis", "recommendations"]
+  }
+
+Process Endpoint:
+  POST /api/v1/agent/process
+  
+  Request:
+  {
+    "user_id": "user123",
+    "food_text": "I had grilled chicken and rice",
+    "meal_type": "dinner"
+  }
+  
+  Response:
+  {
+    "success": true,
+    "foods": [...],
+    "total_nutrition": {"calories": 370, "protein": 35},
+    "message": "Great protein choice! 💪"
+  }
+
+--------------------------------------------------------------------------------
+SLIDE 9: DATA FLOW EXAMPLE
+--------------------------------------------------------------------------------
+Title:          How It Works - Step by Step
+
+User Says: "I had grilled chicken and rice for dinner"
+
+Step 1: FOOD PARSER
+  → Normalizes text
+  → Fuzzy matches: "grilled chicken", "rice"
+  → Extracts portions: 1 serving each
+
+Step 2: NUTRITION WORKER
+  → Chicken: 165 cal, 31g protein
+  → Rice: 205 cal, 4.3g protein
+  → Total: 370 cal, 35.3g protein
+
+Step 3: PATTERN ANALYST
+  → Checks 14-day history
+  → Detects: "High protein meals this week"
+
+Step 4: RECOMMENDATION WORKER
+  → Compares to goals
+  → Generates: "Great protein intake!"
+
+Step 5: RESPONSE GENERATOR
+  → Creates friendly message
+  → Adds emoji and encouragement
+
+Output: "Great choice! Grilled Chicken is packed with protein. 💪"
+
+--------------------------------------------------------------------------------
+SLIDE 10: DEPLOYMENT & TESTING
+--------------------------------------------------------------------------------
+Title:          Deployment & Quality Assurance
+
+Deployment:
+  • Local: python app.py or start-fullstack.cmd
+  • Server: Flask with Gunicorn (production)
+  • Database: MongoDB on localhost:27017
+
+Testing Strategy:
+  ┌────────────────────────────────────────┐
+  │ Unit Tests      → Each worker node     │
+  │ Integration     → End-to-end workflow  │
+  │ Health Check    → /api/v1/agent/health │
+  │ Load Testing    → 100+ concurrent users│
+  └────────────────────────────────────────┘
+
+Quality Metrics Achieved:
+  ✓ Food Recognition Accuracy: 90%+
+  ✓ API Response Time: <500ms
+  ✓ Code Coverage: 80%+
+
+Demo Command:
+  cd backend && python test_integration.py
+
+================================================================================
+================================================================================
+                    AHSAN FARAZ - SLIDES 11-15
+                    (AI Agent, Demo & Conclusion)
+================================================================================
+================================================================================
+
+--------------------------------------------------------------------------------
+SLIDE 11: LANGGRAPH AGENT DEEP DIVE
+--------------------------------------------------------------------------------
+Title:          LangGraph Agent Implementation
+
+Why LangGraph?
+  • State management across nodes
+  • Conditional routing logic
+  • Built-in workflow orchestration
+  • Easy to extend with new workers
+
+Supervisor Routing Logic:
+  ┌─────────────────────────────────────────────────────────┐
+  │  def supervisor_node(state):                            │
+  │      if not state['parsed_foods']:                      │
+  │          return 'food_parser_worker'                    │
+  │      elif not state['nutrition_data']:                  │
+  │          return 'nutrition_worker'                      │
+  │      elif not state['patterns']:                        │
+  │          return 'pattern_analyst_worker'                │
+  │      elif not state['recommendations']:                 │
+  │          return 'recommendation_worker'                 │
+  │      else:                                              │
+  │          return 'response_generator_worker'             │
+  └─────────────────────────────────────────────────────────┘
+
+Key Feature: Agent decides "what to do next" based on state!
+
+--------------------------------------------------------------------------------
+SLIDE 12: MEMORY STRATEGY
+--------------------------------------------------------------------------------
+Title:          Short-Term & Long-Term Memory
+
+Short-Term Memory (Session):
+  ┌────────────────────────────────────────┐
+  │ Storage:    Flask-Session (MongoDB)    │
+  │ Retention:  7 days                     │
+  │ Purpose:    Multi-turn conversations   │
+  │ Example:    "Which soda?" → "Pepsi"    │
+  └────────────────────────────────────────┘
+
+Long-Term Memory (Persistent):
+  ┌────────────────────────────────────────┐
+  │ Storage:    MongoDB Collections        │
+  │ Retention:  Permanent / 1 Year         │
+  │ Purpose:    User history & patterns    │
+  │                                        │
+  │ Collections:                           │
+  │   • users      → Profiles, goals       │
+  │   • food_logs  → Meal history          │
+  │   • sessions   → Session data          │
+  └────────────────────────────────────────┘
+
+Pattern Analysis:
+  → Analyzes last 14 days of meals
+  → Identifies frequent foods
+  → Calculates daily averages
+  → Detects eating trends
+
+--------------------------------------------------------------------------------
+SLIDE 13: LIVE DEMO
+--------------------------------------------------------------------------------
+Title:          Live Demonstration
+
+Demo Scenario 1: Basic Food Logging
+  User: "I had a burger and fries for lunch"
+  Agent: [Shows calories, identifies as high-fat meal]
+
+Demo Scenario 2: Multi-turn Conversation
+  User: "I had soda"
+  Agent: "Which type of soda? Coca-Cola, Pepsi, Sprite..."
+  User: "Pepsi"
+  Agent: [Logs Pepsi with nutrition]
+
+Demo Scenario 3: Pattern Recognition
+  User: "How am I doing this week?"
+  Agent: [Shows weekly summary and trends]
+
+Demo Scenario 4: Health Check API
+  curl http://localhost:5000/api/v1/agent/health
+  → Returns system status
+
+[PERFORM LIVE DEMO HERE]
+
+--------------------------------------------------------------------------------
+SLIDE 14: CHALLENGES & LESSONS LEARNED
+--------------------------------------------------------------------------------
+Title:          Challenges & How We Solved Them
+
+Challenge 1: NLP Accuracy
+  Problem:  "chicken breast" vs "grilled chicken" not matching
+  Solution: Implemented fuzzy word matching with 50% overlap
+  Result:   90%+ recognition accuracy
+
+Challenge 2: Resource Over-allocation
+  Problem:  Team at 120% during development phase
+  Solution: Applied resource leveling techniques
+  Result:   Sustainable 100% allocation, +7 days schedule
+
+Challenge 3: State Management
+  Problem:  Sharing data between multiple worker nodes
+  Solution: LangGraph StateGraph for unified state
+  Result:   Clean, modular workflow
+
+Challenge 4: API Integration
+  Problem:  Need for external supervisor compatibility
+  Solution: Built REST API with JSON contract
+  Result:   Seamless integration capability
+
+Key Learning:
+  "Rule-based NLP can achieve 90%+ accuracy with good design"
+
+--------------------------------------------------------------------------------
+SLIDE 15: CONCLUSION & Q&A
+--------------------------------------------------------------------------------
+Title:          Conclusion
+
+Project Achievements:
+  ✓ Fully functional AI agent with natural language understanding
+  ✓ Supervisor-Worker architecture using LangGraph
+  ✓ 90% food recognition accuracy
+  ✓ REST API for external integration
+  ✓ Sustainable resource management (no over-allocation)
+  ✓ Web-based interface accessible anywhere
+
+By The Numbers:
+  ┌────────────────────────────────────────┐
+  │ Project Duration:      119 days        │
+  │ Foods in Database:     150+            │
+  │ API Response Time:     <500ms          │
+  │ Team Members:          3               │
+  │ Lines of Code:         5000+           │
+  └────────────────────────────────────────┘
+
+Future Enhancements:
+  • Image recognition for food photos
+  • Voice input integration
+  • Mobile app (React Native)
+  • Social sharing features
+
+                    ╔═══════════════════════════════════╗
+                    ║                                   ║
+                    ║        THANK YOU!                 ║
+                    ║                                   ║
+                    ║        Questions?                 ║
+                    ║                                   ║
+                    ╚═══════════════════════════════════╝
+
+================================================================================
+                        END OF PRESENTATION
+================================================================================
+
+TIMING GUIDE:
+  Slides 1-5  (Dawood):   ~3 minutes
+  Slides 6-10 (Gulsher):  ~3 minutes
+  Slides 11-15 (Ahsan):   ~3 minutes (including demo)
+  Q&A:                    ~1-2 minutes
+  TOTAL:                  8-10 minutes
+
+================================================================================
